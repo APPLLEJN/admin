@@ -1,0 +1,43 @@
+<div class="apply_page">
+    <div class="header">
+        <h2>{{isEdit ? '分类详情' : '创建分类'}}</h2>
+        <div class="ctls">
+            <a class="btn btn-default" href="#/classifies">返回列表</a>
+        </div>
+    </div>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <form class="form-horizontl clearfix" role="form" ng-submit="updateContent()">
+        <div class="apply-info">
+            <div class='row'>
+                <div class='col-md-2 text-right'>分类名称：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="classify.name" required="required" placeholder="必填">
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right'>分类英文名称：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="classify.en_name" required="required" placeholder="必填">
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right require-star'>分类图片: </div>
+                <div class='col-md-10'>
+                    <input ng-if="!classify.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
+                           style="font-size: 1px;" required="required">
+                    <input ng-if="classify.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
+                           style="font-size: 1px;">
+                </div>
+            </div>
+            <div class='row' ng-show="classify.image_url">
+                <div class='col-md-2 text-right require-star'></div>
+                <image src="{{classify.image_url}}" width="400"/>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-12 text-right'>
+            <button class="btn btn-info" type="submit">保存</button>
+            </div>
+        </div>
+    </form>
+</div>

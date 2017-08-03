@@ -1,0 +1,76 @@
+<div class="apply_page">
+    <div class="header">
+        <h2>{{isEdit ? '产品详情' : '创建产品'}}</h2>
+        <div class="ctls">
+            <a class="btn btn-default" href="#/products">返回列表</a>
+        </div>
+    </div>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <form class="form-horizontl clearfix" role="form" ng-submit="updateContent()">
+        <div class="apply-info">
+            <div class='row'>
+                <div class='col-md-2 text-right'>名称：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="product.name" required="required" placeholder="必填">
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right'>英文名称：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="product.en_name" required="required" placeholder="必填">
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-md-2 text-right'>所属系列</div>
+                <div class="col-md-8">
+                    <select class="form-control" id="series" ng-model="product.series" required="required">
+                        <option ng-repeat="item in series" value="{{item.id}}">
+                            {{item.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-md-2 text-right'>所属分类</div>
+                <div class="col-md-8">
+                    <select class="form-control" id="classify" ng-model="product.classify" required="required">
+                        <option ng-repeat="item in classifies" value="{{item.id}}">
+                            {{item.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right require-star'>分类图片 (小) : </div>
+                <div class='col-md-10'>
+                    <input ng-if="!product.image_url_mini" type="file" ng-file-select="onFileUpload($files, 'mini')" accept="image/*"
+                           style="font-size: 1px;" required="required">
+                    <input ng-if="product.image_url_mini" type="file" ng-file-select="onFileUpload($files, 'mini')" accept="image/*"
+                           style="font-size: 1px;">
+                </div>
+            </div>
+            <div class='row' ng-show="product.image_url_mini">
+                <div class='col-md-2 text-right require-star'></div>
+                <image src="{{product.image_url_mini}}" width="100"/>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right require-star'>分类图片（大）: </div>
+                <div class='col-md-10'>
+                    <input ng-if="!product.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
+                           style="font-size: 1px;" required="required">
+                    <input ng-if="product.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
+                           style="font-size: 1px;">
+                </div>
+            </div>
+            <div class='row' ng-show="product.image_url">
+                <div class='col-md-2 text-right require-star'></div>
+                <image src="{{product.image_url}}"  width="400"/>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-12 text-right'>
+            <button class="btn btn-info" type="submit">保存</button>
+            </div>
+        </div>
+    </form>
+</div>

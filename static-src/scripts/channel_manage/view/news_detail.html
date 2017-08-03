@@ -1,0 +1,62 @@
+<div class="apply_page">
+    <div class="header">
+        <h2>{{isEdit ? '新闻详情' : '创建新闻'}}</h2>
+        <div class="ctls">
+            <a class="btn btn-default" href="#/news">返回列表</a>
+        </div>
+    </div>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <form class="form-horizontl clearfix" role="form" ng-submit="updateNews()">
+        <div class="apply-info">
+            <div class='row'>
+                <div class='col-md-2 text-right'>标题：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="news.title" required="required" placeholder="必填">
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-md-2 text-right'>英文标题：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="news.en_title" required="required" placeholder="必填">
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-md-2 text-right'>内容：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="news.content" required="required" placeholder="必填">
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right require-star'>图片 (小) : </div>
+                <div class='col-md-10'>
+                    <input ng-if="!news.image_url_mini" type="file" ng-file-select="onFileUpload($files, 'mini')" accept="image/*"
+                           style="font-size: 1px;" required="required">
+                    <input ng-if="news.image_url_mini" type="file" ng-file-select="onFileUpload($files, 'mini')" accept="image/*"
+                           style="font-size: 1px;">
+                </div>
+            </div>
+            <div class='row' ng-show="news.image_url_mini">
+                <div class='col-md-2 text-right require-star'></div>
+                <image src="{{news.image_url_mini}}" width="100"/>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right require-star'>图片（大）: </div>
+                <div class='col-md-10'>
+                    <input ng-if="!news.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
+                           style="font-size: 1px;" required="required">
+                    <input ng-if="news.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
+                           style="font-size: 1px;">
+                </div>
+            </div>
+            <div class='row' ng-show="news.image_url">
+                <div class='col-md-2 text-right require-star'></div>
+                <image src="{{news.image_url}}" width="400"/>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-12 text-right'>
+            <button class="btn btn-info" type="submit">保存</button>
+            </div>
+        </div>
+    </form>
+</div>

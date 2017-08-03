@@ -1,0 +1,91 @@
+<div class="list_page">
+    <div class="header">
+        <h2>预约订单管理</h2>
+        <div class="ctls">
+            <a class="btn btn-info" href="javascript:;" ng-click="creatOrderTime({})">创建预约的时间</a>
+        </div>
+    </div>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <form class="form-inline search-form" role="form" ng-submit="searchOrders()">
+        <div class="form-group input-group">
+            <label for="user" class="input-group-addon">预约人</label>
+            <input class="form-control" id="user"  ng-model="search.username">
+        </div>
+        <div class="form-group input-group">
+            <label for="phone" class="input-group-addon">手机号</label>
+            <input class="form-control" id="phone"  ng-model="search.phone">
+        </div>
+        <div class="form-group input-group">
+            <label class="input-group-addon">日期：</label>
+            <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="search.date"
+                   is-open="opened_start" datepicker-options="dateOptions" close-text="Close"/>
+            <span class="input-group-addon" ng-click="open_start($event)"><i
+                    class="glyphicon glyphicon-calendar"></i></span>
+        </div>
+        <button type="submit" class="btn btn-default">搜索</button>
+    </form>
+    <table class="grid table">
+        <thead>
+            <tr>
+                <td>预约人</td>
+                <td>预约日期</td>
+                <td>预约时段</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="order in orders">
+                <td>{{order.username}}</td>
+                <td>{{order.date | date:'yyyy-MM-dd' }}</td>
+                <td>
+                    <span ng-repeat="item in order.time_type">{{time_obj[item]}} &nbsp;&nbsp;</span>
+                </td>
+                <td>
+                    <a href="javascript:;" ng-click="creatOrderTime(order)">编辑</a>&nbsp;&nbsp;
+                    <a href="javascript:;"  ng-click="deleteOrderTime(order.id)">删除</a>&nbsp;&nbsp;
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" ng-change="pageChanged()" max-size="maxSize" items-per-page="20" class="pagination" boundary-links="true" rotate="false" num-pages="numPages">
+        </pagination>
+    </div>
+</div>
+<script type="text/ng-template" id="createOrderTime.html">
+    <div class="modal-header">
+        <h3 class="modal-title">新增预约时间点</h3>
+    </div>
+    <form class="form-inline" role="form" ng-submit="submit()">
+        <div class="modal-body">
+            <div class="form-group">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <label for="date" class="input-group-addon">时间</label>
+                        <input type="text" class="form-control" datepicker-popup="yyyy-MM-dd"
+                               ng-model="order.date" is-open="opened_date"
+                               datepicker-options="dateOptions"
+                               close-text="Close" placeholder="必填"
+                               id="date" required="required"/>
+                        <span class="input-group-addon" ng-click="executed_date($event)"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <label class="input-group-addon">时间段</label>
+                        <div class="checkbox">
+                            <label for="one"><input type="checkbox" ng-model="order.onetime" id="one">10:00 － 12:00</label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="two"><input type="checkbox" ng-model="order.twotime" id="two">14:00 － 17:00</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" type="submit">确认</button>
+            <button class="btn btn-warning" ng-click="close()" type="button">取消</button>
+        </div>
+    </form>
+</script>

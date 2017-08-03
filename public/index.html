@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="styles/bootstrap.css">
+	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="styles/nprogress.css">
+	<link rel="stylesheet" href="styles/select.css">
+	<script src="scripts/angular-all.js"></script>
+	<script src="scripts/editor/ckeditor.js"></script>
+	<script src="scripts/index.js"></script>
+	<title>cigem管理后台</title>
+</head>
+<body ng-app="cigem" ng-controller="bodyController">
+	
+	<div style="height: 100%" ng-init="init()">
+		<nav class="nav-top-fix "> 
+			<div>
+				<a href="#/index" ng-if="judgeIsAdmin">cigem管理后台（已登录）</a>
+				<a href="javascript: void 0;" ng-if="judgeIsAdmin" class="blue" ng-click="logout()">退出登录</a>
+				<a href="javascript: void 0;" ng-if="!judgeIsAdmin">cigem管理后台（未登录）</a>
+				<a href="#/password" class="pull-right blue" ng-if="judgeIsAdmin">修改密码</a>
+			</div>
+		</nav>
+		<div class="wrapper" >
+			<div class="menu" ng-hide="judgeIsAdmin">
+			</div>
+			<div class="menu" ng-controller="sideBarController" ng-if="judgeIsAdmin">
+				<ul class="nav side-nav">
+					<li ng-repeat="tab in navTabs" ng-class="{'active': isActive(tab),'collapse':tab.isCollapse}" ng-switch on="tab.isCollapse">
+						<a ng-if="!!tab.items.length" ng-switch-when="true" href="javascript:void(0);" ng-click="tab.collapsed = !tab.collapsed">
+							<span class="glyphicon glyphicon-{{tab.icon ? tab.icon : 'list-alt'}}"></span>
+							{{ tab.label }}
+							<span class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': !tab.collapsed, 'glyphicon-chevron-right': tab.collapsed}"></span>
+						</a>
+						<ul ng-if="!!tab.items.length" ng-switch-when="true" collapse="tab.collapsed">
+							<li ng-repeat="item in tab.items" ng-class="{'active': isItemActive(item)}">
+								<a ui-sref="{{ item.link }}">{{ item.label }}</a>
+							</li>
+						</ul>
+						<a ng-if="!tab.items.length" ui-sref="{{ tab.link || false }}">
+							<span class="glyphicon glyphicon-{{ tab.icon ? tab.icon : 'list-alt' }}"></span>
+							{{ tab.label }}
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="page-wrapper" id="page-wrapper">
+				<div ui-view=""></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<div class="list_page">
+    <div class="header">
+        <h2>新闻管理</h2>
+        <div class="ctls">
+            <a class="btn btn-info" href="#/news/new">新建</a>
+        </div>
+    </div>
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    <form class="form-inline search-form" role="form" ng-submit="searchNews()">
+        <div class="form-group input-group">
+            <label for="user" class="input-group-addon">标题</label>
+            <input class="form-control" id="user"  ng-model="search.title">
+        </div>
+        <div class="form-group input-group">
+            <label for="phone" class="input-group-addon">英文标题</label>
+            <input class="form-control" id="phone"  ng-model="search.en_title">
+        </div>
+        <button type="submit" class="btn btn-default">搜索</button>
+    </form>
+    <table class="grid table">
+        <thead>
+        <tr>
+            <td>标题</td>
+            <td>英文标题</td>
+            <td>内容</td>
+            <td>图片</td>
+            <td>操作</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="news in newsList">
+            <td>{{news.title}}</td>
+            <td>{{news.en_title}}</td>
+            <td>{{news.content}}</td>
+            <td>
+                <img ng-src="{{news.image_url_mini}}" alt="" width="100">
+            </td>
+            <td>
+                <a ng-show="$index" href="javascript:;"  ng-click="changeSort('up', news.id, news.sort, $index)">上移&nbsp;&nbsp;</a>
+                <a ng-show="$index !== bigTotalItems-1"href="javascript:;"  ng-click="changeSort('down', news.id, news.sort, $index)">下移&nbsp;&nbsp;</a>
+                <a href="#/news/{{news.id}}">编辑</a>&nbsp;&nbsp;
+                <a href="javascript:;"  ng-click="deleteNews(news.id)">删除</a>&nbsp;&nbsp;
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" ng-change="pageChanged()" max-size="maxSize" items-per-page="20" class="pagination" boundary-links="true" rotate="false" num-pages="numPages">
+        </pagination>
+    </div>
+</div>
