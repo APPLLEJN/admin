@@ -4,8 +4,8 @@
   "description": "zaih fenda zpanel",
   "main": " ",
   "scripts": {
-    "production": "rm -rf public & gulp & cross-env NODE_ENV=production pm2 start app.js",
-    "test": "rm -rf public & gulp & cross-env NODE_ENV=dev pm2 start app.js",
+    "production": "rm -rf public & gulp & cross-env NODE_ENV=production pm2 start app.js -n admin",
+    "test": "rm -rf public & gulp & cross-env NODE_ENV=dev pm2 start app.js -n admin",
     "start": "rm -rf public & gulp dev & cross-env NODE_ENV=dev supervisor -i public app"
   },
   "keywords": [
