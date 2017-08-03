@@ -17,7 +17,10 @@ class orderDao extends baseDao {
 
   async insert(req, res, next) {
     const {username, date, time_type} = req.body
-    await super.insert(req, res, next, {username, date, time_type: time_type.join(',')})
+    const [id] = await super.insert(req, res, next, {username, date, time_type: time_type.join(',')})
+    if (id) {
+      res.status(200).json({status: 'ok'})
+    }
   }
 
   async update(req, res, next) {
