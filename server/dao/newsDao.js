@@ -1,4 +1,5 @@
 const baseDao = require('./baseDao')
+const db = require('../database')
 
 class newsDao extends baseDao {
   constructor(db, search, orderBy){
