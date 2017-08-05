@@ -20,6 +20,7 @@
     <table class="grid table">
         <thead>
         <tr>
+            <td>ID</td>
             <td>名称</td>
             <td>英文</td>
             <td>图片（小）</td>
@@ -29,6 +30,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="product in products">
+            <td>{{product.id}}</td>
             <td>{{product.name}}</td>
             <td>{{product.en_name}}</td>
             <td>
