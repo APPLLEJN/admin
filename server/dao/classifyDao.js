@@ -6,6 +6,8 @@ class classifyDao extends baseDao {
     super(db, search, orderBy)
   }
   async insert(req, res, next) {
+    const result = await db('recommends').select().innerJoin('products', 'products.id', 'recommends.product_id')
+    return console.log(result, 'result')
     const [{count}] = await db(this.db).select().where({status: 1}).count('id as count')
     req.body.sort = count +1
     super.insert(req, res, next)
