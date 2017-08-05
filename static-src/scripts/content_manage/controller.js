@@ -1,7 +1,7 @@
 'use strict';
 var contentController = angular.module('contentController',['ui.bootstrap']);
 
-contentController.factory('changeSort',['Content', 'PanelAlert', function(Content, PanelAlert){
+contentController.factory('handleSort',['Content', 'PanelAlert', function(Content, PanelAlert){
   return function($scope, type, id, sort, index, scopeData, service){
     var before = $scope[scopeData][index-1]
     var after = $scope[scopeData][index+1]
@@ -32,8 +32,8 @@ contentController.factory('changeSort',['Content', 'PanelAlert', function(Conten
   }
 }])
 
-contentController.controller('classifyController',['$scope', '$location', '$stateParams', '$window', 'PanelAlert', 'Content', '$filter', 'changeSort',
-	function($scope, $location, $stateParams, $window, PanelAlert, Content, $filter, changeSort){
+contentController.controller('classifyController',['$scope', '$location', '$stateParams', '$window', 'PanelAlert', 'Content', '$filter', 'handleSort',
+	function($scope, $location, $stateParams, $window, PanelAlert, Content, $filter, handleSort){
 		PanelAlert.clearAlert();
 
 		/* init */
@@ -100,8 +100,8 @@ contentController.controller('classifyController',['$scope', '$location', '$stat
       });
     }
 
-    $scope.changeSort = function(type, id, sort, index) {
-      changeSort($scope, type, id, sort, index, 'classifies', 'classifies')
+    $scope.handleSort = function(type, id, sort, index) {
+      handleSort($scope, type, id, sort, index, 'classifies', 'classifies')
     }
   }]);
 
@@ -181,8 +181,8 @@ contentController.controller('classifyDetailController', ['$scope', '$location',
   }
 ]);
 
-contentController.controller('seriesController',['$scope', '$location', '$stateParams', '$window', 'PanelAlert', 'Content', '$filter', 'changeSort',
-  function($scope, $location, $stateParams, $window, PanelAlert, Content, $filter, changeSort){
+contentController.controller('seriesController',['$scope', '$location', '$stateParams', '$window', 'PanelAlert', 'Content', '$filter', 'handleSort',
+  function($scope, $location, $stateParams, $window, PanelAlert, Content, $filter, handleSort){
     PanelAlert.clearAlert();
 
     /* init */
@@ -249,8 +249,8 @@ contentController.controller('seriesController',['$scope', '$location', '$stateP
       });
     }
 
-    $scope.changeSort = function(type, id, sort, index) {
-      changeSort($scope, type, id, sort, index, 'seriesList', 'series')
+    $scope.handleSort = function(type, id, sort, index) {
+      handleSort($scope, type, id, sort, index, 'seriesList', 'series')
     }
 }]);
 

@@ -34,8 +34,8 @@
                 <img ng-src="{{classify.image_url}}" alt="" width="100">
             </td>
             <td>
-                <a ng-show="$index" href="javascript:;"  ng-click="changeSort('up', classify.id, classify.sort, $index)">上移&nbsp;&nbsp;</a>
-                <a ng-show="$index !== bigTotalItems-1"href="javascript:;"  ng-click="changeSort('down', classify.id, classify.sort, $index)">下移&nbsp;&nbsp;</a>
+                <a ng-show="$index" href="javascript:;"  ng-click="handleSort('up', classify.id, classify.sort, $index)">上移&nbsp;&nbsp;</a>
+                <a ng-show="$index !== bigTotalItems-1"href="javascript:;"  ng-click="handleSort('down', classify.id, classify.sort, $index)">下移&nbsp;&nbsp;</a>
                 <a href="#/classify/{{classify.id}}">编辑&nbsp;&nbsp;</a>
                 <a href="javascript:;"  ng-click="deleteClassify(classify.id)">删除&nbsp;&nbsp;</a>
             </td>
