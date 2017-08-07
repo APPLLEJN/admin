@@ -20,7 +20,7 @@ class baseDao {
         }
       })
       const [ {count} ] = await listQuery.clone().count('id as count')
-      let list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page : 1 - 1))
+      let list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
       if(typeof cb === 'function') {
         list = cb(list)
       }

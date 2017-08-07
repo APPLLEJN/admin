@@ -18,7 +18,7 @@ class uniqueDao extends baseDao {
         }
       })
       const result = await listQuery.clone()
-      let list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page : 1 - 1))
+      let list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
       res.set({'total-count': result.length}).status(200).json({status: 'ok', list: list})
     } catch (err) {
       console.log(err, 'error')

@@ -14,7 +14,7 @@ class productDao extends baseDao {
             .leftJoin(`${typeName} as t`, 't.product_id', 'p.id')
             .select('p.name', 'p.image_url_mini', 'p.id')
             .where({'p.status': 1, 't.product_id': null}).orderBy('p.create_time', 'desc')
-        let list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page : 1 - 1))
+        let list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
         res.status(200).json({status: 'ok', list: list})
       } else {
         super.query(req, res, next)
