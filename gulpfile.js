@@ -29,37 +29,25 @@ var gulp  = require('gulp'),
                 path.dev + '/libs/angular-timer/dist/angular-timer.js',
                 path.dev + '/libs/humanize-duration/humanize-duration.js',
                 path.dev + '/libs/moment/moment.js',
-                path.dev + '/libs/angular-ui-select/dist/select.js',
                 path.dev + '/libs/angular-cookies/angular-cookies.js',
+                path.dev + '/libs/angular-ueditor/dist/angular-ueditor.js',
       		],
       		index: [
       			path.dev + '/scripts/libs/{,*/}*.js',
                 path.dev + '/scripts/*/{,*/}*.js',
-                path.dev + '/scripts/index.js',
-                '!' + path.dev + '/scripts/libs/ng-ckeditor.js',
-                '!' + path.dev + '/scripts/libs/ckeditor/{,*/}*.js'
+                path.dev + '/scripts/index.js'
       		],
-      		ckeditor: [
-      			path.dev + '/scripts/libs/ckeditor/ckeditor.js',
-      			path.dev + '/scripts/libs/ng-ckeditor.js',
-      		],
-      		editor: [
-      			path.dev + '/scripts/libs/ckeditor/**',
-      			'!' + path.dev + '/scripts/libs/ckeditor/ckeditor.js',
-      			'!' + path.dev + '/scripts/libs/ckeditor/samples/**'
-      		]
       	},
       	styles: {
       		main: path.dev + '/styles/*.scss',
       		bootstrap: path.dev + '/libs/bootstrap/dist/css/bootstrap.css',
       		nprogress: path.dev + '/libs/nprogress/nprogress.css',
-          select: path.dev + '/libs/angular-ui-select/dist/select.css',
       	},
       	html: {
       		common: path.dev + '/*.html',
       		sub: [
-				path.dev + '/scripts/**',
-			'!' + path.dev + '/scripts/{,*/}*.js'
+							path.dev + '/scripts/**',
+							'!' + path.dev + '/scripts/{,*/}*.js'
       		]	
       	},
       	fonts: {
@@ -74,14 +62,11 @@ var gulp  = require('gulp'),
       	scripts: {
       		angular: path.prod + '/scripts/',
       		index: path.prod + '/scripts/',
-      		ckeditor: path.prod + '/scripts/editor/',
-      		editor: path.prod + '/scripts/editor/'
       	},
       	styles: {
       		main: path.prod + '/styles/',
       		bootstrap: path.prod + '/styles/',
       		nprogress: path.prod + '/styles/',
-          select: path.prod + '/styles/'
       	},
       	html: {
       		common: path.prod,
@@ -108,17 +93,6 @@ var gulp  = require('gulp'),
 		    .pipe(gulp.dest(output.scripts.index));
 	});
 
-	gulp.task('concat-scripts-ckeditor', function () {
-	    gulp.src(input.scripts.ckeditor)
-		    .pipe(concat('ckeditor.js'))
-		    .pipe(gulp.dest(output.scripts.ckeditor));
-	});
-
-	gulp.task('dest-scripts-editor', function() {
-		gulp.src(input.scripts.editor)
-    		.pipe(gulp.dest(output.scripts.editor));
-	});
-
 	gulp.task('build-styles-main', function() {
 		return gulp.src(input.styles.main)
 			.pipe(sourcemaps.init())
@@ -138,12 +112,6 @@ var gulp  = require('gulp'),
 		gulp.src(input.styles.nprogress)
 			.pipe(minifycss())
     		.pipe(gulp.dest(output.styles.nprogress));
-	});
-
-	gulp.task('dest-select', function() {
-	  gulp.src(input.styles.select)
-      .pipe(minifycss())
-		    .pipe(gulp.dest(output.styles.select));
 	});
 
 	gulp.task('dest-html-common', function() {
@@ -173,13 +141,13 @@ var gulp  = require('gulp'),
         gulp.watch(input.html.sub, ['dest-html-sub']);
     });
 
-    gulp.task('default', ['concat-scripts-angular', 'concat-scripts-index', 'concat-scripts-ckeditor', 'dest-scripts-editor', 
-        'build-styles-main', 'dest-styles-bootstrap', 'dest-styles-nprogress', 'dest-select',
+    gulp.task('default', ['concat-scripts-angular', 'concat-scripts-index',
+        'build-styles-main', 'dest-styles-bootstrap', 'dest-styles-nprogress',
         'dest-html-common', 'dest-html-sub',
         'dest-fonts-bootstrap', 'dest-clip-zeroclipboard']);
 
-    gulp.task('dev', ['concat-scripts-angular', 'concat-scripts-index', 'concat-scripts-ckeditor', 'dest-scripts-editor', 
-        'build-styles-main', 'dest-styles-bootstrap', 'dest-styles-nprogress', 'dest-select',
+    gulp.task('dev', ['concat-scripts-angular', 'concat-scripts-index',
+        'build-styles-main', 'dest-styles-bootstrap', 'dest-styles-nprogress',
         'dest-html-common', 'dest-html-sub',
         'dest-fonts-bootstrap', 'dest-clip-zeroclipboard', 'dev-watch']);
 

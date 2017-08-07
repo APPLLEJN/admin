@@ -608,7 +608,23 @@ var panelUtils = {
 }
 
 'use strict';
-var channelController = angular.module('channelController',['ui.bootstrap']);
+var channelController = angular.module('channelController',['ui.bootstrap', 'ng.ueditor']);
+
+angular.module('channelController').directive('scrollToBottom', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, elm, attr) {
+      elm.bind('scroll', function() {
+        if (elm[0].scrollHeight - elm[0].scrollTop < parseInt(elm[0].style.height) + 5) {
+          scope.$apply(function() {
+            scope.isBottom = true;
+          });
+        }
+      });
+
+    }
+  };
+});
 
 channelController.factory('changeSort',['Channel', 'PanelAlert', function(Channel, PanelAlert){
   return function($scope, type, id, sort, index, scopeData, service){
@@ -723,6 +739,13 @@ channelController.controller('newsDetailController', ['$scope', '$location', '$s
 
     /* parameter */
     $scope.isEdit = news_id !== 'new';
+    $scope.config = {
+      toolbars: [
+        ['fullscreen', 'source', 'undo', 'redo', 'bold']
+      ],
+      autoHeightEnabled: true,
+      autoFloatEnabled: true
+    }
 
     /* common function */
     function dateInit() {
@@ -880,8 +903,13 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
       });
     }
 
-    $scope.addProduct = function() {
+    $scope.addProduct = function(obj) {
       $scope.modalType = 'recommend'
+      if (obj){
+        obj.image_url_mini = obj.image_url
+        $scope.isEdit = true
+      }
+      $scope.products = obj ? [obj] : [];
       var modalInstance = $modal.open({
         templateUrl: 'addProduct.html',
         controller: 'addProductController',
@@ -963,8 +991,13 @@ channelController.controller('uniqueController',['$scope', '$location', '$stateP
     }
 
 
-    $scope.addProduct = function() {
+    $scope.addProduct = function(obj) {
       $scope.modalType = 'unique'
+      if (obj){
+        obj.image_url_mini = obj.image_url
+        $scope.isEdit = true
+      }
+      $scope.products = obj ? [obj] : [];
       var modalInstance = $modal.open({
         templateUrl: 'addProduct.html',
         controller: 'addProductController',
@@ -1046,8 +1079,13 @@ channelController.controller('designController',['$scope', '$location', '$stateP
     }
 
 
-    $scope.addProduct = function() {
+    $scope.addProduct = function(obj) {
       $scope.modalType = 'design'
+      if (obj){
+        obj.image_url_mini = obj.image_url
+        $scope.isEdit = true
+      }
+      $scope.products = obj ? [obj] : [];
       var modalInstance = $modal.open({
         templateUrl: 'addProduct.html',
         controller: 'addProductController',
@@ -1061,13 +1099,43 @@ channelController.controller('designController',['$scope', '$location', '$stateP
 
 }]);
 
-channelController.controller('addProductController', ['$scope', '$modalInstance', 'PanelAlert', 'Channel',  '$filter', '$stateParams',
-  function ($scope, $modalInstance, PanelAlert, Channel, $filter, $stateParams){
+channelController.controller('addProductController', ['$scope', '$modalInstance', 'PanelAlert', 'Channel', 'Content', '$filter', '$stateParams', '$upload',
+  function ($scope, $modalInstance, PanelAlert, Channel, Content, $filter, $stateParams, $upload){
     PanelAlert.clearAlert();
     $scope[$scope.modalType] = {}
+    $scope.page = 1
+    $scope.addProducts = []
+
+    if(!$scope.isEdit) {
+      getProducts({page: $scope.page, type: $scope.modalType}, function(data, total){
+        $scope.products = data.list;
+        $scope.bigTotalItems = total;
+        $scope.page = $scope.page + 1
+      }, function(err){
+        PanelAlert.addError(err.data);
+      });
+    }
+
+    function getProducts(param, success, error){
+      NProgress.start();
+      Content.products.get(param, function(data, getResponseHeaders){
+        NProgress.done();
+        var totalNumber = getResponseHeaders()['total-count'];
+        success && success(data, totalNumber);
+      }, function(err){
+        NProgress.done();
+        error && error(err);
+      });
+    }
+
     $scope.submit = function () {
-      if ($scope[$scope.modalType].id) {
-        Channel[$scope.modalType].update($scope[$scope.modalType], function(data){
+      if ($scope.isEdit) {
+        var data = {
+          id: $scope.products[0].id,
+          name: $scope.products[0].name,
+          image_url: $scope.products[0].image_url,
+        }
+        Channel[$scope.modalType].update(data, function(data){
           PanelAlert.addError({
             type: 'success',
             msg: '修改成功'
@@ -1077,11 +1145,18 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
           PanelAlert.addError(err.data);
         });
       } else {
-        Channel[$scope.modalType].create($scope[$scope.modalType], function(data){
+        var list = $scope.products.filter(function (item) { return item.checked})
+        if ($scope.modalType !== 'recommend') {
+          list = list.map(function (item) {
+            return item.id
+          })
+        }
+        Channel[$scope.modalType].create({list: list}, function(data){
           PanelAlert.addError({
             type: 'success',
             msg: '发布成功'
           });
+          location.reload();
           $modalInstance.dismiss('cancel');
         }, function(err){
           PanelAlert.addError(err.data);
@@ -1091,7 +1166,52 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
     $scope.close = function () {
       $modalInstance.dismiss('cancel');
     };
-  }]);
+
+    $scope.selectProduction = function (product) {
+      if($scope.addProducts.indexOf(product.id) > -1) {
+        var index = $scope.addProducts.indexOf(product.id)
+        $scope.addProducts.splice(index, 1)
+        product.checked = false
+      } else {
+        $scope.addProducts.push(product.id)
+        product.checked = true
+      }
+    }
+
+
+    $scope.onFileUpload = function ($files, product) {
+      $scope.upload = $upload.upload({
+        url: '/api/upload',
+        file: $files
+      }).success(function(data, status, headers, config) {
+        PanelAlert.addError({
+          type: 'success',
+          msg: '上传成功'
+        });
+        if ($scope.isEdit) {
+          product.image_url = data.image_url
+        }
+        product.image_url_mini = data.image_url
+      }).error(function(data){
+        PanelAlert.addError({
+          type: 'danger',
+          msg: '上传失败'
+        });
+      });
+    };
+
+    $scope.$watch('isBottom', function (value) {
+      if (value) {
+        getProducts({page: $scope.page, type: $scope.modalType}, function(data, total){
+          $scope.products = $scope.products.concat(data.list)
+          $scope.bigTotalItems = total;
+        }, function(err){
+          PanelAlert.addError(err.data);
+        });
+      }
+    })
+
+}]);
 
 
 
@@ -1553,6 +1673,8 @@ contentController.controller('productsController',['$scope', '$location', '$stat
         PanelAlert.addError(err.data);
       });
     }
+    
+
 }]);
 
 contentController.controller('productDetailController', ['$scope', '$location', '$stateParams', '$upload', 'PanelAlert', 'Content', '$filter', '$modal',
@@ -1904,13 +2026,11 @@ orderServices.factory('Order', ['$resource', function($resource){
 var cigem = angular.module('cigem', [
     'ui.router',
     'cigemApi',
-    'ngCkeditor',
     'ngClipboard',
     'ngCookies',
     'angularFileUpload',
     'panelAlert',
     'mapInfo',
-    'ui.select',
     'ngSanitize',
     'filter',
     'contentController',

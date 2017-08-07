@@ -18,6 +18,8 @@
         <tr>
             <td>id</td>
             <td>产品id</td>
+            <td>名称</td>
+            <td>图片</td>
             <td>操作</td>
         </tr>
         </thead>
@@ -25,6 +27,10 @@
         <tr ng-repeat="unique in uniqueList">
             <td>{{unique.id}}</td>
             <td>{{unique.product_id}}</td>
+            <td>{{unique.name}}</td>
+            <td>
+                <img ng-src="{{unique.image_url_mini}}" alt="" width="100">
+            </td>
             <td>
                 <a ng-show="$index" href="javascript:;"  ng-click="changeSort('up', unique.id, unique.sort, $index)">上移&nbsp;&nbsp;</a>
                 <a ng-show="$index !== bigTotalItems-1"href="javascript:;"  ng-click="changeSort('down', unique.id, unique.sort, $index)">下移&nbsp;&nbsp;</a>
@@ -44,9 +50,17 @@
     </div>
     <form class="form-inline" role="form" ng-submit="submit()">
         <div class="modal-body">
-            <textarea style="width: 100%" class="form-control" name="" id="" cols="30" rows="10"
-                      placeholder="请输入产品id" ng-model="unique.productIds" />
-            </textarea>
+            <!--<textarea style="width: 100%" class="form-control" name="" id="" cols="30" rows="10"-->
+                      <!--placeholder="请输入产品id" ng-model="unique.productIds" />-->
+            <!--</textarea>-->
+            <div style="display: flex; flex-wrap: wrap; margin: 10px -10px 0 0; height: 400px; overflow: scroll;" scroll-to-bottom="isAtBottom">
+                <div ng-repeat="product in products" style="width: 178px; margin: 0 10px 36px 0 ; display: flex; flex-direction: column; position: relative;">
+                    <img ng-show="!isEdit" ng-src="{{product.image_url_mini}}" alt="mini" width="100%" ng-click="selectProduction(product);">
+                    <img ng-show="isEdit" ng-src="{{product.image_url_mini}}" alt="mini" width="100%">
+                    <input class="form-control" id="product_name" ng-model="product.name" style="margin: 10px 0;" disabled="true" />
+                    <input ng-show="!isEdit" type="checkbox" ng-model="product.checked" ng-click="selectProduction(product);" style="position: absolute; left: 10px">
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-default" type="submit">确认</button>

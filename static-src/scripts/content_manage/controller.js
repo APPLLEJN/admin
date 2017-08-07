@@ -393,6 +393,8 @@ contentController.controller('productsController',['$scope', '$location', '$stat
         PanelAlert.addError(err.data);
       });
     }
+    
+
 }]);
 
 contentController.controller('productDetailController', ['$scope', '$location', '$stateParams', '$upload', 'PanelAlert', 'Content', '$filter', '$modal',

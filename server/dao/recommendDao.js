@@ -5,9 +5,12 @@ class recommendDao extends baseDao {
     super(db, search, orderBy)
   }
   async insert(req, res, next) {
-    let { productIds } = req.body
-    productIds = productIds.split(/,|，|\b\n/g)
-    const result = await Promise.all(productIds.map(async item => await super.insert(req, res, next, {product_id: +item, sort: +item})))
+    let { list } = req.body
+    const result = await Promise.all(list.map(
+      async item => await super.insert(req, res, next,
+        {product_id: item.id, sort:  item.id, name: item.name, image_url_mini: item.image_url_mini}
+        ))
+    )
     if (result) {
       res.json({status: 'ok'})
     }

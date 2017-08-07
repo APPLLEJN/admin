@@ -3,13 +3,11 @@
 var cigem = angular.module('cigem', [
     'ui.router',
     'cigemApi',
-    'ngCkeditor',
     'ngClipboard',
     'ngCookies',
     'angularFileUpload',
     'panelAlert',
     'mapInfo',
-    'ui.select',
     'ngSanitize',
     'filter',
     'contentController',
