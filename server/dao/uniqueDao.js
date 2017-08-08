@@ -11,7 +11,7 @@ class uniqueDao extends baseDao {
         .rightJoin(`products as p`, 'u.product_id', 'p.id')
         .select('p.name', 'p.image_url_mini', 'u.product_id', 'u.id')
         .where({'u.status': 1}).orderBy('u.sort', 'desc')
-        .groupBy('u.product_id')
+        .groupBy('u.id')
       this.search.map(function (item) {
         if (req.query && req.query[ item ]) {
           listQuery = listQuery.where(`u.${item}`, req.query[ item ])

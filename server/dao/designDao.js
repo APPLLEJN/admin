@@ -13,7 +13,7 @@ class designDao extends baseDao {
         .rightJoin(`products as p`, 'd.product_id', 'p.id')
         .select('p.name', 'p.image_url_mini', 'd.product_id', 'd.id')
         .where({'d.status': 1}).orderBy('d.sort', 'desc')
-        .groupBy('d.product_id')
+        .groupBy('d.id')
       this.search.map(function (item) {
         if (req.query && req.query[ item ]) {
           listQuery = listQuery.where(`d.${item}`, req.query[ item ])

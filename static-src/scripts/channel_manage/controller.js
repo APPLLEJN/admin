@@ -524,8 +524,8 @@ channelController.controller('designController',['$scope', '$location', '$stateP
 
 }]);
 
-channelController.controller('addProductController', ['$scope', '$modalInstance', 'PanelAlert', 'Channel', 'Content', '$filter', '$stateParams', '$upload',
-  function ($scope, $modalInstance, PanelAlert, Channel, Content, $filter, $stateParams, $upload){
+channelController.controller('addProductController', ['$scope', '$modalInstance', 'PanelAlert', 'Channel', 'Content', '$filter', '$stateParams', '$upload', '$timeout',
+  function ($scope, $modalInstance, PanelAlert, Channel, Content, $filter, $stateParams, $upload, $timeout){
     PanelAlert.clearAlert();
     $scope[$scope.modalType] = {}
     $scope.page = 1
@@ -577,12 +577,14 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
           })
         }
         Channel[$scope.modalType].create({list: list}, function(data){
+          $modalInstance.dismiss('cancel');
           PanelAlert.addError({
             type: 'success',
             msg: '发布成功'
           });
-          $modalInstance.dismiss('cancel');
-          location.reload();
+          $timeout(function () {
+            location.reload()
+          }, 500)
         }, function(err){
           PanelAlert.addError(err.data);
         });
