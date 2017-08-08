@@ -10,10 +10,11 @@ class productDao extends baseDao {
     try {
       if (req.query.type){
         let typeName = req.query.type === 'recommend' ? 'recommends' : req.query.type
-        let listQuery = db(`${this.db} as p`)
-            .leftJoin(`${typeName} as t`, 't.product_id', 'p.id')
-            .select('p.name', 'p.image_url_mini', 'p.id')
-            .where({'p.status': 1, 't.product_id': null}).orderBy('p.create_time', 'desc')
+        let listQuery = db(this.db)
+            .select().where('status', 1).orderBy('create_time', 'desc')
+            .whereNotExists(function () {
+              this.select('product_id').from(typeName).where('status', 1).whereRaw(`${typeName}.product_id=products.id`)
+            })
         let list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
         res.status(200).json({status: 'ok', list: list})
       } else {

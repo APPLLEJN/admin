@@ -547,8 +547,8 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             type: 'success',
             msg: '发布成功'
           });
-          location.reload();
           $modalInstance.dismiss('cancel');
+          location.reload();
         }, function(err){
           PanelAlert.addError(err.data);
         });
