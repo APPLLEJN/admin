@@ -1,5 +1,45 @@
 'use strict';
-var channelController = angular.module('channelController',['ui.bootstrap', 'ng.ueditor']);
+var channelController = angular.module('channelController',['ui.bootstrap']);
+
+channelController.directive('contenteditable', function() {
+  return {
+    restrict: 'A' ,
+    require: 'ngModel',
+    link: function(scope, element, attrs, ctrl) {
+      // 创建编辑器
+      var editor = scope.editor = new wangEditor('editor-trigger');
+      editor.config.menus = [
+        'source',
+        '|',     // '|' 是菜单组的分割线
+        'head',
+        'bold',
+        'underline',
+        'italic',
+        'forecolor',
+        'link',
+        'unlink',
+        '|',     // '|' 是菜单组的分割线
+        'img',
+      ];
+      editor.config.uploadImgUrl = '/api/upload';
+      editor.config.uploadImgFns.onload = function (resultText, xhr) {
+        console.log(resultText, 'resultText')
+        // 上传图片时，已经将图片的名字存在 editor.uploadImgOriginalName
+        var originalName = editor.uploadImgOriginalName || '';
+        // 如果 resultText 是图片的url地址，可以这样插入图片：
+        editor.command(null, 'insertHtml', '<img src="' + JSON.parse(resultText).image_url + '" alt="' + originalName + '" style="max-width:100%;"/>');
+      };
+      editor.onchange = function () {
+        // 从 onchange 函数中更新数据
+        scope.$apply(function () {
+          var html = editor.$txt.html();
+          ctrl.$setViewValue(html);
+        });
+      };
+      editor.create();
+    }
+  };
+});
 
 angular.module('channelController').directive('scrollToBottom', function() {
   return {
@@ -130,13 +170,6 @@ channelController.controller('newsDetailController', ['$scope', '$location', '$s
 
     /* parameter */
     $scope.isEdit = news_id !== 'new';
-    $scope.config = {
-      toolbars: [
-        ['fullscreen', 'source', 'undo', 'redo', 'bold']
-      ],
-      autoHeightEnabled: true,
-      autoFloatEnabled: true
-    }
 
     /* common function */
     function dateInit() {
@@ -162,6 +195,7 @@ channelController.controller('newsDetailController', ['$scope', '$location', '$s
     if ($scope.isEdit) {
       Channel.news.get({id: news_id}, function (data) {
         $scope.news = data;
+        $scope.editor.$txt.html(data.content);
         NProgress.done();
       }, function (err) {
         NProgress.done();

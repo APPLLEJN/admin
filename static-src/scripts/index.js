@@ -18,6 +18,7 @@ var cigem = angular.module('cigem', [
     'channelServices',
 ]);
 
+
 cigem.run(['$rootScope', 'Logout', function ($rootScope, Logout) {
     $rootScope.logout = function () {
         Logout.create({}, function (data) {

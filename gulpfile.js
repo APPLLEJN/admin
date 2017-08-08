@@ -3,6 +3,8 @@ var gulp  = require('gulp'),
 
     jshint     = require('gulp-jshint'),
     sass       = require('gulp-sass'),
+    sass       = require('gulp-sass'),
+    less       = require('gulp-less'),
     concat     = require('gulp-concat'),
     sourcemaps = require('gulp-sourcemaps'),
     minifycss  = require('gulp-clean-css'),
@@ -30,7 +32,8 @@ var gulp  = require('gulp'),
                 path.dev + '/libs/humanize-duration/humanize-duration.js',
                 path.dev + '/libs/moment/moment.js',
                 path.dev + '/libs/angular-cookies/angular-cookies.js',
-                path.dev + '/libs/angular-ueditor/dist/angular-ueditor.js',
+                path.dev + '/libs/jquery/dist/jquery.js',
+                path.dev + '/libs/wangEditor/dist/js/wangEditor.js',
       		],
       		index: [
       			path.dev + '/scripts/libs/{,*/}*.js',
@@ -42,6 +45,7 @@ var gulp  = require('gulp'),
       		main: path.dev + '/styles/*.scss',
       		bootstrap: path.dev + '/libs/bootstrap/dist/css/bootstrap.css',
       		nprogress: path.dev + '/libs/nprogress/nprogress.css',
+      		wangEditor: path.dev + '/libs/wangEditor/dist/css/wangEditor.less',
       	},
       	html: {
       		common: path.dev + '/*.html',
@@ -51,7 +55,8 @@ var gulp  = require('gulp'),
       		]	
       	},
       	fonts: {
-      		bootstrap: path.dev + '/libs/bootstrap/dist/fonts/*'
+      		bootstrap: path.dev + '/libs/bootstrap/dist/fonts/*',
+          wangEditor: path.dev + '/libs/wangEditor/dist/fonts/*',
       	},
       	clip: {
       		zeroclipboard: path.dev + '/libs/zeroclipboard/dist/ZeroClipboard.swf'
@@ -67,13 +72,15 @@ var gulp  = require('gulp'),
       		main: path.prod + '/styles/',
       		bootstrap: path.prod + '/styles/',
       		nprogress: path.prod + '/styles/',
+          wangEditor: path.prod + '/styles/',
       	},
       	html: {
       		common: path.prod,
       		sub: path.prod + '/scripts/'
       	},
       	fonts: {
-      		bootstrap: path.prod + '/fonts/'
+      		bootstrap: path.prod + '/fonts/',
+          wangEditor: path.prod + '/fonts/',
       	},
       	clip: {
       		zeroclipboard: path.prod + '/scripts/clip/'
@@ -114,6 +121,20 @@ var gulp  = require('gulp'),
     		.pipe(gulp.dest(output.styles.nprogress));
 	});
 
+	gulp.task('dest-styles-wangEditor', function() {
+		try {
+      gulp.src(input.styles.wangEditor)
+        .pipe(sourcemaps.init())
+        .pipe(less())
+        .pipe(minifycss())
+        .pipe(sourcemaps.write())
+	      .pipe(gulp.dest(output.styles.wangEditor));
+		} catch (err) {
+			console.log(err, 'errr')
+		}
+
+	});
+
 	gulp.task('dest-html-common', function() {
 		gulp.src(input.html.common)
     		.pipe(gulp.dest(output.html.common));
@@ -127,6 +148,11 @@ var gulp  = require('gulp'),
 	gulp.task('dest-fonts-bootstrap', function() {
 		gulp.src(input.fonts.bootstrap)
     		.pipe(gulp.dest(output.fonts.bootstrap));
+	});
+
+	gulp.task('dest-fonts-wangEditor', function() {
+	  gulp.src(input.fonts.wangEditor)
+	    .pipe(gulp.dest(output.fonts.wangEditor));
 	});
 
 	gulp.task('dest-clip-zeroclipboard', function() {
@@ -143,12 +169,12 @@ var gulp  = require('gulp'),
 
     gulp.task('default', ['concat-scripts-angular', 'concat-scripts-index',
         'build-styles-main', 'dest-styles-bootstrap', 'dest-styles-nprogress',
-        'dest-html-common', 'dest-html-sub',
+        'dest-html-common', 'dest-html-sub', 'dest-styles-wangEditor', 'dest-fonts-wangEditor',
         'dest-fonts-bootstrap', 'dest-clip-zeroclipboard']);
 
     gulp.task('dev', ['concat-scripts-angular', 'concat-scripts-index',
         'build-styles-main', 'dest-styles-bootstrap', 'dest-styles-nprogress',
-        'dest-html-common', 'dest-html-sub',
+        'dest-html-common', 'dest-html-sub', 'dest-styles-wangEditor', 'dest-fonts-wangEditor',
         'dest-fonts-bootstrap', 'dest-clip-zeroclipboard', 'dev-watch']);
 
 

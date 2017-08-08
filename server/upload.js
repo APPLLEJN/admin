@@ -4,8 +4,8 @@
 //处理图像文件上传，图像文件保存在public/upload下
 var fs = require('fs')
 exports.upload = function (req, res) {
-  fs.readFile(req.files.file.path, function (err, data) {
-    var file = req.files.file
+  var file = 'file' in req.files ? req.files.file : req.files.wangEditorH5File
+  fs.readFile(file.path, function (err, data) {
     file.path = "/upload/images/" + file.name;
     fs.writeFile(__dirname + file.path, data, function (err) {
       if (err) {
