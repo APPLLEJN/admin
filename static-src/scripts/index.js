@@ -107,15 +107,12 @@ cigem.config(['ngClipProvider', function (ngClipProvider) {
 }]);
 
 
-cigem.controller('sideBarController', ['$scope', '$location', '$rootScope', '$window', function ($scope, $location, $rootScope, $window) {
-  //var pageWrapper = angular.element( document.querySelector( '#page-wrapper' ) )
-  //$window.content = pageWrapper[0]
-  //var locationChangeSuccessOff = $rootScope.$on('$locationChangeSuccess', locationChangeSuccess)
-  //function locationChangeSuccess(event) {
-  //  if(arguments[1] !== arguments[2]){
-  //    $window.content.scrollTop = 0;
-  //  }
-  //}
+cigem.controller('sideBarController', ['$scope', '$location', '$rootScope', '$window', '$cookieStore', function ($scope, $location, $rootScope, $window, $cookieStore) {
+  $rootScope.$on('stateChangeStart', function () {
+    if (!$cookieStore.get("judgeIsAdmin")) {
+      $location.path('/index')
+    }
+  })
 
   //function judePermisson(permisson) {
   //      return $rootScope.userPermisson.indexOf(permisson) > -1;
@@ -276,10 +273,12 @@ cigem.controller('loginController', ['$scope', '$rootScope', 'Login', '$cookieSt
     }
 }]);
 
-cigem.controller('bodyController', ['$scope', '$rootScope', '$cookieStore', function ($scope, $rootScope, $cookieStore) {
+cigem.controller('bodyController', ['$scope', '$rootScope', '$cookieStore', '$location', function ($scope, $rootScope, $cookieStore, $location) {
   $scope.init = function () {
     if ($cookieStore.get("judgeIsAdmin")==='true') {
       $rootScope.judgeIsAdmin = true;
+    } else {
+      $location.path('/index')
     }
   }
 }])
