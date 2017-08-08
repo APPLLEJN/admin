@@ -12,7 +12,7 @@ const db = knex({
     port: 3306,
     user: 'root',
     password: '1q2w3e4r',
-      database: IS_DEV ? 'cigem' : 'cigem',
+    database: IS_DEV ? 'test' : 'cigem',
   },
   pool: {
     min: 5,
