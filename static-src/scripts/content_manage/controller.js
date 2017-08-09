@@ -1,7 +1,7 @@
 'use strict';
 var contentController = angular.module('contentController',['ui.bootstrap']);
 
-contentController.factory('handleSort',['Content', 'PanelAlert', function(Content, PanelAlert){
+contentController.factory('handleSort',['Content', 'CigemAlert', function(Content, CigemAlert){
   return function($scope, type, id, sort, index, scopeData, service){
     var before = $scope[scopeData][index-1]
     var after = $scope[scopeData][index+1]
@@ -15,7 +15,7 @@ contentController.factory('handleSort',['Content', 'PanelAlert', function(Conten
           $scope[scopeData][index] = before
         })
       }, function(err){
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     } else {
       Content[service].update({id: id, sort: after.sort}, function(data){
@@ -26,15 +26,15 @@ contentController.factory('handleSort',['Content', 'PanelAlert', function(Conten
           $scope[scopeData][index] = after
         })
       }, function(err){
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
   }
 }])
 
-contentController.controller('classifyController',['$scope', '$location', '$stateParams', '$window', 'PanelAlert', 'Content', '$filter', 'handleSort',
-	function($scope, $location, $stateParams, $window, PanelAlert, Content, $filter, handleSort){
-		PanelAlert.clearAlert();
+contentController.controller('classifyController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter', 'handleSort',
+	function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter, handleSort){
+		CigemAlert.clearAlert();
 
 		/* init */
     var search = $location.search();
@@ -58,13 +58,13 @@ contentController.controller('classifyController',['$scope', '$location', '$stat
       $scope.classifies = data.list || [];
       $scope.bigTotalItems = total;
     }, function(err){
-      PanelAlert.addError(err.data);
+      CigemAlert.addError(err.data);
     });
 
     $scope.deleteClassify = function (id) {
       if (confirm('确认删除？')) {
         Content.classifies.delete({id: id}, function(data){
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '删除成功'
           });
@@ -72,21 +72,21 @@ contentController.controller('classifyController',['$scope', '$location', '$stat
             return item.id !== id
           })
         }, function(err){
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       }
     }
 
     $scope.searchClassifies = function () {
-      PanelAlert.clearAlert();
+      CigemAlert.clearAlert();
       var searchKey = ['name', 'en_name']
-      var param = panelUtils.searchCondition(searchKey, $scope.search);
+      var param = cigemUtils.searchCondition(searchKey, $scope.search);
       $location.search(param);
       getClassifies(param, function(data, total){
         $scope.classifies = data.list;
         $scope.bigTotalItems = total;
       }, function(err){
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
@@ -96,7 +96,7 @@ contentController.controller('classifyController',['$scope', '$location', '$stat
         $scope.classifies = data.list;
         $scope.bigTotalItems = total;
       }, function (err) {
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
@@ -105,9 +105,9 @@ contentController.controller('classifyController',['$scope', '$location', '$stat
     }
   }]);
 
-contentController.controller('classifyDetailController', ['$scope', '$location', '$stateParams', '$upload', 'PanelAlert', 'Content', '$filter', '$modal',
-  function ($scope, $location, $stateParams, $upload, PanelAlert, Content, $filter, $modal) {
-    PanelAlert.clearAlert();
+contentController.controller('classifyDetailController', ['$scope', '$location', '$stateParams', '$upload', 'CigemAlert', 'Content', '$filter', '$modal',
+  function ($scope, $location, $stateParams, $upload, CigemAlert, Content, $filter, $modal) {
+    CigemAlert.clearAlert();
 
 		/* init */
     var classify_id = $stateParams.id;
@@ -122,7 +122,7 @@ contentController.controller('classifyDetailController', ['$scope', '$location',
         NProgress.done();
       }, function (err) {
         NProgress.done();
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
@@ -132,26 +132,26 @@ contentController.controller('classifyDetailController', ['$scope', '$location',
         delete $scope.classify.update_time
         Content.classifies.update($scope.classify, function (data) {
           NProgress.done();
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '修改成功'
           });
           location.href = '#/classifies';
         }, function (err) {
           NProgress.done();
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       } else {
         Content.classifies.create($scope.classify, function (data) {
           NProgress.done();
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '创建成功'
           });
           location.href = '#/classifies';
         }, function (err) {
           NProgress.done();
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       }
     }
@@ -166,13 +166,13 @@ contentController.controller('classifyDetailController', ['$scope', '$location',
         url: '/api/upload',
         file: $files
       }).success(function(data, status, headers, config) {
-        PanelAlert.addError({
+        CigemAlert.addError({
           type: 'success',
           msg: '上传成功'
         });
         $scope.classify.image_url = data.image_url
       }).error(function(data){
-        PanelAlert.addError({
+        CigemAlert.addError({
           type: 'danger',
           msg: '上传失败'
         });
@@ -181,9 +181,9 @@ contentController.controller('classifyDetailController', ['$scope', '$location',
   }
 ]);
 
-contentController.controller('seriesController',['$scope', '$location', '$stateParams', '$window', 'PanelAlert', 'Content', '$filter', 'handleSort',
-  function($scope, $location, $stateParams, $window, PanelAlert, Content, $filter, handleSort){
-    PanelAlert.clearAlert();
+contentController.controller('seriesController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter', 'handleSort',
+  function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter, handleSort){
+    CigemAlert.clearAlert();
 
     /* init */
     var search = $location.search();
@@ -207,13 +207,13 @@ contentController.controller('seriesController',['$scope', '$location', '$stateP
       $scope.seriesList = data.list || [];
       $scope.bigTotalItems = total;
     }, function(err){
-      PanelAlert.addError(err.data);
+      CigemAlert.addError(err.data);
     });
 
     $scope.deleteSeries = function (id) {
       if (confirm('确认删除？')) {
         Content.series.delete({id: id}, function(data){
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '删除成功'
           });
@@ -221,21 +221,21 @@ contentController.controller('seriesController',['$scope', '$location', '$stateP
             return item.id !== id
           })
         }, function(err){
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       }
     }
 
     $scope.searchSeries = function () {
-      PanelAlert.clearAlert();
+      CigemAlert.clearAlert();
       var searchKey = ['name', 'en_name']
-      var param = panelUtils.searchCondition(searchKey, $scope.search);
+      var param = cigemUtils.searchCondition(searchKey, $scope.search);
       $location.search(param);
       getSeries(param, function(data, total){
         $scope.seriesList = data.list;
         $scope.bigTotalItems = total;
       }, function(err){
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
@@ -245,7 +245,7 @@ contentController.controller('seriesController',['$scope', '$location', '$stateP
         $scope.seriesList = data.list;
         $scope.bigTotalItems = total;
       }, function (err) {
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
@@ -254,9 +254,9 @@ contentController.controller('seriesController',['$scope', '$location', '$stateP
     }
 }]);
 
-contentController.controller('seriesDetailController', ['$scope', '$location', '$stateParams', '$upload', 'PanelAlert', 'Content', '$filter', '$modal',
-  function ($scope, $location, $stateParams, $upload, PanelAlert, Content, $filter, $modal) {
-    PanelAlert.clearAlert();
+contentController.controller('seriesDetailController', ['$scope', '$location', '$stateParams', '$upload', 'CigemAlert', 'Content', '$filter', '$modal',
+  function ($scope, $location, $stateParams, $upload, CigemAlert, Content, $filter, $modal) {
+    CigemAlert.clearAlert();
 
     /* init */
     var series_id = $stateParams.id;
@@ -270,7 +270,7 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
         NProgress.done();
       }, function (err) {
         NProgress.done();
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
@@ -280,25 +280,25 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
         delete $scope.series.update_time
         Content.series.update($scope.series, function (data) {
           NProgress.done();
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '修改成功'
           });
         }, function (err) {
           NProgress.done();
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       } else {
         Content.series.create($scope.series, function (data) {
           NProgress.done();
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '创建成功'
           });
           location.href = '#/series';
         }, function (err) {
           NProgress.done();
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       }
     }
@@ -311,13 +311,13 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
         url: '/api/upload',
         file: $files
       }).success(function(data, status, headers, config) {
-        PanelAlert.addError({
+        CigemAlert.addError({
           type: 'success',
           msg: '上传成功'
         });
         $scope.series.image_url = data.image_url
       }).error(function(data){
-        PanelAlert.addError({
+        CigemAlert.addError({
           type: 'danger',
           msg: '上传失败'
         });
@@ -326,9 +326,9 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
   }
 ]);
 
-contentController.controller('productsController',['$scope', '$location', '$stateParams', '$window', 'PanelAlert', 'Content', '$filter',
-  function($scope, $location, $stateParams, $window, PanelAlert, Content, $filter){
-    PanelAlert.clearAlert();
+contentController.controller('productsController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter',
+  function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter){
+    CigemAlert.clearAlert();
 
     /* init */
     var search = $location.search();
@@ -352,13 +352,13 @@ contentController.controller('productsController',['$scope', '$location', '$stat
       $scope.products = data.list || [];
       $scope.bigTotalItems = total;
     }, function(err){
-      PanelAlert.addError(err.data);
+      CigemAlert.addError(err.data);
     });
 
     $scope.deleteProduct = function (id) {
       if (confirm('确认删除？')) {
         Content.products.delete({id: id}, function(data){
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '删除成功'
           });
@@ -366,21 +366,21 @@ contentController.controller('productsController',['$scope', '$location', '$stat
             return item.id !== id
           })
         }, function(err){
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       }
     }
 
     $scope.searchProducts = function () {
-      PanelAlert.clearAlert();
+      CigemAlert.clearAlert();
       var searchKey = ['name', 'en_name']
-      var param = panelUtils.searchCondition(searchKey, $scope.search);
+      var param = cigemUtils.searchCondition(searchKey, $scope.search);
       $location.search(param);
       getProducts(param, function(data, total){
         $scope.products = data.list;
         $scope.bigTotalItems = total;
       }, function(err){
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
@@ -390,16 +390,16 @@ contentController.controller('productsController',['$scope', '$location', '$stat
         $scope.products = data.list;
         $scope.bigTotalItems = total;
       }, function (err) {
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
     
 
 }]);
 
-contentController.controller('productDetailController', ['$scope', '$location', '$stateParams', '$upload', 'PanelAlert', 'Content', '$filter', '$modal',
-  function ($scope, $location, $stateParams, $upload, PanelAlert, Content, $filter, $modal) {
-    PanelAlert.clearAlert();
+contentController.controller('productDetailController', ['$scope', '$location', '$stateParams', '$upload', 'CigemAlert', 'Content', '$filter', '$modal',
+  function ($scope, $location, $stateParams, $upload, CigemAlert, Content, $filter, $modal) {
+    CigemAlert.clearAlert();
 
     /* init */
     var product_id = $stateParams.id;
@@ -426,7 +426,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
         NProgress.done();
       }, function (err) {
         NProgress.done();
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
@@ -436,25 +436,25 @@ contentController.controller('productDetailController', ['$scope', '$location', 
         delete $scope.product.update_time
         Content.products.update($scope.product, function (data) {
           NProgress.done();
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '修改成功'
           });
         }, function (err) {
           NProgress.done();
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       } else {
         Content.products.create($scope.product, function (data) {
           NProgress.done();
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '创建成功'
           });
           location.href = '#/products';
         }, function (err) {
           NProgress.done();
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       }
     }
@@ -468,7 +468,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
         url: '/api/upload',
         file: $files
       }).success(function(data, status, headers, config) {
-        PanelAlert.addError({
+        CigemAlert.addError({
           type: 'success',
           msg: '上传成功'
         });
@@ -478,7 +478,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
           $scope.product.image_url = data.image_url
         }
       }).error(function(data){
-        PanelAlert.addError({
+        CigemAlert.addError({
           type: 'danger',
           msg: '上传失败'
         });

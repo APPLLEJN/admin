@@ -6,7 +6,7 @@ var cigem = angular.module('cigem', [
     'ngClipboard',
     'ngCookies',
     'angularFileUpload',
-    'panelAlert',
+    'cigemAlert',
     'mapInfo',
     'ngSanitize',
     'filter',
@@ -19,16 +19,20 @@ var cigem = angular.module('cigem', [
 ]);
 
 
-cigem.run(['$rootScope', 'Logout', function ($rootScope, Logout) {
-    $rootScope.logout = function () {
-        Logout.create({}, function (data) {
-            $rootScope.judgeIsAdmin = false;
-            location.href = '#/index';
-        }, function (err) {
-            $rootScope.judgeIsAdmin = false;
-            location.href = '#/index';
-        });
-    }
+cigem.run(['$rootScope', '$location', 'Permission', 'Logout', function ($rootScope, $location, Permission, Logout) {
+  $rootScope.logout = function () {
+    Logout.create({}, function (data) {}, function (err) {});
+    $rootScope.judgeIsAdmin = false;
+    $location.path('/#/index');
+  }
+  $rootScope.$on('$stateChangeStart', function () {
+    Permission.get({}, function(data) {
+      $rootScope.judgeIsAdmin = true;
+    }, function(err) {
+      $location.path('/#/index');
+      $rootScope.judgeIsAdmin = false;
+    });
+  })
 }]);
 
 
@@ -109,11 +113,7 @@ cigem.config(['ngClipProvider', function (ngClipProvider) {
 
 
 cigem.controller('sideBarController', ['$scope', '$location', '$rootScope', '$window', '$cookieStore', function ($scope, $location, $rootScope, $window, $cookieStore) {
-  $rootScope.$on('stateChangeStart', function () {
-    if (!$cookieStore.get("judgeIsAdmin")) {
-      $location.path('/index')
-    }
-  })
+
 
   //function judePermisson(permisson) {
   //      return $rootScope.userPermisson.indexOf(permisson) > -1;
@@ -194,69 +194,6 @@ cigem.controller('sideBarController', ['$scope', '$location', '$rootScope', '$wi
     }
 }]);
 
-
-cigem.controller('imgsUploadController', ['$scope', '$modal',
-    function ($scope, $modal) {
-        $scope.openUpload = function () {
-            var modalInstance = $modal.open({
-                templateUrl: 'imgUpload.html',
-                controller: 'ImageUploadCtrl'
-            });
-        }
-    }
-]);
-
-
-cigem.controller('ImageUploadCtrl', ['$scope', '$modalInstance', '$upload', 'ImageToken', 'PanelAlert',
-    function ($scope, $modalInstance, $upload, ImageToken, PanelAlert) {
-        var token, uploadUrl,
-            imagePerfix = '';
-
-        $scope.btnMessage = '';
-
-        ImageToken.get(function (d) {
-            token = d.token;
-            uploadUrl = d.upload_url;
-            var _domain = d.domain.indexOf('https://') == 0 ? d.domain : 'https://' + d.domain
-            imagePerfix += _domain;
-        });
-
-        $scope.onFileUpload = function ($files) {
-            $scope.lastImgUrl = "正在上传...";
-
-            var file = $files[0];
-            $scope.upload = $upload.upload({
-                url: uploadUrl,
-                data: {
-                    token: token
-                },
-                file: file
-            }).success(function (data, status, headers, config) {
-                $scope.lastImgUrl = imagePerfix + '/' + data.key;
-            }).error(function (data) {
-
-                PanelAlert.addError({
-                    type: 'danger',
-                    msg: '上传图片失败'
-                });
-            });
-
-        }
-
-        $scope.closeUpload = function () {
-            $modalInstance.dismiss('cancel');
-        };
-
-        $scope.changeMessage = function () {
-            $scope.btnMessage = '复制成功';
-        };
-        $scope.fallback = function (copy) {
-            window.prompt('系统不支持自动复制，请按 cmd+c 复制', copy);
-        }
-    }
-]);
-
-
 cigem.controller('loginController', ['$scope', '$rootScope', 'Login', '$cookieStore', function ($scope, $rootScope, Login, $cookieStore) {
     $scope.login = {},
     $scope.isWrong = false;
@@ -264,9 +201,6 @@ cigem.controller('loginController', ['$scope', '$rootScope', 'Login', '$cookieSt
         $scope.isWrong = false;
         Login.create($scope.login, function (data) {
             $rootScope.judgeIsAdmin = true;
-            var expireDate = new Date();
-            expireDate.setDate(expireDate.getDate() + 30);
-            $cookieStore.put("judgeIsAdmin", 'true', {'expires': expireDate.toUTCString()});
         }, function (err) {
             $rootScope.judgeIsAdmin = false;
             $scope.isWrong = true;
@@ -276,11 +210,18 @@ cigem.controller('loginController', ['$scope', '$rootScope', 'Login', '$cookieSt
 
 cigem.controller('bodyController', ['$scope', '$rootScope', '$cookieStore', '$location', function ($scope, $rootScope, $cookieStore, $location) {
   $scope.init = function () {
-    if ($cookieStore.get("judgeIsAdmin")==='true') {
-      $rootScope.judgeIsAdmin = true;
-    } else {
-      $location.path('/index')
-    }
+    console.log('-=-=', '1111')
+
+    //try {
+    //  if ($cookieStore.get("userToken")) {
+    //    $rootScope.judgeIsAdmin = true;
+    //  } else {
+    //    $location.path('/index')
+    //  }
+    //} catch (err) {
+    //  console.log(err, 'err')
+    //}
+
   }
 }])
 

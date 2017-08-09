@@ -1,9 +1,9 @@
 'use strict';
 var orderController = angular.module('orderController',['ui.bootstrap']);
 
-orderController.controller('orderListController',['$scope', '$location', '$stateParams', 'PanelAlert', 'Order', '$modal', '$filter',
-	function($scope, $location, $stateParams, PanelAlert, Order, $modal, $filter){
-		PanelAlert.clearAlert();
+orderController.controller('orderListController',['$scope', '$location', '$stateParams', 'CigemAlert', 'Order', '$modal', '$filter',
+	function($scope, $location, $stateParams, CigemAlert, Order, $modal, $filter){
+		CigemAlert.clearAlert();
 
     /* init */
     dateInit();
@@ -45,7 +45,7 @@ orderController.controller('orderListController',['$scope', '$location', '$state
       $scope.orders = data.list || [];
       $scope.bigTotalItems = total;
     }, function(err){
-      PanelAlert.addError(err.data);
+      CigemAlert.addError(err.data);
     });
     $scope.creatOrderTime = function(order) {
       if (order) $scope.orderEdit = order;
@@ -59,7 +59,7 @@ orderController.controller('orderListController',['$scope', '$location', '$state
     $scope.deleteOrderTime = function (id) {
       if (confirm('确认删除？')) {
         Order.order.delete({id: id}, function(data){
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '删除成功'
           });
@@ -67,15 +67,15 @@ orderController.controller('orderListController',['$scope', '$location', '$state
             return item.id !== id
           })
         }, function(err){
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       }
     }
     
     $scope.searchOrders = function () {
-      PanelAlert.clearAlert();
+      CigemAlert.clearAlert();
       var searchKey = ['username', 'phone']
-      var param = panelUtils.searchCondition(searchKey, $scope.search);
+      var param = cigemUtils.searchCondition(searchKey, $scope.search);
       if($scope.search.date) {
         param.date = $filter('date')($scope.search.date, 'yyyy-MM-dd');
       }
@@ -85,7 +85,7 @@ orderController.controller('orderListController',['$scope', '$location', '$state
         $scope.bigTotalItems = total;
         console.log(total)
       }, function(err){
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
@@ -97,15 +97,15 @@ orderController.controller('orderListController',['$scope', '$location', '$state
         console.log(total)
 
       }, function (err) {
-        PanelAlert.addError(err.data);
+        CigemAlert.addError(err.data);
       });
     }
 
 }]);
 
-orderController.controller('createOrderTimeController', ['$scope', '$modalInstance', 'PanelAlert', 'Order',  '$filter', '$stateParams',
-  function ($scope, $modalInstance, PanelAlert, Order, $filter, $stateParams){
-    PanelAlert.clearAlert();
+orderController.controller('createOrderTimeController', ['$scope', '$modalInstance', 'CigemAlert', 'Order',  '$filter', '$stateParams',
+  function ($scope, $modalInstance, CigemAlert, Order, $filter, $stateParams){
+    CigemAlert.clearAlert();
     $scope.order = $scope.orderEdit || {}
     if ($scope.order.time_type){
       $scope.order.onetime = $scope.order.time_type.indexOf(1)>-1
@@ -146,7 +146,7 @@ orderController.controller('createOrderTimeController', ['$scope', '$modalInstan
       if ($scope.order.id) {
         param.id = $scope.order.id
         Order.order.update(param, function(data){
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '修改成功'
           });
@@ -159,18 +159,18 @@ orderController.controller('createOrderTimeController', ['$scope', '$modalInstan
           console.log($scope.orders, '$scope.orders')
           $modalInstance.dismiss('cancel');
         }, function(err){
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       } else {
         Order.order.create(param, function(data){
-          PanelAlert.addError({
+          CigemAlert.addError({
             type: 'success',
             msg: '发布成功'
           });
           $scope.orders.unshift(param)
           $modalInstance.dismiss('cancel');
         }, function(err){
-          PanelAlert.addError(err.data);
+          CigemAlert.addError(err.data);
         });
       }
 

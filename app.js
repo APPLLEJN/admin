@@ -24,6 +24,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// session
+app.use(session({
+  secret: '47a9cfd6d027b28ec69febaa01252f00',
+  name: 'cigem.userToken',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+  cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 },
+  resave: false,
+  saveUninitialized: true,
+}));
+
 app.use('/api', apiRoutes)
 
 app.use('/upload/images', express.static('server/upload/images'));

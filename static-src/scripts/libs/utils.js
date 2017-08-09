@@ -1,5 +1,5 @@
 'use strict';
-var panelUtils = {
+var cigemUtils = {
     transformResponse: function (data) {
         var data;
         try {
@@ -12,6 +12,7 @@ var panelUtils = {
     },
     judgeAdminPermission: function (status) {
         if (status === 403) {
+            console.log('-=-=')
             location.href = '#/';
         }
     },

@@ -1,7 +1,7 @@
-/****** panelAlert ********/
-var panelAlert = angular.module('panelAlert', []);
+/****** cigemAlert ********/
+var cigemAlert = angular.module('cigemAlert', []);
 
-panelAlert.factory('PanelAlert',['$rootScope', function( $rootScope ){
+cigemAlert.factory('CigemAlert',['$rootScope', function( $rootScope ){
 
 	$rootScope.alerts = [];
 

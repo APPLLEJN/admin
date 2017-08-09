@@ -23,6 +23,19 @@ console.log(classifyDao.query, 'classifyDao.query')
 router.post('/upload', multipartyMiddleware, upload.upload);
 
 router.post('/login', (req,res,next) => userDao.find(req, res, next));
+router.post('/logout', (req,res,next) => {
+  delete req.session.userToken
+  res.status(200).end()
+});
+
+router.get('/permission', (req,res,next) => {
+  if (req.session.userToken){
+    res.status(200).end()
+  } else {
+    console.log('enter')
+    res.status(403).end()
+  }
+});
 
 //订单
 router.post('/order', (req,res,next) => orderDao.insert(req, res, next));
