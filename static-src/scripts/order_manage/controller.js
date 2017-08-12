@@ -111,6 +111,10 @@ orderController.controller('createOrderTimeController', ['$scope', '$modalInstan
       $scope.order.onetime = $scope.order.time_type.indexOf(1)>-1
       $scope.order.twotime = $scope.order.time_type.indexOf(2)>-1
     }
+    $scope.time_obj = {
+      '1': '10:00 - 12:00',
+      '2': '14:00 - 17:00'
+    }
     /* init */
     function dateInit() {
       $scope.executed_date = function ($event) {
@@ -156,10 +160,13 @@ orderController.controller('createOrderTimeController', ['$scope', '$modalInstan
             }
             return item
           })
-          console.log($scope.orders, '$scope.orders')
           $modalInstance.dismiss('cancel');
         }, function(err){
-          CigemAlert.addError(err.data);
+          var timeMsg = ''
+          err.data.time.map(function (item) {
+            timeMsg += $scope.time_obj[item]
+          })
+          alert(err.data.msg + timeMsg);
         });
       } else {
         Order.order.create(param, function(data){
@@ -170,7 +177,11 @@ orderController.controller('createOrderTimeController', ['$scope', '$modalInstan
           $scope.orders.unshift(param)
           $modalInstance.dismiss('cancel');
         }, function(err){
-          CigemAlert.addError(err.data);
+          var timeMsg = ''
+          err.data.time.map(function (item) {
+            timeMsg += $scope.time_obj[item]
+          })
+          alert(err.data.msg + timeMsg);
         });
       }
 
