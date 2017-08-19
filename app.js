@@ -13,6 +13,10 @@ var apiRoutes = require('./server/apiRoutes');
 var app = express();
 
 var session = require("express-session");
+var morgan = require('morgan');
+var fs = require('fs');
+var path = require('path');
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 
 // model
 app.set('views', __dirname + config.static_dir);
@@ -23,6 +27,8 @@ app.set('view engine', 'html');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(morgan('short', {stream: accessLogStream}));
 
 // session
 app.use(session({
