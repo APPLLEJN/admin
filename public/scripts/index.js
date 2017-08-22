@@ -1070,7 +1070,7 @@ channelController.controller('designController',['$scope', '$location', '$stateP
             type: 'success',
             msg: '删除成功'
           });
-          $scope.classifies = $scope.classifies.filter(function (item) {
+          $scope.designList = $scope.designList.filter(function (item) {
             return item.id !== id
           })
         }, function(err){
@@ -1133,7 +1133,6 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
     if(!$scope.isEdit) {
       getProducts({page: $scope.page, type: $scope.modalType}, function(data, total){
         $scope.products = data.list;
-        $scope.bigTotalItems = total;
         $scope.page = $scope.page + 1
       }, function(err){
         CigemAlert.addError(err.data);
@@ -1171,8 +1170,17 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
       } else {
         var list = $scope.products.filter(function (item) { return item.checked})
         if ($scope.modalType !== 'recommend') {
-          list = list.map(function (item) {
-            return item.id
+          list = list.map(function (item, index) {
+            return {product_id: item.id, sort: index + $scope.bigTotalItems * 1 + 1}
+          })
+        } else if ($scope.modalType == 'recommend') {
+          list = list.map(function (item, index) {
+            var newItem = {}
+            newItem.sort = index + $scope.bigTotalItems * 1 + 1
+            newItem.name = item.name
+            newItem.product_id = item.id
+            newItem.image_url = item.image_url_mini
+            return newItem
           })
         }
         Channel[$scope.modalType].create({list: list}, function(data){
@@ -2270,8 +2278,6 @@ cigem.controller('loginController', ['$scope', '$rootScope', 'Login', '$cookieSt
 
 cigem.controller('bodyController', ['$scope', '$rootScope', '$cookieStore', '$location', function ($scope, $rootScope, $cookieStore, $location) {
   $scope.init = function () {
-    console.log('-=-=', '1111')
-
     //try {
     //  if ($cookieStore.get("userToken")) {
     //    $rootScope.judgeIsAdmin = true;
@@ -2281,7 +2287,6 @@ cigem.controller('bodyController', ['$scope', '$rootScope', '$cookieStore', '$lo
     //} catch (err) {
     //  console.log(err, 'err')
     //}
-
   }
 }])
 

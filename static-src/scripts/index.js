@@ -210,8 +210,6 @@ cigem.controller('loginController', ['$scope', '$rootScope', 'Login', '$cookieSt
 
 cigem.controller('bodyController', ['$scope', '$rootScope', '$cookieStore', '$location', function ($scope, $rootScope, $cookieStore, $location) {
   $scope.init = function () {
-    console.log('-=-=', '1111')
-
     //try {
     //  if ($cookieStore.get("userToken")) {
     //    $rootScope.judgeIsAdmin = true;
@@ -221,7 +219,6 @@ cigem.controller('bodyController', ['$scope', '$rootScope', '$cookieStore', '$lo
     //} catch (err) {
     //  console.log(err, 'err')
     //}
-
   }
 }])
 

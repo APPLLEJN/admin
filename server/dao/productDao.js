@@ -15,8 +15,9 @@ class productDao extends baseDao {
             .whereNotExists(function () {
               this.select('product_id').from(typeName).where('status', 1).whereRaw(`${typeName}.product_id=products.id`)
             })
+        const [ {count} ] = await listQuery.clone().count('id as count')
         let list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
-        res.status(200).json({status: 'ok', list: list})
+        res.set({'total-count': count}).status(200).json({status: 'ok', list: list})
       } else {
         super.query(req, res, next)
       }

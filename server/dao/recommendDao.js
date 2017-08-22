@@ -6,11 +6,7 @@ class recommendDao extends baseDao {
   }
   async insert(req, res, next) {
     let { list } = req.body
-    const result = await Promise.all(list.map(
-      async item => await super.insert(req, res, next,
-        {product_id: item.id, sort:  item.id, name: item.name, image_url: item.image_url_mini}
-        ))
-    )
+    const result = await Promise.all(list.map(async item => await super.insert(req, res, next, item)))
     if (result) {
       res.json({status: 'ok'})
     }

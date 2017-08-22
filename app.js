@@ -5,7 +5,7 @@ var ejs = require('ejs');
 var express = require("express");
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-
+var compression = require('compression')
 var config = require("./cigem/config");
 var proxy = require('./cigem/proxy');
 var apiRoutes = require('./server/apiRoutes');
@@ -23,7 +23,8 @@ app.set('views', __dirname + config.static_dir);
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 
-// middlewares 
+// middlewares
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());

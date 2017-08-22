@@ -6,7 +6,7 @@ class orderDao extends baseDao {
     super(db, search)
   }
   async query(req, res, next) {
-    await super.query(res, res, next, function (list) {
+    await super.query(req, res, next, function (list) {
       list.forEach(function (item) {
         item.time_type = item.time_type.split(',').map(function (item) {
           return +item
@@ -33,7 +33,10 @@ class orderDao extends baseDao {
       if (array.length) {
         res.status(406).json({msg: '已经有预约信息！请重新选择！', time: array })
       } else {
-        await super.insert(req, res, next, {username: username, date: date, time_type: time_type.join(',')})
+        const result = await super.insert(req, res, next, {username: username, date: date, time_type: time_type.join(',')})
+        if (result) {
+          res.json({status: 'ok'})
+        }
       }
     } catch (err) {
       console.log(err, 'err')
