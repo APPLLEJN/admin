@@ -1,3 +1,28 @@
+/**
+ * @api {GET, PUT, DELETE} /classifies/[:id]
+ * @apiName Get,Update,Delete
+ * @apiGroup Classifies
+ *
+ * @apiParam {Number} id classify unique ID.
+ *
+ */
+
+/**
+ * @api {POST} /classifies
+ * @apiName POST
+ * @apiGroup Classifies
+ *
+ * @apiParamExample {json} Request Example
+ *   POST /api/classifies/
+ *   {
+ *     "data": {
+ *       "name": "test",
+ *       "en_name": "test",
+ *       "image_url": "/upload/images/bg_s_r.png"
+ *     }
+ *   }
+ */
+
 const baseDao = require('./baseDao')
 const db = require('../database')
 

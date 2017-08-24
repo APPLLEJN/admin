@@ -1,19 +1,23 @@
 {
-  "name": "zaih-zpanel",
+  "name": "cigem-admin",
   "version": "1.0.0",
-  "description": "zaih fenda zpanel",
+  "description": "cigem admin",
   "main": " ",
   "scripts": {
     "production": "rm -rf public & gulp & cross-env NODE_ENV=production pm2 start app.js -n admin",
     "test": "rm -rf public & gulp & cross-env NODE_ENV=dev pm2 start app.js -n admin",
-    "start": "rm -rf public & gulp dev & cross-env NODE_ENV=dev supervisor -i public app"
+    "start": "rm -rf public & gulp dev & cross-env NODE_ENV=dev supervisor -i public app",
+    "apidoc": "rm -rf doc & apidoc -i server/dao  -o doc  --debug"
   },
   "keywords": [
-    "zhifubao",
-    "zpanel"
+    "cigem"
   ],
-  "author": "zaih",
+  "author": "cigem",
   "license": "ISC",
+  "apidoc": {
+    "title": "Custom apiDoc browser title",
+    "url" : "http://admin.cigem.com.cn/api"
+  },
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.0",
@@ -31,7 +35,8 @@
     "morgan": "^1.8.2",
     "mysql": "^2.13.0",
     "raw-body": "^1.1.6",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "restc": "^0.2.1"
   },
   "devDependencies": {
     "cross-env": "^1.0.7",

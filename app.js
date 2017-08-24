@@ -9,6 +9,7 @@ var compression = require('compression')
 var config = require("./cigem/config");
 var proxy = require('./cigem/proxy');
 var apiRoutes = require('./server/apiRoutes');
+var restc = require('restc');
 
 var app = express();
 
