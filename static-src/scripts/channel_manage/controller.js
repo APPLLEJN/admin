@@ -575,12 +575,12 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
         var list = $scope.products.filter(function (item) { return item.checked})
         if ($scope.modalType !== 'recommend') {
           list = list.map(function (item, index) {
-            return {product_id: item.id, sort: index + $scope.bigTotalItems * 1 + 1}
+            return {product_id: item.id, sort:   $scope[$scope.modalType + 'List'][0].sort + 1}
           })
         } else if ($scope.modalType == 'recommend') {
           list = list.map(function (item, index) {
             var newItem = {}
-            newItem.sort = index + $scope.bigTotalItems * 1 + 1
+            newItem.sort = $scope.recommends[0].sort + 1
             newItem.name = item.name
             newItem.product_id = item.id
             newItem.image_url = item.image_url_mini

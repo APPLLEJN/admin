@@ -11,7 +11,7 @@ class designDao extends baseDao {
     try {
       let listQuery = db(`${this.db} as d`)
         .rightJoin(`products as p`, 'd.product_id', 'p.id')
-        .select('p.name', 'p.image_url_mini', 'd.product_id', 'd.id')
+        .select('p.name', 'p.image_url_mini', 'd.product_id', 'd.id', 'd.sort')
         .where({'d.status': 1}).orderBy('d.sort', 'desc')
       this.search.map(function (item) {
         if (req.query && req.query[ item ]) {
