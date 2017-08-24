@@ -2072,3 +2072,6 @@
 ::1 - GET /upload/images/bg_s_r.png HTTP/1.1 304 - - 2.485 ms
 ::1 - GET /upload/images/democard-img.jpg HTTP/1.1 404 169 - 14.780 ms
 ::1 - GET /upload/images/img.png HTTP/1.1 404 160 - 5.269 ms
+::1 - GET /api/permission HTTP/1.1 200 - - 1.351 ms
+::1 - GET /scripts/order_manage/view/list.html HTTP/1.1 200 - - 5.374 ms
+::1 - GET /api/order HTTP/1.1 200 - - 23.894 ms
