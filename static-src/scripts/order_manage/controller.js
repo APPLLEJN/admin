@@ -141,51 +141,60 @@ orderController.controller('createOrderTimeController', ['$scope', '$modalInstan
         alert('请选择时间段')
         return
       }
-      var param={
-        username: 'admin',
-        date:  $filter('date')($scope.order.date, 'yyyy-MM-dd'),
-        time_type: time_type,
-      }
-      
-      if ($scope.order.id) {
-        param.id = $scope.order.id
-        Order.order.update(param, function(data){
-          CigemAlert.addError({
-            type: 'success',
-            msg: '修改成功'
-          });
-          $scope.$parent.orders = $scope.$parent.orders.map(function (item) {
-            if(item.id == param.id){
-              item = param
-            }
-            return item
-          })
-          $modalInstance.dismiss('cancel');
-        }, function(err){
-          var timeMsg = ''
-          err.data.time.map(function (item) {
-            timeMsg += $scope.time_obj[item]
-          })
-          alert(err.data.msg + timeMsg);
-        });
-      } else {
-        Order.order.create(param, function(data){
-          CigemAlert.addError({
-            type: 'success',
-            msg: '发布成功'
-          });
-          $scope.orders.unshift(param)
-          $modalInstance.dismiss('cancel');
-        }, function(err){
-          var timeMsg = ''
-          err.data.time.map(function (item) {
-            timeMsg += $scope.time_obj[item]
-          })
-          alert(err.data.msg + timeMsg);
-        });
+
+      console.log(!$scope.order.username || !$scope.order.phone)
+      var confirmRes = true
+      if (!$scope.order.username || !$scope.order.phone) {
+        confirmRes = confirm('确认不填写姓名，电话么？')
       }
 
-     
+
+      if (confirmRes)  {
+        var param={
+          username: $scope.order.username || 'admin',
+          phone: $scope.order.phone || 'admin',
+          date:  $filter('date')($scope.order.date, 'yyyy-MM-dd'),
+          time_type: time_type,
+        }
+
+        if ($scope.order.id) {
+          param.id = $scope.order.id
+          Order.order.update(param, function(data){
+            CigemAlert.addError({
+              type: 'success',
+              msg: '修改成功'
+            });
+            $scope.$parent.orders = $scope.$parent.orders.map(function (item) {
+              if(item.id == param.id){
+                item = param
+              }
+              return item
+            })
+            $modalInstance.dismiss('cancel');
+          }, function(err){
+            var timeMsg = ''
+            err.data.time.map(function (item) {
+              timeMsg += $scope.time_obj[item]
+            })
+            alert(err.data.msg + timeMsg);
+          });
+        } else {
+          Order.order.create(param, function(data){
+            CigemAlert.addError({
+              type: 'success',
+              msg: '发布成功'
+            });
+            $scope.orders.unshift(param)
+            $modalInstance.dismiss('cancel');
+          }, function(err){
+            var timeMsg = ''
+            err.data.time.map(function (item) {
+              timeMsg += $scope.time_obj[item]
+            })
+            alert(err.data.msg + timeMsg);
+          });
+        }
+      }
     };
 
     $scope.close = function () {

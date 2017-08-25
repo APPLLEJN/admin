@@ -28,6 +28,7 @@
         <thead>
             <tr>
                 <td>预约人</td>
+                <td>手机号</td>
                 <td>预约日期</td>
                 <td>预约时段</td>
                 <td>操作</td>
@@ -36,6 +37,7 @@
         <tbody>
             <tr ng-repeat="order in orders">
                 <td>{{order.username}}</td>
+                <td>{{order.phone}}</td>
                 <td>{{order.date | date:'yyyy-MM-dd' }}</td>
                 <td>
                     <span ng-repeat="item in order.time_type">{{time_obj[item]}} &nbsp;&nbsp;</span>
@@ -59,6 +61,18 @@
     <form class="form-inline" role="form" ng-submit="submit()">
         <div class="modal-body">
             <div class="form-group">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <label for="date" class="input-group-addon">预约人</label>
+                        <input type="text" class="form-control" id="username" ng-model="order.username" />
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="input-group">
+                        <label for="date" class="input-group-addon">手机号</label>
+                        <input type="text" class="form-control"id="phone"  ng-model="order.phone" />
+                    </div>
+                </div>
                 <div class="row" style="margin-bottom: 10px;">
                     <div class="input-group">
                         <label for="date" class="input-group-addon">时间</label>
