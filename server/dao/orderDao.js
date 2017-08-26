@@ -18,7 +18,7 @@ class orderDao extends baseDao {
 
   async insert(req, res, next) {
     try {
-      const {username, date, time_type} = req.body
+      const {username, date, phone, time_type} = req.body
       const list = await db(this.db).select().where({date: date, status: 1})
       let array = []
       list.map(item => {
@@ -33,7 +33,7 @@ class orderDao extends baseDao {
       if (array.length) {
         res.status(406).json({msg: '已经有预约信息！请重新选择！', time: array })
       } else {
-        const result = await super.insert(req, res, next, {username: username, date: date, time_type: time_type.join(',')})
+        const result = await super.insert(req, res, next, {username: username, date: date, phone: phone, time_type: time_type.join(',')})
         if (result) {
           res.json({status: 'ok'})
         }
