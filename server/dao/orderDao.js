@@ -49,6 +49,7 @@ class orderDao extends baseDao {
     const list = await db(this.db).select().where({date, status: 1})
     let array = []
     list.map(item => {
+      console.log(item, item.id, id, 'iiiii')
       if (item.id != id) {
         if (item.time_type.length > 1) {
           array=item.time_type.split(',')
