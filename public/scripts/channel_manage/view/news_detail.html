@@ -9,19 +9,19 @@
     <form class="form-horizontl clearfix" role="form" ng-submit="updateNews()">
         <div class="apply-info">
             <div class='row'>
-                <div class='col-md-2 text-right'>标题：</div>
+                <div class='col-md-2 text-right'>标题 <span style="color: red"> * </span>：</div>
                 <div class="col-md-8">
                     <input class="form-control" ng-model="news.title" required="required" placeholder="必填">
                 </div>
             </div>
             <div class="row">
-                <div class='col-md-2 text-right'>英文标题：</div>
+                <div class='col-md-2 text-right'>英文标题 <span style="color: red"> * </span> ：</div>
                 <div class="col-md-8">
                     <input class="form-control" ng-model="news.en_title" required="required" placeholder="必填">
                 </div>
             </div>
             <div class="row">
-                <div class='col-md-2 text-right'>内容：</div>
+                <div class='col-md-2 text-right'>内容 <span style="color: red"> * </span> ：</div>
                 <div class="col-md-8">
                     <!--<input class="form-control" ng-model="news.content" required="required" placeholder="必填">-->
                     <div id="editor-trigger" ng-model="news.content" contenteditable="true" style="height:400px;max-height:500px;"></div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class='row'>
-                <div class='col-md-2 text-right require-star'>图片 (小) : </div>
+                <div class='col-md-2 text-right require-star'>图片 (小)<span style="color: red"> * </span> : </div>
                 <div class='col-md-10'>
                     <input ng-if="!news.image_url_mini" type="file" ng-file-select="onFileUpload($files, 'mini')" accept="image/*"
                            style="font-size: 1px;" required="required">
@@ -44,7 +44,7 @@
                 <image src="{{news.image_url_mini}}" width="100"/>
             </div>
             <div class='row'>
-                <div class='col-md-2 text-right require-star'>图片（大）: </div>
+                <div class='col-md-2 text-right require-star'>图片（大）<span style="color: red"> * </span>: </div>
                 <div class='col-md-10'>
                     <input ng-if="!news.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
                            style="font-size: 1px;" required="required">

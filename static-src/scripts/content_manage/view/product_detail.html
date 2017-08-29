@@ -9,19 +9,19 @@
     <form class="form-horizontl clearfix" role="form" ng-submit="updateContent()">
         <div class="apply-info">
             <div class='row'>
-                <div class='col-md-2 text-right'>名称：</div>
+                <div class='col-md-2 text-right'>名称 <span style="color: red"> * </span> ：</div>
                 <div class="col-md-8">
                     <input class="form-control" ng-model="product.name" required="required" placeholder="必填">
                 </div>
             </div>
             <div class='row'>
-                <div class='col-md-2 text-right'>英文名称：</div>
+                <div class='col-md-2 text-right'>英文名称 <span style="color: red"> * </span> ：</div>
                 <div class="col-md-8">
                     <input class="form-control" ng-model="product.en_name" required="required" placeholder="必填">
                 </div>
             </div>
             <div class='row'>
-                <div class='col-md-2 text-right'>描述：</div>
+                <div class='col-md-2 text-right'>描述 <span style="color: red"> * </span> ：</div>
                 <div class="col-md-8">
                     <textarea class="form-control" name="des" id="des" cols="30"
                               rows="10" required="required" placeholder="必填"
@@ -32,7 +32,7 @@
             <div class="row">
                 <div class='col-md-2 text-right'>所属系列</div>
                 <div class="col-md-8">
-                    <select class="form-control" id="series" ng-model="product.series" required="required">
+                    <select class="form-control" id="series" ng-model="product.series">
                         <option ng-repeat="item in series" value="{{item.id}}">
                             {{item.name}}
                         </option>
@@ -42,7 +42,7 @@
             <div class="row">
                 <div class='col-md-2 text-right'>所属分类</div>
                 <div class="col-md-8">
-                    <select class="form-control" id="classify" ng-model="product.classify" required="required">
+                    <select class="form-control" id="classify" ng-model="product.classify">
                         <option ng-repeat="item in classifies" value="{{item.id}}">
                             {{item.name}}
                         </option>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class='row'>
-                <div class='col-md-2 text-right require-star'>分类图片 (小) : </div>
+                <div class='col-md-2 text-right require-star'>分类图片 (小)<span style="color: red"> * </span> : </div>
                 <div class='col-md-10'>
                     <input ng-if="!product.image_url_mini" type="file" ng-file-select="onFileUpload($files, 'mini')" accept="image/*"
                            style="font-size: 1px;" required="required">
@@ -63,7 +63,7 @@
                 <image src="{{product.image_url_mini}}" width="100"/>
             </div>
             <div class='row'>
-                <div class='col-md-2 text-right require-star'>分类图片（大）: </div>
+                <div class='col-md-2 text-right require-star'>分类图片（大）<span style="color: red"> * </span>: </div>
                 <div class='col-md-10'>
                     <input ng-if="!product.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
                            style="font-size: 1px;" required="required">

@@ -9,19 +9,19 @@
     <form class="form-horizontl clearfix" role="form" ng-submit="updateContent()">
         <div class="apply-info">
             <div class='row'>
-                <div class='col-md-2 text-right'>系列名称：</div>
+                <div class='col-md-2 text-right'>系列名称<span style="color: red"> * </span>：</div>
                 <div class="col-md-8">
                     <input class="form-control" ng-model="series.name" required="required" placeholder="必填">
                 </div>
             </div>
             <div class='row'>
-                <div class='col-md-2 text-right'>系列英文名称：</div>
+                <div class='col-md-2 text-right'>系列英文名称<span style="color: red"> * </span>：</div>
                 <div class="col-md-8">
                     <input class="form-control" ng-model="series.en_name" required="required" placeholder="必填">
                 </div>
             </div>
             <div class='row'>
-                <div class='col-md-2 text-right require-star'>系列图片: </div>
+                <div class='col-md-2 text-right require-star'>系列图片<span style="color: red"> * </span>: </div>
                 <div class='col-md-10'>
                     <input ng-if="!series.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
                            style="font-size: 1px;" required="required">
