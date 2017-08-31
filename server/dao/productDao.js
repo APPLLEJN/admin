@@ -9,15 +9,37 @@ class productDao extends baseDao {
   async query(req, res, next) {
     try {
       if (req.query.type){
-        let typeName = req.query.type === 'recommend' ? 'recommends' : req.query.type
-        let listQuery = db(this.db)
+        if(req.query.type === 'unique') {
+          const listQuery = db(`${this.db} as p`)
             .select().where('status', 1).orderBy('create_time', 'desc')
             .whereNotExists(function () {
-              this.select('product_id').from(typeName).where('status', 1).whereRaw(`${typeName}.product_id=products.id`)
+              this.select('product_id').from('design').where('status', 1).whereRaw('design.product_id=p.id')
             })
-        const [ {count} ] = await listQuery.clone().count('id as count')
-        let list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
-        res.set({'total-count': count}).status(200).json({status: 'ok', list: list})
+            .whereNotExists(function () {
+              this.select('product_id').from('unique').where('status', 1).whereRaw('unique.product_id=p.id')
+            })
+          const list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
+          res.status(200).json({status: 'ok', list: list})
+        } else if (req.query.type === 'design') {
+          const listQuery = db(`${this.db} as p`)
+            .select().where('status', 1).whereNull('classify').orderBy('create_time', 'desc')
+            .whereNotExists(function () {
+              this.select('product_id').from('design').where('status', 1).whereRaw('design.product_id=p.id')
+            })
+          const list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
+          res.status(200).json({status: 'ok', list: list})
+        } else if (req.query.type === 'recommend') {
+          const seriesList = await db('series').select()
+            .whereNotExists(function () {
+              this.select('series_id').from('recommends').where('status', 1).whereRaw('recommends.series_id=series.id')
+            }).limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.seriesPage - 1 : 0))
+          const uniqueList = await db('unique as u').leftJoin('products as p', 'p.id', 'u.product_id')
+            .select('p.id', 'p.name', 'p.image_url', 'p.image_url_mini').where('p.status', 1)
+            .whereNotExists(function () {
+              this.select('product_id').from('recommends').where('status', 1).whereRaw('recommends.product_id=u.product_id')
+            }).limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.uniquePage - 1 : 0))
+          res.status(200).json({status: 'ok', seriesList: seriesList, uniqueList: uniqueList})
+        }
       } else {
         super.query(req, res, next)
       }

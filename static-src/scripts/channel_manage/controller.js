@@ -52,7 +52,6 @@ angular.module('channelController').directive('scrollToBottom', function() {
           });
         }
       });
-
     }
   };
 });
@@ -532,12 +531,21 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
     CigemAlert.clearAlert();
     $scope[$scope.modalType] = {}
     $scope.page = 1
+    $scope.seriesPage = 1
+    $scope.uniquePage = 1
     $scope.addProducts = []
 
     if(!$scope.isEdit) {
-      getProducts({page: $scope.page, type: $scope.modalType}, function(data, total){
-        $scope.products = data.list;
-        $scope.page = $scope.page + 1
+      getProducts({page: $scope.page, seriesPage: $scope.seriesPage, uniquePage: $scope.uniquePage, type: $scope.modalType}, function(data, total){
+        if ($scope.modalType === 'recommend') {
+          $scope.seriesList = data.seriesList;
+          $scope.uniqueList = data.uniqueList;
+          $scope.seriesPage = $scope.seriesPage + 1
+          $scope.uniquePage = $scope.uniquePage + 1
+        } else {
+          $scope.products = data.list;
+          $scope.page = $scope.page + 1
+        }
       }, function(err){
         CigemAlert.addError(err.data);
       });
@@ -572,20 +580,34 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
           CigemAlert.addError(err.data);
         });
       } else {
-        var list = $scope.products.filter(function (item) { return item.checked})
+        var list
         if ($scope.modalType !== 'recommend') {
+          list = $scope.products.filter(function (item) { return item.checked})
           list = list.map(function (item, index) {
             return {product_id: item.id, sort:   $scope[$scope.modalType + 'List'][0].sort + 1}
           })
         } else if ($scope.modalType == 'recommend') {
-          list = list.map(function (item, index) {
+          var seriesList = $scope.seriesList.filter(function (item) { return item.checked})
+          var uniqueList = $scope.uniqueList.filter(function (item) { return item.checked})
+          seriesList = seriesList.map(function (item, index) {
             var newItem = {}
             newItem.sort = $scope.recommends[0].sort + 1
             newItem.name = item.name
             newItem.product_id = item.id
             newItem.image_url = item.image_url_mini
+            newItem.type = 'series'
             return newItem
           })
+          uniqueList = uniqueList.map(function (item, index) {
+            var newItem = {}
+            newItem.sort = $scope.recommends[0].sort + 1
+            newItem.name = item.name
+            newItem.product_id = item.id
+            newItem.image_url = item.image_url_mini
+            newItem.type = 'unique'
+            return newItem
+          })
+          list = seriesList.concat(uniqueList)
         }
         Channel[$scope.modalType].create({list: list}, function(data){
           $modalInstance.dismiss('cancel');
@@ -593,9 +615,9 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             type: 'success',
             msg: '发布成功'
           });
-          $timeout(function () {
-            location.reload()
-          }, 500)
+          //$timeout(function () {
+          //  location.reload()
+          //}, 500)
         }, function(err){
           CigemAlert.addError(err.data);
         });
@@ -640,9 +662,16 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
 
     $scope.$watch('isBottom', function (value) {
       if (value) {
-        getProducts({page: $scope.page, type: $scope.modalType}, function(data, total){
-          $scope.products = $scope.products.concat(data.list)
-          $scope.bigTotalItems = total;
+        getProducts({page: $scope.page, seriesPage: $scope.seriesPage, uniquePage: $scope.uniquePage, type: $scope.modalType}, function(data, total){
+          if ($scope.modalType === 'recommend') {
+            $scope.seriesList = $scope.seriesList.concat(data.seriesList);
+            $scope.uniqueList =  $scope.uniqueList.concat(data.uniqueList);
+            $scope.seriesPage = $scope.seriesPage + 1
+            $scope.uniquePage = $scope.uniquePage + 1
+          } else {
+            $scope.products = $scope.products.concat(data.list);
+            $scope.page = $scope.page + 1
+          }
         }, function(err){
           CigemAlert.addError(err.data);
         });

@@ -50,16 +50,27 @@
         <h3 class="modal-title">添加产品</h3>
     </div>
     <form class="form-inline" role="form" ng-submit="submit()">
-        <div class="modal-body">
+        <div class="modal-body" style="display: flex">
             <!--<textarea style="width: 100%" class="form-control" name="" id="" cols="30" rows="10"-->
                       <!--placeholder="请输入产品id" ng-model="recommend.productIds" />-->
             <!--</textarea>-->
-            <div style="display: flex; flex-wrap: wrap; margin: 10px -10px 0 0; height: 400px; overflow: scroll;" scroll-to-bottom="isAtBottom">
-                <div ng-repeat="product in products" style="width: 178px; margin: 0 10px 36px 0 ; display: flex; flex-direction: column; position: relative;">
+            <div style="display: flex; flex: 1; flex-direction: column; margin: 10px; height: 400px; overflow-y: scroll;" scroll-to-bottom="isAtBottom">
+                <h4>系列</h4>
+                <div ng-repeat="product in seriesList" style="width: 178px; margin: 0 10px 36px 0 ;  position: relative;">
                     <img ng-show="!isEdit" ng-src="{{product.image_url_mini}}" alt="mini" width="100%" ng-click="selectProduction(product);">
                     <img ng-show="isEdit" ng-src="{{product.image_url_mini}}" alt="mini" width="100%">
-                    <input class="form-control" id="product_name" ng-model="product.name" style="margin: 10px 0;" />
-                    <input ng-show="!isEdit"  type="checkbox" ng-model="product.checked" ng-click="selectProduction(product);" style="position: absolute; left: 10px">
+                    <input class="form-control" id="product_name_s" ng-model="product.name" style="margin: 10px 0;" />
+                    <input ng-show="!isEdit"  type="checkbox" ng-model="product.checked" ng-click="selectProduction(product);" style="position: absolute; left: 10px; top: 0;">
+                    <input type="file" ng-file-select="onFileUpload($files, product)"/>
+                </div>
+            </div>
+            <div style="display: flex; flex: 1; flex-direction: column; margin: 10px; height: 400px; overflow-y: scroll;" scroll-to-bottom="isAtBottom">
+                <h4>单品</h4>
+                <div ng-repeat="product in uniqueList" style="width: 178px; margin: 0 10px 36px 0 ;  position: relative;">
+                    <img ng-show="!isEdit" ng-src="{{product.image_url_mini}}" alt="mini" width="100%" ng-click="selectProduction(product);">
+                    <img ng-show="isEdit" ng-src="{{product.image_url_mini}}" alt="mini" width="100%">
+                    <input class="form-control" id="product_name_u" ng-model="product.name" style="margin: 10px 0;" />
+                    <input ng-show="!isEdit"  type="checkbox" ng-model="product.checked" ng-click="selectProduction(product);" style="position: absolute; left: 10px; top: 0;">
                     <input type="file" ng-file-select="onFileUpload($files, product)"/>
                 </div>
             </div>

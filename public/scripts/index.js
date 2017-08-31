@@ -648,7 +648,6 @@ angular.module('channelController').directive('scrollToBottom', function() {
           });
         }
       });
-
     }
   };
 });
@@ -1128,12 +1127,21 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
     CigemAlert.clearAlert();
     $scope[$scope.modalType] = {}
     $scope.page = 1
+    $scope.seriesPage = 1
+    $scope.uniquePage = 1
     $scope.addProducts = []
 
     if(!$scope.isEdit) {
-      getProducts({page: $scope.page, type: $scope.modalType}, function(data, total){
-        $scope.products = data.list;
-        $scope.page = $scope.page + 1
+      getProducts({page: $scope.page, seriesPage: $scope.seriesPage, uniquePage: $scope.uniquePage, type: $scope.modalType}, function(data, total){
+        if ($scope.modalType === 'recommend') {
+          $scope.seriesList = data.seriesList;
+          $scope.uniqueList = data.uniqueList;
+          $scope.seriesPage = $scope.seriesPage + 1
+          $scope.uniquePage = $scope.uniquePage + 1
+        } else {
+          $scope.products = data.list;
+          $scope.page = $scope.page + 1
+        }
       }, function(err){
         CigemAlert.addError(err.data);
       });
@@ -1168,20 +1176,34 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
           CigemAlert.addError(err.data);
         });
       } else {
-        var list = $scope.products.filter(function (item) { return item.checked})
+        var list
         if ($scope.modalType !== 'recommend') {
+          list = $scope.products.filter(function (item) { return item.checked})
           list = list.map(function (item, index) {
             return {product_id: item.id, sort:   $scope[$scope.modalType + 'List'][0].sort + 1}
           })
         } else if ($scope.modalType == 'recommend') {
-          list = list.map(function (item, index) {
+          var seriesList = $scope.seriesList.filter(function (item) { return item.checked})
+          var uniqueList = $scope.uniqueList.filter(function (item) { return item.checked})
+          seriesList = seriesList.map(function (item, index) {
             var newItem = {}
             newItem.sort = $scope.recommends[0].sort + 1
             newItem.name = item.name
             newItem.product_id = item.id
             newItem.image_url = item.image_url_mini
+            newItem.type = 'series'
             return newItem
           })
+          uniqueList = uniqueList.map(function (item, index) {
+            var newItem = {}
+            newItem.sort = $scope.recommends[0].sort + 1
+            newItem.name = item.name
+            newItem.product_id = item.id
+            newItem.image_url = item.image_url_mini
+            newItem.type = 'unique'
+            return newItem
+          })
+          list = seriesList.concat(uniqueList)
         }
         Channel[$scope.modalType].create({list: list}, function(data){
           $modalInstance.dismiss('cancel');
@@ -1189,9 +1211,9 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             type: 'success',
             msg: '发布成功'
           });
-          $timeout(function () {
-            location.reload()
-          }, 500)
+          //$timeout(function () {
+          //  location.reload()
+          //}, 500)
         }, function(err){
           CigemAlert.addError(err.data);
         });
@@ -1236,9 +1258,16 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
 
     $scope.$watch('isBottom', function (value) {
       if (value) {
-        getProducts({page: $scope.page, type: $scope.modalType}, function(data, total){
-          $scope.products = $scope.products.concat(data.list)
-          $scope.bigTotalItems = total;
+        getProducts({page: $scope.page, seriesPage: $scope.seriesPage, uniquePage: $scope.uniquePage, type: $scope.modalType}, function(data, total){
+          if ($scope.modalType === 'recommend') {
+            $scope.seriesList = $scope.seriesList.concat(data.seriesList);
+            $scope.uniqueList =  $scope.uniqueList.concat(data.uniqueList);
+            $scope.seriesPage = $scope.seriesPage + 1
+            $scope.uniquePage = $scope.uniquePage + 1
+          } else {
+            $scope.products = $scope.products.concat(data.list);
+            $scope.page = $scope.page + 1
+          }
         }, function(err){
           CigemAlert.addError(err.data);
         });
@@ -1311,6 +1340,232 @@ channelServices.factory('Channel', ['$resource', function($resource){
       }},
     }),
   }
+}]);
+'use strict';
+var orderController = angular.module('orderController',['ui.bootstrap']);
+
+orderController.controller('orderListController',['$scope', '$location', '$stateParams', 'CigemAlert', 'Order', '$modal', '$filter',
+	function($scope, $location, $stateParams, CigemAlert, Order, $modal, $filter){
+		CigemAlert.clearAlert();
+
+    /* init */
+    dateInit();
+
+    var search = $location.search();
+    $scope.search = {},
+    $scope.maxSize = 5,
+    $scope.bigCurrentPage = search.page;
+
+    function getOrders(param, success, error){
+      NProgress.start();
+      Order.order.get(param, function(data, getResponseHeaders){
+        NProgress.done();
+        var totalNumber = getResponseHeaders()['total-count'];
+        success && success(data, totalNumber);
+      }, function(err){
+        NProgress.done();
+        error && error(err);
+      });
+    }
+
+    function dateInit() {
+      $scope.open_start = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened_start = true;
+      };
+      $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+      };
+    }
+
+    getOrders(search, function(data, total){
+      $scope.time_obj = {
+        '1': '10:00 - 12:00',
+        '2': '14:00 - 17:00'
+      }
+      $scope.orders = data.list || [];
+      $scope.bigTotalItems = total;
+    }, function(err){
+      CigemAlert.addError(err.data);
+    });
+    $scope.creatOrderTime = function(order) {
+      if (order) $scope.orderEdit = order;
+      var modalInstance = $modal.open({
+        templateUrl: 'createOrderTime.html',
+        controller: 'createOrderTimeController',
+        scope: $scope
+      });
+    }
+    
+    $scope.deleteOrderTime = function (id) {
+      if (confirm('确认删除？')) {
+        Order.order.delete({id: id}, function(data){
+          CigemAlert.addError({
+            type: 'success',
+            msg: '删除成功'
+          });
+          $scope.orders = $scope.orders.filter(function (item) {
+            return item.id !== id
+          })
+        }, function(err){
+          CigemAlert.addError(err.data);
+        });
+      }
+    }
+    
+    $scope.searchOrders = function () {
+      CigemAlert.clearAlert();
+      var searchKey = ['username', 'phone']
+      var param = cigemUtils.searchCondition(searchKey, $scope.search);
+      if($scope.search.date) {
+        param.date = $filter('date')($scope.search.date, 'yyyy-MM-dd');
+      }
+      $location.search(param);
+      getOrders(param, function(data, total){
+        $scope.orders = data.list;
+        $scope.bigTotalItems = total;
+        console.log(total)
+      }, function(err){
+        CigemAlert.addError(err.data);
+      });
+    }
+
+    $scope.pageChanged = function () {
+      $location.search('page', $scope.bigCurrentPage);
+      getOrders($location.search(), function (data, total) {
+        $scope.orders = data.list;
+        $scope.bigTotalItems = total;
+        console.log(total)
+
+      }, function (err) {
+        CigemAlert.addError(err.data);
+      });
+    }
+
+}]);
+
+orderController.controller('createOrderTimeController', ['$scope', '$modalInstance', 'CigemAlert', 'Order',  '$filter', '$stateParams',
+  function ($scope, $modalInstance, CigemAlert, Order, $filter, $stateParams){
+    CigemAlert.clearAlert();
+    $scope.order = $scope.orderEdit || {}
+    if ($scope.order.time_type){
+      $scope.order.onetime = $scope.order.time_type.indexOf(1)>-1
+      $scope.order.twotime = $scope.order.time_type.indexOf(2)>-1
+    }
+    $scope.time_obj = {
+      '1': '10:00 - 12:00',
+      '2': '14:00 - 17:00'
+    }
+    /* init */
+    function dateInit() {
+      $scope.executed_date = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened_date = true;
+      };
+      $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+      };
+    }
+    dateInit();
+
+    $scope.submit = function () {
+      var time_type = []
+      if ($scope.order.onetime) {
+        time_type.push(1)
+      }
+      if ($scope.order.twotime) {
+        time_type.push(2)
+      }
+      if (!time_type.length) {
+        alert('请选择时间段')
+        return
+      }
+
+      console.log(!$scope.order.username || !$scope.order.phone)
+      var confirmRes = true
+      if (!$scope.order.username || !$scope.order.phone) {
+        confirmRes = confirm('确认不填写姓名，电话么？')
+      }
+
+
+      if (confirmRes)  {
+        var param={
+          username: $scope.order.username || 'admin',
+          phone: $scope.order.phone || 'admin',
+          date:  $filter('date')($scope.order.date, 'yyyy-MM-dd'),
+          time_type: time_type,
+        }
+
+        if ($scope.order.id) {
+          param.id = $scope.order.id
+          Order.order.update(param, function(data){
+            CigemAlert.addError({
+              type: 'success',
+              msg: '修改成功'
+            });
+            $scope.$parent.orders = $scope.$parent.orders.map(function (item) {
+              if(item.id == param.id){
+                item = param
+              }
+              return item
+            })
+            $modalInstance.dismiss('cancel');
+          }, function(err){
+            var timeMsg = ''
+            err.data.time.map(function (item) {
+              timeMsg += $scope.time_obj[item]
+            })
+            alert(err.data.msg + timeMsg);
+          });
+        } else {
+          Order.order.create(param, function(data){
+            CigemAlert.addError({
+              type: 'success',
+              msg: '发布成功'
+            });
+            $scope.orders.unshift(param)
+            $modalInstance.dismiss('cancel');
+          }, function(err){
+            var timeMsg = ''
+            err.data.time.map(function (item) {
+              timeMsg += $scope.time_obj[item]
+            })
+            alert(err.data.msg + timeMsg);
+          });
+        }
+      }
+    };
+
+    $scope.close = function () {
+      $modalInstance.dismiss('cancel');
+    };
+}]);
+
+
+/* speech services */
+var orderServices = angular.module('orderServices', ['ngResource']);
+orderServices.factory('Order', ['$resource', function($resource){
+    return{
+      order : $resource('/api/order/:id', {id: '@id'}, {
+        get : {method: 'GET', isArray: false, transformResponse: function(data, headersGetter, status){
+          return cigemUtils.transformResponse(data);
+        }},
+				create : {method: 'POST', isArray: false, transformResponse: function(data, headersGetter, status){
+          return cigemUtils.transformResponse(data);
+				}},
+				update : {method: 'PUT', isArray: false, transformResponse: function(data, headersGetter, status){
+          return cigemUtils.transformResponse(data);
+				}},
+        delete : {method: 'DELETE', isArray: false, transformResponse: function(data, headersGetter, status){
+          return cigemUtils.transformResponse(data);
+        }},
+		}),
+
+    }
 }]);
 'use strict';
 var contentController = angular.module('contentController',['ui.bootstrap']);
@@ -1848,232 +2103,6 @@ contentServices.factory('Content', ['$resource', function($resource){
       }},
     }),
   }
-}]);
-'use strict';
-var orderController = angular.module('orderController',['ui.bootstrap']);
-
-orderController.controller('orderListController',['$scope', '$location', '$stateParams', 'CigemAlert', 'Order', '$modal', '$filter',
-	function($scope, $location, $stateParams, CigemAlert, Order, $modal, $filter){
-		CigemAlert.clearAlert();
-
-    /* init */
-    dateInit();
-
-    var search = $location.search();
-    $scope.search = {},
-    $scope.maxSize = 5,
-    $scope.bigCurrentPage = search.page;
-
-    function getOrders(param, success, error){
-      NProgress.start();
-      Order.order.get(param, function(data, getResponseHeaders){
-        NProgress.done();
-        var totalNumber = getResponseHeaders()['total-count'];
-        success && success(data, totalNumber);
-      }, function(err){
-        NProgress.done();
-        error && error(err);
-      });
-    }
-
-    function dateInit() {
-      $scope.open_start = function ($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.opened_start = true;
-      };
-      $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
-      };
-    }
-
-    getOrders(search, function(data, total){
-      $scope.time_obj = {
-        '1': '10:00 - 12:00',
-        '2': '14:00 - 17:00'
-      }
-      $scope.orders = data.list || [];
-      $scope.bigTotalItems = total;
-    }, function(err){
-      CigemAlert.addError(err.data);
-    });
-    $scope.creatOrderTime = function(order) {
-      if (order) $scope.orderEdit = order;
-      var modalInstance = $modal.open({
-        templateUrl: 'createOrderTime.html',
-        controller: 'createOrderTimeController',
-        scope: $scope
-      });
-    }
-    
-    $scope.deleteOrderTime = function (id) {
-      if (confirm('确认删除？')) {
-        Order.order.delete({id: id}, function(data){
-          CigemAlert.addError({
-            type: 'success',
-            msg: '删除成功'
-          });
-          $scope.orders = $scope.orders.filter(function (item) {
-            return item.id !== id
-          })
-        }, function(err){
-          CigemAlert.addError(err.data);
-        });
-      }
-    }
-    
-    $scope.searchOrders = function () {
-      CigemAlert.clearAlert();
-      var searchKey = ['username', 'phone']
-      var param = cigemUtils.searchCondition(searchKey, $scope.search);
-      if($scope.search.date) {
-        param.date = $filter('date')($scope.search.date, 'yyyy-MM-dd');
-      }
-      $location.search(param);
-      getOrders(param, function(data, total){
-        $scope.orders = data.list;
-        $scope.bigTotalItems = total;
-        console.log(total)
-      }, function(err){
-        CigemAlert.addError(err.data);
-      });
-    }
-
-    $scope.pageChanged = function () {
-      $location.search('page', $scope.bigCurrentPage);
-      getOrders($location.search(), function (data, total) {
-        $scope.orders = data.list;
-        $scope.bigTotalItems = total;
-        console.log(total)
-
-      }, function (err) {
-        CigemAlert.addError(err.data);
-      });
-    }
-
-}]);
-
-orderController.controller('createOrderTimeController', ['$scope', '$modalInstance', 'CigemAlert', 'Order',  '$filter', '$stateParams',
-  function ($scope, $modalInstance, CigemAlert, Order, $filter, $stateParams){
-    CigemAlert.clearAlert();
-    $scope.order = $scope.orderEdit || {}
-    if ($scope.order.time_type){
-      $scope.order.onetime = $scope.order.time_type.indexOf(1)>-1
-      $scope.order.twotime = $scope.order.time_type.indexOf(2)>-1
-    }
-    $scope.time_obj = {
-      '1': '10:00 - 12:00',
-      '2': '14:00 - 17:00'
-    }
-    /* init */
-    function dateInit() {
-      $scope.executed_date = function ($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.opened_date = true;
-      };
-      $scope.dateOptions = {
-        formatYear: 'yy',
-        startingDay: 1
-      };
-    }
-    dateInit();
-
-    $scope.submit = function () {
-      var time_type = []
-      if ($scope.order.onetime) {
-        time_type.push(1)
-      }
-      if ($scope.order.twotime) {
-        time_type.push(2)
-      }
-      if (!time_type.length) {
-        alert('请选择时间段')
-        return
-      }
-
-      console.log(!$scope.order.username || !$scope.order.phone)
-      var confirmRes = true
-      if (!$scope.order.username || !$scope.order.phone) {
-        confirmRes = confirm('确认不填写姓名，电话么？')
-      }
-
-
-      if (confirmRes)  {
-        var param={
-          username: $scope.order.username || 'admin',
-          phone: $scope.order.phone || 'admin',
-          date:  $filter('date')($scope.order.date, 'yyyy-MM-dd'),
-          time_type: time_type,
-        }
-
-        if ($scope.order.id) {
-          param.id = $scope.order.id
-          Order.order.update(param, function(data){
-            CigemAlert.addError({
-              type: 'success',
-              msg: '修改成功'
-            });
-            $scope.$parent.orders = $scope.$parent.orders.map(function (item) {
-              if(item.id == param.id){
-                item = param
-              }
-              return item
-            })
-            $modalInstance.dismiss('cancel');
-          }, function(err){
-            var timeMsg = ''
-            err.data.time.map(function (item) {
-              timeMsg += $scope.time_obj[item]
-            })
-            alert(err.data.msg + timeMsg);
-          });
-        } else {
-          Order.order.create(param, function(data){
-            CigemAlert.addError({
-              type: 'success',
-              msg: '发布成功'
-            });
-            $scope.orders.unshift(param)
-            $modalInstance.dismiss('cancel');
-          }, function(err){
-            var timeMsg = ''
-            err.data.time.map(function (item) {
-              timeMsg += $scope.time_obj[item]
-            })
-            alert(err.data.msg + timeMsg);
-          });
-        }
-      }
-    };
-
-    $scope.close = function () {
-      $modalInstance.dismiss('cancel');
-    };
-}]);
-
-
-/* speech services */
-var orderServices = angular.module('orderServices', ['ngResource']);
-orderServices.factory('Order', ['$resource', function($resource){
-    return{
-      order : $resource('/api/order/:id', {id: '@id'}, {
-        get : {method: 'GET', isArray: false, transformResponse: function(data, headersGetter, status){
-          return cigemUtils.transformResponse(data);
-        }},
-				create : {method: 'POST', isArray: false, transformResponse: function(data, headersGetter, status){
-          return cigemUtils.transformResponse(data);
-				}},
-				update : {method: 'PUT', isArray: false, transformResponse: function(data, headersGetter, status){
-          return cigemUtils.transformResponse(data);
-				}},
-        delete : {method: 'DELETE', isArray: false, transformResponse: function(data, headersGetter, status){
-          return cigemUtils.transformResponse(data);
-        }},
-		}),
-
-    }
 }]);
 'use strict';
 
