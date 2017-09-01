@@ -8,7 +8,7 @@ var IS_DEV = process.env.NODE_ENV === 'dev'
 const db = knex({
   client: 'mysql',
   connection: {
-  host: '127.0.0.1',
+  host: '59.110.240.219',
     port: 3306,
     user: 'root',
     password: '1q2w3e4r',
