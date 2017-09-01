@@ -271,6 +271,10 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
     $scope.search = {},
     $scope.maxSize = 5,
     $scope.bigCurrentPage = search.page;
+    $scope.typeStatus = {
+      series: '系列',
+      unique: '单品',
+    }
 
     function getRecommends(param, success, error){
       NProgress.start();
@@ -584,23 +588,23 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
         if ($scope.modalType !== 'recommend') {
           list = $scope.products.filter(function (item) { return item.checked})
           list = list.map(function (item, index) {
-            return {product_id: item.id, sort:   $scope[$scope.modalType + 'List'][0].sort + 1}
+            return {product_id: item.id, sort: $scope[$scope.modalType + 'List'].length ? $scope[$scope.modalType + 'List'][0].sort + 1 : 1}
           })
         } else if ($scope.modalType == 'recommend') {
           var seriesList = $scope.seriesList.filter(function (item) { return item.checked})
           var uniqueList = $scope.uniqueList.filter(function (item) { return item.checked})
           seriesList = seriesList.map(function (item, index) {
             var newItem = {}
-            newItem.sort = $scope.recommends[0].sort + 1
+            newItem.sort = $scope.recommends.length ? $scope.recommends[0].sort + 1 : 1
             newItem.name = item.name
-            newItem.product_id = item.id
-            newItem.image_url = item.image_url_mini
+            newItem.series_id = item.id
+            newItem.image_url = item.image_url
             newItem.type = 'series'
             return newItem
           })
           uniqueList = uniqueList.map(function (item, index) {
             var newItem = {}
-            newItem.sort = $scope.recommends[0].sort + 1
+            newItem.sort = $scope.recommends.length ?  $scope.recommends[0].sort + 1 : 1
             newItem.name = item.name
             newItem.product_id = item.id
             newItem.image_url = item.image_url_mini
@@ -615,9 +619,9 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             type: 'success',
             msg: '发布成功'
           });
-          //$timeout(function () {
-          //  location.reload()
-          //}, 500)
+          $timeout(function () {
+            location.reload()
+          }, 500)
         }, function(err){
           CigemAlert.addError(err.data);
         });

@@ -6,8 +6,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/access.log" afterPath="$PROJECT_DIR$/access.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/channel_manage/view/recommends.html" afterPath="$PROJECT_DIR$/public/scripts/channel_manage/view/recommends.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/index.js" afterPath="$PROJECT_DIR$/public/scripts/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/dao/productDao.js" afterPath="$PROJECT_DIR$/server/dao/productDao.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/dao/recommendDao.js" afterPath="$PROJECT_DIR$/server/dao/recommendDao.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js" afterPath="$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html" afterPath="$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html" />
     </list>
@@ -28,7 +26,7 @@
         <entry file="file://$PROJECT_DIR$/server/database.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
-              <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+              <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -47,17 +45,16 @@
       <file leaf-file-name="controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="596" column="51" lean-forward="false" selection-start-line="596" selection-start-column="51" selection-end-line="596" selection-end-column="51" />
+            <state relative-caret-position="291">
+              <caret line="280" column="46" lean-forward="true" selection-start-line="280" selection-start-column="46" selection-end-line="280" selection-end-column="46" />
               <folding>
                 <element signature="e#151#1334#0" expanded="false" />
                 <element signature="e#1413#1729#0" expanded="false" />
                 <element signature="e#1827#2862#0" expanded="false" />
                 <element signature="e#2912#5122#0" expanded="false" />
                 <element signature="e#5179#7852#0" expanded="false" />
-                <element signature="e#7908#10587#0" expanded="false" />
-                <element signature="e#10639#13281#0" expanded="false" />
-                <marker date="1504189186000" expanded="true" signature="1067:1082" ph="..." />
+                <element signature="e#10711#13353#0" expanded="false" />
+                <marker date="1504256546000" expanded="true" signature="1067:1082" ph="..." />
               </folding>
             </state>
           </provider>
@@ -66,8 +63,8 @@
       <file leaf-file-name="recommends.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="72" column="123" lean-forward="true" selection-start-line="72" selection-start-column="123" selection-end-line="72" selection-end-column="123" />
+            <state relative-caret-position="434">
+              <caret line="30" column="28" lean-forward="false" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -97,8 +94,13 @@
         <entry file="file://$PROJECT_DIR$/server/dao/productDao.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="376">
-              <caret line="32" column="41" lean-forward="true" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
-              <folding />
+              <caret line="32" column="41" lean-forward="false" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+              <folding>
+                <marker date="1504189013000" expanded="true" signature="128:2579" ph="{...}" />
+                <marker date="1504189013000" expanded="true" signature="213:2577" ph="{...}" />
+                <marker date="1504189013000" expanded="true" signature="223:2463" ph="{...}" />
+                <marker date="1504189013000" expanded="true" signature="250:2406" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -107,7 +109,7 @@
         <entry file="file://$PROJECT_DIR$/server/apiRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="363">
-              <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+              <caret line="82" column="33" lean-forward="false" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -227,8 +229,8 @@
         <option value="$PROJECT_DIR$/server/database.js" />
         <option value="$PROJECT_DIR$/static-src/scripts/content_manage/view/product_detail.html" />
         <option value="$PROJECT_DIR$/server/dao/recommendDao.js" />
-        <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html" />
         <option value="$PROJECT_DIR$/server/dao/productDao.js" />
+        <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html" />
         <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js" />
       </list>
     </option>
@@ -521,12 +523,12 @@
       <workItem from="1503631666475" duration="304000" />
       <workItem from="1503639467155" duration="407000" />
       <workItem from="1503648504989" duration="1838000" />
-      <workItem from="1504009588712" duration="18096000" />
+      <workItem from="1504009588712" duration="19443000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124896000" />
+    <option name="totallyTimeSpent" value="126243000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -904,7 +906,7 @@
     <entry file="file://$PROJECT_DIR$/server/database.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
-          <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -912,7 +914,7 @@
     <entry file="file://$PROJECT_DIR$/server/apiRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
-          <caret line="82" column="33" lean-forward="true" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+          <caret line="82" column="33" lean-forward="false" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -936,32 +938,36 @@
     <entry file="file://$PROJECT_DIR$/server/dao/productDao.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
-          <caret line="32" column="41" lean-forward="true" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
-          <folding />
+          <caret line="32" column="41" lean-forward="false" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+          <folding>
+            <marker date="1504189013000" expanded="true" signature="128:2579" ph="{...}" />
+            <marker date="1504189013000" expanded="true" signature="213:2577" ph="{...}" />
+            <marker date="1504189013000" expanded="true" signature="223:2463" ph="{...}" />
+            <marker date="1504189013000" expanded="true" signature="250:2406" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="72" column="123" lean-forward="true" selection-start-line="72" selection-start-column="123" selection-end-line="72" selection-end-column="123" />
+        <state relative-caret-position="434">
+          <caret line="30" column="28" lean-forward="false" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="596" column="51" lean-forward="false" selection-start-line="596" selection-start-column="51" selection-end-line="596" selection-end-column="51" />
+        <state relative-caret-position="291">
+          <caret line="280" column="46" lean-forward="true" selection-start-line="280" selection-start-column="46" selection-end-line="280" selection-end-column="46" />
           <folding>
             <element signature="e#151#1334#0" expanded="false" />
             <element signature="e#1413#1729#0" expanded="false" />
             <element signature="e#1827#2862#0" expanded="false" />
             <element signature="e#2912#5122#0" expanded="false" />
             <element signature="e#5179#7852#0" expanded="false" />
-            <element signature="e#7908#10587#0" expanded="false" />
-            <element signature="e#10639#13281#0" expanded="false" />
-            <marker date="1504189186000" expanded="true" signature="1067:1082" ph="..." />
+            <element signature="e#10711#13353#0" expanded="false" />
+            <marker date="1504256546000" expanded="true" signature="1067:1082" ph="..." />
           </folding>
         </state>
       </provider>
