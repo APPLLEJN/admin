@@ -32,18 +32,30 @@
             <div class="row">
                 <div class='col-md-2 text-right'>所属系列</div>
                 <div class="col-md-8">
-                    <select class="form-control" id="series" ng-model="product.series">
+                    <select class="form-control" id="series" ng-model="product.series" ng-disabled="!!product.design_id">
                         <option ng-repeat="item in series" value="{{item.id}}">
                             {{item.name}}
                         </option>
                     </select>
+                    <p ng-show="!!product.design_id">已经被添加到私人订制的产品，不能选择分类</p>
                 </div>
             </div>
             <div class="row">
                 <div class='col-md-2 text-right'>所属分类</div>
                 <div class="col-md-8">
-                    <select class="form-control" id="classify" ng-model="product.classify">
+                    <select class="form-control" id="classify" ng-model="product.classify" ng-disabled="!!product.design_id">
                         <option ng-repeat="item in classifies" value="{{item.id}}">
+                            {{item.name}}
+                        </option>
+                    </select>
+                    <p ng-show="!!product.design_id">已经被添加到私人订制的产品，不能选择分类</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class='col-md-2 text-right'>佩戴方式 <span style="color: red"> * </span></div>
+                <div class="col-md-8">
+                    <select class="form-control" id="wearing" ng-model="product.wearing_method" required="required">
+                        <option ng-repeat="item in wearing" value="{{item.id}}">
                             {{item.name}}
                         </option>
                     </select>

@@ -33,7 +33,10 @@ class baseDao {
 
   async get(req, res, cb) {
     try {
-      const obj = await db(this.db).select().where({id: req.params.id, status: 1}).orderBy('create_time', 'desc')
+      let obj = await db(this.db).select().where({id: req.params.id, status: 1}).orderBy('create_time', 'desc')
+      if(typeof cb === 'function') {
+        obj[0] = await cb(obj[0])
+      }
       res.status(200).json(obj[0])
     } catch (err) {
       console.log(err, 'error')

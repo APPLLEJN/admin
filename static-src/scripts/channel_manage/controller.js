@@ -619,9 +619,9 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             type: 'success',
             msg: '发布成功'
           });
-          $timeout(function () {
-            location.reload()
-          }, 500)
+          //$timeout(function () {
+          //  location.reload()
+          //}, 500)
         }, function(err){
           CigemAlert.addError(err.data);
         });
