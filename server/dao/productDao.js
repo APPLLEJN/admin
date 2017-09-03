@@ -44,12 +44,12 @@ class productDao extends baseDao {
         } else if (req.query.type === 'recommend') {
           const seriesList = await db('series').select()
             .whereNotExists(function () {
-              this.select('product_id').from('recommends').where('status', 1).whereRaw('recommends.product_id=series.id')
+              this.select('recommend_id').from('recommends').where({'status': 1, type: 'series'}).whereRaw('recommends.recommend_id=series.id')
             }).limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.seriesPage - 1 : 0))
           const uniqueList = await db('unique as u').leftJoin('products as p', 'p.id', 'u.product_id')
             .select('p.id', 'p.name', 'p.image_url', 'p.image_url_mini').where('p.status', 1)
             .whereNotExists(function () {
-              this.select('product_id').from('recommends').where('status', 1).whereRaw('recommends.product_id=u.product_id')
+              this.select('recommend_id').from('recommends').where({'status': 1, type: 'unique'}).whereRaw('recommends.recommend_id=u.product_id')
             }).limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.uniquePage - 1 : 0))
           res.status(200).json({status: 'ok', seriesList: seriesList, uniqueList: uniqueList})
         }
