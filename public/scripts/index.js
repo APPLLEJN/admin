@@ -1193,7 +1193,7 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             var newItem = {}
             newItem.sort = $scope.recommends.length ? $scope.recommends[0].sort + 1 : 1
             newItem.name = item.name
-            newItem.product_id = item.id
+            newItem.series_id = item.id
             newItem.image_url = item.image_url
             newItem.type = 'series'
             return newItem
@@ -1202,7 +1202,7 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             var newItem = {}
             newItem.sort = $scope.recommends.length ?  $scope.recommends[0].sort + 1 : 1
             newItem.name = item.name
-            newItem.product_id = item.id
+            newItem.unique_id = item.id
             newItem.image_url = item.image_url_mini
             newItem.type = 'unique'
             return newItem

@@ -17,7 +17,7 @@
         <thead>
         <tr>
             <td>id</td>
-            <td>产品id</td>
+            <td>推荐id</td>
             <td>类型</td>
             <td>名称</td>
             <td>图片</td>
@@ -27,7 +27,7 @@
         <tbody>
         <tr ng-repeat="recommend in recommends">
             <td>{{recommend.id}}</td>
-            <td>{{recommend.product_id}}</td>
+            <td>{{recommend[recommend.type + '_id']}}</td>
             <td>{{typeStatus[recommend.type]}}</td>
             <td>{{recommend.name}}</td>
             <td>
