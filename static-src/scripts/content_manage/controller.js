@@ -338,16 +338,16 @@ contentController.controller('productsController',['$scope', '$location', '$stat
     $scope.wearing = [
       {name: '戒指', en_name: 'ring', id: 10},
       {name: '对戒', en_name: 'twin ring', id: 11},
-      {name: '项链', en_name: 'necklace', id: 20},
-      {name: '锁骨链', en_name: '', id: 21},
-      {name: '手镯', en_name: 'bracele', id: 30},
-      {name: '手链', en_name: '', id: 31},
-      {name: '耳钉', en_name: '', id: 40},
-      {name: '胸针', en_name: '', id: 50},
-      {name: '领针', en_name: '', id: 51},
+      {name: '项链', en_name: 'choker necklace', id: 20},
+      {name: '锁骨链', en_name: 'princess necklace', id: 21},
+      {name: '手镯', en_name: 'bangle', id: 30},
+      {name: '手链', en_name: 'bracelet', id: 31},
+      {name: '耳钉', en_name: 'stud', id: 40},
+      {name: '耳环', en_name: 'earring', id: 41},
+      {name: '胸针', en_name: 'brooch', id: 50},
+      {name: '领针', en_name: 'collar pin', id: 51},
       {name: '其他', en_name: 'other', id: 90},
     ]
-
     function getProducts(param, success, error){
       NProgress.start();
       Content.products.get(param, function(data, getResponseHeaders){
@@ -429,13 +429,14 @@ contentController.controller('productDetailController', ['$scope', '$location', 
     $scope.wearing = [
       {name: '戒指', en_name: 'ring', id: 10},
       {name: '对戒', en_name: 'twin ring', id: 11},
-      {name: '项链', en_name: 'necklace', id: 20},
-      {name: '锁骨链', en_name: '', id: 21},
-      {name: '手镯', en_name: 'bracele', id: 30},
-      {name: '手链', en_name: '', id: 31},
-      {name: '耳钉', en_name: '', id: 40},
-      {name: '胸针', en_name: '', id: 50},
-      {name: '领针', en_name: '', id: 51},
+      {name: '项链', en_name: 'choker necklace', id: 20},
+      {name: '锁骨链', en_name: 'princess necklace', id: 21},
+      {name: '手镯', en_name: 'bangle', id: 30},
+      {name: '手链', en_name: 'bracelet', id: 31},
+      {name: '耳钉', en_name: 'stud', id: 40},
+      {name: '耳环', en_name: 'earring', id: 41},
+      {name: '胸针', en_name: 'brooch', id: 50},
+      {name: '领针', en_name: 'collar pin', id: 51},
       {name: '其他', en_name: 'other', id: 90},
     ]
 
