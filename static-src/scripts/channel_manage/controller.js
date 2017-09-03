@@ -336,11 +336,16 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
 
     $scope.addProduct = function(obj) {
       $scope.modalType = 'recommend'
+      $scope.seriesList = []
       if (obj){
         obj.image_url_mini = obj.image_url
         $scope.isEdit = true
+        if (obj.type === "unique") {
+            $scope.uniqueList = [obj]
+        } else if (obj.type === "series") {
+          $scope.seriesList = [obj]
+        }
       }
-      $scope.products = obj ? [obj] : [];
       var modalInstance = $modal.open({
         templateUrl: 'addProduct.html',
         controller: 'addProductController',
@@ -588,7 +593,7 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
         if ($scope.modalType !== 'recommend') {
           list = $scope.products.filter(function (item) { return item.checked})
           list = list.map(function (item, index) {
-            return {product_id: item.id, sort: $scope[$scope.modalType + 'List'].length ? $scope[$scope.modalType + 'List'][0].sort + 1 : 1}
+            return {recommend_id: item.id, sort: $scope[$scope.modalType + 'List'].length ? $scope[$scope.modalType + 'List'][0].sort + 1 : 1}
           })
         } else if ($scope.modalType == 'recommend') {
           var seriesList = $scope.seriesList.filter(function (item) { return item.checked})
@@ -619,9 +624,9 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             type: 'success',
             msg: '发布成功'
           });
-          //$timeout(function () {
-          //  location.reload()
-          //}, 500)
+          $timeout(function () {
+            location.reload()
+          }, 500)
         }, function(err){
           CigemAlert.addError(err.data);
         });
