@@ -1819,6 +1819,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
       if ($scope.isEdit) {
         delete $scope.product.create_time
         delete $scope.product.update_time
+        delete $scope.product.design_id
         Content.products.update($scope.product, function (data) {
           NProgress.done();
           CigemAlert.addError({
