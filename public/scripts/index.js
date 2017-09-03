@@ -932,11 +932,16 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
 
     $scope.addProduct = function(obj) {
       $scope.modalType = 'recommend'
+      $scope.seriesList = []
       if (obj){
         obj.image_url_mini = obj.image_url
         $scope.isEdit = true
+        if (obj.type === "unique") {
+            $scope.uniqueList = [obj]
+        } else if (obj.type === "series") {
+          $scope.seriesList = [obj]
+        }
       }
-      $scope.products = obj ? [obj] : [];
       var modalInstance = $modal.open({
         templateUrl: 'addProduct.html',
         controller: 'addProductController',
