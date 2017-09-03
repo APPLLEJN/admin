@@ -33,6 +33,12 @@ class productDao extends baseDao {
             .whereNotExists(function () {
               this.select('product_id').from('design').where('status', 1).whereRaw('design.product_id=p.id')
             })
+            .whereNotExists(function () {
+              this.select('product_id').from('unique').where('status', 1).whereRaw('unique.product_id=p.id')
+            })
+            .whereNotExists(function () {
+              this.select('product_id').from('recommends').where('status', 1).whereRaw('recommends.product_id=p.product_id')
+            })
           const list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
           res.status(200).json({status: 'ok', list: list})
         } else if (req.query.type === 'recommend') {

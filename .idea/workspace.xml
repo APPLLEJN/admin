@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a68d7a24-78b0-46d3-a184-d0a98ee0d715" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/channel_manage/view/recommends.html" afterPath="$PROJECT_DIR$/public/scripts/channel_manage/view/recommends.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/index.js" afterPath="$PROJECT_DIR$/public/scripts/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js" afterPath="$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html" afterPath="$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/admin.iml" afterPath="$PROJECT_DIR$/.idea/admin.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/access.log" afterPath="$PROJECT_DIR$/access.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scripts/index.js" afterPath="$PROJECT_DIR$/public/scripts/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/dao/productDao.js" afterPath="$PROJECT_DIR$/server/dao/productDao.js" />
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,40 +25,43 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="admin" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="baseDao.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/dao/baseDao.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="database.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/database.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/controller.js">
+      <file leaf-file-name="product_detail.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/view/product_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="524">
-              <caret line="367" column="28" lean-forward="false" selection-start-line="367" selection-start-column="17" selection-end-line="367" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="56" column="90" selection-start-line="56" selection-start-column="90" selection-end-line="56" selection-end-column="90" />
               <folding>
-                <element signature="e#187#1222#0" expanded="false" />
-                <element signature="e#1276#3556#0" expanded="false" />
-                <element signature="e#3617#5698#0" expanded="false" />
-                <element signature="e#5750#7995#0" expanded="false" />
-                <element signature="e#8054#9999#0" expanded="false" />
+                <marker date="1504407962000" expanded="true" signature="406:5013" placeholder="..." />
+                <marker date="1504407962000" expanded="true" signature="439:4827" placeholder="..." />
+                <marker date="1504407962000" expanded="true" signature="786:1078" placeholder="..." />
+                <marker date="1504407962000" expanded="false" signature="855:865" placeholder="..." />
+                <marker date="1504407962000" expanded="true" signature="923:1059" placeholder="..." />
+                <marker date="1504407962000" expanded="true" signature="1108:1538" placeholder="..." />
+                <marker date="1504407962000" expanded="false" signature="1175:1185" placeholder="..." />
+                <marker date="1504407962000" expanded="true" signature="1243:1519" placeholder="..." />
+                <marker date="1504407962000" expanded="true" signature="1325:1496" placeholder="..." />
+                <marker date="1504407962000" expanded="true" signature="1568:1755" placeholder="..." />
+                <marker date="1504407962000" expanded="true" signature="1667:1755" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -59,6 +70,7 @@
       <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="430">
               <caret line="590" column="32" lean-forward="false" selection-start-line="590" selection-start-column="32" selection-end-line="590" selection-end-column="32" />
               <folding>
@@ -69,46 +81,84 @@
                 <element signature="e#5179#7852#0" expanded="false" />
                 <element signature="e#10711#13353#0" expanded="false" />
                 <marker date="1504412739000" expanded="true" signature="1067:1082" ph="..." />
+=======
+            <state vertical-scroll-proportion="0.0">
+              <caret line="544" column="46" selection-start-line="544" selection-start-column="46" selection-end-line="544" selection-end-column="46" />
+              <folding>
+                <marker date="1504407962000" expanded="true" signature="151:1334" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="162:1331" placeholder="{&quot;restrict&quot;: 'A'...}" />
+                <marker date="1504407962000" expanded="true" signature="256:1327" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="369:603" placeholder="[...]" />
+                <marker date="1504407962000" expanded="true" signature="724:1096" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="1067:1082" placeholder="..." />
+                <marker date="1504407962000" expanded="true" signature="1134:1297" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="1199:1287" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="1413:1717" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="1424:1717" placeholder="{&quot;restrict&quot;: 'A'...}" />
+                <marker date="1504407962000" expanded="true" signature="1482:1717" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="1520:1714" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="1610:1706" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="1646:1694" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="21457:21467" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="21457:21550" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="21457:21554" placeholder="{...}" />
+                <marker date="1504407962000" expanded="true" signature="21457:21555" placeholder="[...]" />
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="products.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/view/products.html">
+      <file leaf-file-name="recommendDao.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/dao/recommendDao.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+              <folding>
+                <marker date="1504407962000" expanded="true" signature="144:145" placeholder="//..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="upload.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/upload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product_detail.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/view/product_detail.html">
+      <file leaf-file-name="seriesDao.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/dao/seriesDao.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="34" column="120" lean-forward="false" selection-start-line="34" selection-start-column="120" selection-end-line="34" selection-end-column="120" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="recommends.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html">
-          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="416">
               <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+=======
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="38" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="38" />
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="productDao.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/dao/productDao.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-110">
               <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="19" />
+=======
+      <file leaf-file-name="uniqueDao.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/dao/uniqueDao.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="35" column="38" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="38" />
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
               <folding />
             </state>
           </provider>
@@ -117,8 +167,13 @@
       <file leaf-file-name="recommendDao.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/dao/recommendDao.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="216">
               <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+=======
+            <state vertical-scroll-proportion="0.40080428">
+              <caret line="40" column="14" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
               <folding />
             </state>
           </provider>
@@ -127,8 +182,18 @@
       <file leaf-file-name="apiRoutes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/apiRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="62" column="59" lean-forward="false" selection-start-line="62" selection-start-column="59" selection-end-line="62" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="61" column="58" selection-start-line="61" selection-start-column="58" selection-end-line="61" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="classifyDao.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/dao/classifyDao.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -145,8 +210,37 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>C</find>
+      <find>Cigem</find>
+      <find>P</find>
+      <find>Panel</find>
+      <find>PanelA</find>
+      <find>judgeIsAdmin</find>
+      <find>panelAlert</find>
+      <find>PanelAlert</find>
+      <find>ImageUploadCtrl</find>
+      <find>cigemPer</find>
+      <find>location</find>
+      <find>transformResponse</find>
+      <find>news</find>
+      <find>editor</find>
+      <find>$location</find>
+      <find>time_obj</find>
+      <find>time_type</find>
+      <find>co</find>
+      <find>uglify</find>
+      <find>console.log('-=-=', '1111')</find>
+      <find>deleteDesign</find>
+      <find>addProductController</find>
+      <find>deleteRecommend</find>
+      <find>count</find>
+      <find>insert</find>
+      <find>.sort =</find>
+      <find>designList</find>
+      <find>modalType</find>
       <find>re</find>
       <find>required</find>
+<<<<<<< HEAD
       <find>l</find>
       <find>leftjpin</find>
       <find>leftjpi</find>
@@ -175,6 +269,8 @@
       <find>list</find>
       <find>recommends.series_id</find>
       <find>series_id</find>
+=======
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
     </findStrings>
     <replaceStrings>
       <replace />
@@ -183,9 +279,9 @@
     <dirStrings>
       <dir>$PROJECT_DIR$/static-src/scripts/content_manage/view</dir>
       <dir>$PROJECT_DIR$/static-src/libs</dir>
-      <dir>$PROJECT_DIR$/static-src/scripts</dir>
       <dir>$PROJECT_DIR$/static-src</dir>
       <dir>$PROJECT_DIR$/server/dao</dir>
+      <dir>$PROJECT_DIR$/static-src/scripts</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -194,11 +290,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/static-src/scripts/content_manage/view/products.html" />
         <option value="$PROJECT_DIR$/server/dao/newsDao.js" />
         <option value="$PROJECT_DIR$/static-src/scripts/content_manage/view/series.html" />
         <option value="$PROJECT_DIR$/static-src/scripts/content_manage/view/classifies.html" />
         <option value="$PROJECT_DIR$/static-src/libs/angular-ueditor/dist/angular-ueditor.js" />
         <option value="$PROJECT_DIR$/static-src/libs/angular-ueditor/dist/angular-ueditor.min.js" />
+        <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html" />
         <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/view/design.html" />
         <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/server/upload.js" />
@@ -212,6 +310,7 @@
         <option value="$PROJECT_DIR$/static-src/scripts/content_manage/service.js" />
         <option value="$PROJECT_DIR$/static-src/scripts/order_manage/service.js" />
         <option value="$PROJECT_DIR$/static-src/scripts/libs/cigemAlert.js" />
+        <option value="$PROJECT_DIR$/static-src/scripts/content_manage/controller.js" />
         <option value="$PROJECT_DIR$/server/dao/userDao.js" />
         <option value="$PROJECT_DIR$/static-src/scripts/libs/apis.js" />
         <option value="$PROJECT_DIR$/server/apiRoutes.js" />
@@ -221,6 +320,7 @@
         <option value="$PROJECT_DIR$/static-src/scripts/index.js" />
         <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/view/unique.html" />
         <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/view/news.html" />
+        <option value="$PROJECT_DIR$/server/dao/baseDao.js" />
         <option value="$PROJECT_DIR$/tsconfig.json" />
         <option value="$PROJECT_DIR$/apidoc.json" />
         <option value="$PROJECT_DIR$/app.js" />
@@ -228,10 +328,12 @@
         <option value="$PROJECT_DIR$/server/dao/classifyDao.js" />
         <option value="$PROJECT_DIR$/server/dao/uniqueDao.js" />
         <option value="$PROJECT_DIR$/server/dao/designDao.js" />
+        <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js" />
         <option value="$PROJECT_DIR$/static-src/scripts/order_manage/view/list.html" />
         <option value="$PROJECT_DIR$/static-src/scripts/order_manage/controller.js" />
         <option value="$PROJECT_DIR$/server/dao/orderDao.js" />
         <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/view/news_detail.html" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/server/dao/recommendDao.js" />
         <option value="$PROJECT_DIR$/server/database.js" />
         <option value="$PROJECT_DIR$/static-src/scripts/content_manage/controller.js" />
@@ -241,11 +343,17 @@
         <option value="$PROJECT_DIR$/static-src/scripts/content_manage/view/product_detail.html" />
         <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html" />
         <option value="$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js" />
+=======
+        <option value="$PROJECT_DIR$/static-src/scripts/content_manage/view/product_detail.html" />
+        <option value="$PROJECT_DIR$/server/database.js" />
+        <option value="$PROJECT_DIR$/server/dao/recommendDao.js" />
+        <option value="$PROJECT_DIR$/server/dao/productDao.js" />
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true">
     <package-json value="$PROJECT_DIR$/package.json" />
   </component>
   <component name="JsGulpfileManager">
@@ -255,15 +363,24 @@
         <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
       </GulpfileState>
     </gulpfiles>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
     <handled-path value="$PROJECT_DIR$/static-src/libs/wangEditor/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1280" />
-    <option name="height" value="800" />
+    <option name="width" value="1600" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -280,9 +397,14 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="admin" />
@@ -322,6 +444,54 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static-src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order_manage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static-src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order_manage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -455,6 +625,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -464,7 +635,7 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="js.eslint.eslintPackage" value="$PROJECT_DIR$/../zhenliaoquan-api/node_modules/eslint" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../zhenliaoquan-api/.eslintrc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="js.eslint.nodeInterpreter" value="project" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
@@ -500,25 +671,7 @@
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
-    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
-      <node-interpreter value="project" />
-      <working-dir value="" />
-      <envs />
-      <scope-kind value="ALL" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
-      <config-file value="" />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
-      <config-file value="" />
-      <node-interpreter value="project" />
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
       <envs />
       <method />
     </configuration>
@@ -535,7 +688,6 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
       <node-options />
       <gulpfile />
       <tasks />
@@ -544,14 +696,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run" />
+      <command value="run-script" />
       <scripts />
-      <node-interpreter value="project" />
       <envs />
       <method />
     </configuration>
     <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
-      <node-interpreter>project</node-interpreter>
       <node-options />
       <working-directory />
       <pass-parent-env>true</pass-parent-env>
@@ -564,15 +714,12 @@
       <method />
     </configuration>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a68d7a24-78b0-46d3-a184-d0a98ee0d715" name="Default" comment="" />
       <created>1501736056358</created>
       <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
       <updated>1501736056358</updated>
       <workItem from="1501736057827" duration="354000" />
       <workItem from="1501739983064" duration="1335000" />
@@ -580,11 +727,16 @@
       <workItem from="1503631666475" duration="304000" />
       <workItem from="1503639467155" duration="407000" />
       <workItem from="1503648504989" duration="1838000" />
+<<<<<<< HEAD
       <workItem from="1504009588712" duration="25874000" />
+=======
+      <workItem from="1504009588712" duration="2239000" />
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="132674000" />
   </component>
   <component name="TodoView">
@@ -595,83 +747,122 @@
       <are-packages-shown value="true" />
       <is-autoscroll-to-source value="true" />
     </todo-panel>
+=======
+    <option name="totallyTimeSpent" value="109039000" />
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <frame x="0" y="0" width="1600" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24305004" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.50277996" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.49722" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23637515" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32876712" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static-src/libs/angular-ueditor/dist/angular-ueditor.min.js" />
+    <entry file="file://$PROJECT_DIR$/server/dao/seriesDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="65" selection-start-line="37" selection-start-column="50" selection-end-line="37" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dao/recommendDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1504407962000" expanded="true" signature="144:145" placeholder="//..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dao/seriesDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dao/uniqueDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="38" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dao/productDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dao/classifyDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/view/series.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="37" column="96" lean-forward="false" selection-start-line="37" selection-start-column="96" selection-end-line="37" selection-end-column="96" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="96" selection-start-line="37" selection-start-column="96" selection-end-line="37" selection-end-column="96" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="51" lean-forward="false" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="51" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static-src/libs/angular-ueditor/dist/angular-ueditor.js" />
-    <entry file="file://$PROJECT_DIR$/static-src/libs/angular-ueditor/dist/angular-ueditor.js.map" />
     <entry file="file://$PROJECT_DIR$/bower.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="3" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -682,318 +873,331 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/styles/main.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="740" column="9" lean-forward="false" selection-start-line="740" selection-start-column="9" selection-end-line="740" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="740" column="9" selection-start-line="740" selection-start-column="9" selection-end-line="740" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cigem/proxy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2151">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cigem/config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cigem/cookie-secret.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="1" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="26" lean-forward="false" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/libs/utils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="4" lean-forward="false" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/upload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/order_manage/service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/libs/ng-tree.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/libs/cigemAlert.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="30" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="30" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static-src/scripts/libs/cigemPermisson.js" />
     <entry file="file://$PROJECT_DIR$/static-src/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="96" lean-forward="false" selection-start-line="20" selection-start-column="96" selection-end-line="20" selection-end-column="96" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="96" selection-start-line="20" selection-start-column="96" selection-end-line="20" selection-end-column="96" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/dao/userDao.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/libs/apis.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="5" lean-forward="false" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="87" column="6" lean-forward="false" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="87" column="6" selection-start-line="87" selection-start-column="6" selection-end-line="87" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="221" column="0" lean-forward="false" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/view/design.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="557">
-          <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/view/unique.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="35" column="56" lean-forward="false" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="56" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1026">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/view/news.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="24" column="26" lean-forward="false" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apidoc.json" />
-    <entry file="file://$PROJECT_DIR$/admin/doc/index.html" />
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="40" column="26" lean-forward="false" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="26" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dao/baseDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/dao/designDao.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="72" lean-forward="false" selection-start-line="13" selection-start-column="72" selection-end-line="13" selection-end-column="72" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="72" selection-start-line="13" selection-start-column="72" selection-end-line="13" selection-end-column="72" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/order_manage/view/list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1188">
-          <caret line="66" column="102" lean-forward="false" selection-start-line="66" selection-start-column="102" selection-end-line="66" selection-end-column="102" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="102" selection-start-line="66" selection-start-column="102" selection-end-line="66" selection-end-column="102" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/order_manage/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2736">
-          <caret line="152" column="18" lean-forward="false" selection-start-line="152" selection-start-column="18" selection-end-line="152" selection-end-column="18" />
-          <folding>
-            <element signature="e#4638#5320#0" expanded="false" />
-            <element signature="e#5378#5585#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="152" column="18" selection-start-line="152" selection-start-column="18" selection-end-line="152" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/dao/orderDao.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="50" column="22" lean-forward="false" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
-          <folding>
-            <marker date="1504009520000" expanded="true" signature="103:2009" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="188:427" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="244:422" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="354:388" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="460:1261" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="470:1207" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="651:878" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="692:745" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="751:870" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="808:860" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="904:981" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="987:1201" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="1147:1193" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="1220:1257" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="1294:2007" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="1489:1795" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="1562:1789" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="1603:1656" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="1662:1781" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="1719:1771" ph="{...}" />
-            <marker date="1504009520000" expanded="true" signature="1898:2003" ph="{...}" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="22" selection-start-line="50" selection-start-column="22" selection-end-line="50" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/view/news_detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/view/products.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="16" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dao/seriesDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/server/database.js">
+=======
+    <entry file="file://$PROJECT_DIR$/server/upload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/view/recommends.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47114375">
+          <caret line="51" column="29" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/view/product_detail.html">
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="56" column="90" selection-start-line="56" selection-start-column="90" selection-end-line="56" selection-end-column="90" />
           <folding>
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#3;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#span#0;n#div#0;n#div#5;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
+            <marker date="1504407962000" expanded="true" signature="406:5013" placeholder="..." />
+            <marker date="1504407962000" expanded="true" signature="439:4827" placeholder="..." />
+            <marker date="1504407962000" expanded="true" signature="786:1078" placeholder="..." />
+            <marker date="1504407962000" expanded="false" signature="855:865" placeholder="..." />
+            <marker date="1504407962000" expanded="true" signature="923:1059" placeholder="..." />
+            <marker date="1504407962000" expanded="true" signature="1108:1538" placeholder="..." />
+            <marker date="1504407962000" expanded="false" signature="1175:1185" placeholder="..." />
+            <marker date="1504407962000" expanded="true" signature="1243:1519" placeholder="..." />
+            <marker date="1504407962000" expanded="true" signature="1325:1496" placeholder="..." />
+            <marker date="1504407962000" expanded="true" signature="1568:1755" placeholder="..." />
+            <marker date="1504407962000" expanded="true" signature="1667:1755" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/dao/classifyDao.js">
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/controller.js">
+=======
+    <entry file="file://$PROJECT_DIR$/static-src/scripts/channel_manage/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="544" column="46" selection-start-line="544" selection-start-column="46" selection-end-line="544" selection-end-column="46" />
+          <folding>
+            <marker date="1504407962000" expanded="true" signature="151:1334" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="162:1331" placeholder="{&quot;restrict&quot;: 'A'...}" />
+            <marker date="1504407962000" expanded="true" signature="256:1327" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="369:603" placeholder="[...]" />
+            <marker date="1504407962000" expanded="true" signature="724:1096" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="1067:1082" placeholder="..." />
+            <marker date="1504407962000" expanded="true" signature="1134:1297" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="1199:1287" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="1413:1717" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="1424:1717" placeholder="{&quot;restrict&quot;: 'A'...}" />
+            <marker date="1504407962000" expanded="true" signature="1482:1717" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="1520:1714" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="1610:1706" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="1646:1694" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="21457:21467" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="21457:21550" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="21457:21554" placeholder="{...}" />
+            <marker date="1504407962000" expanded="true" signature="21457:21555" placeholder="[...]" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dao/recommendDao.js">
+>>>>>>> 6916f4b0c5cb7d6f376300803c5527fdfba345ec
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+          <folding>
+            <marker date="1504407962000" expanded="true" signature="144:145" placeholder="//..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/dao/uniqueDao.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="35" column="38" lean-forward="false" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/dao/seriesDao.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="38" lean-forward="false" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="524">
-          <caret line="367" column="28" lean-forward="false" selection-start-line="367" selection-start-column="17" selection-end-line="367" selection-end-column="28" />
-          <folding>
-            <element signature="e#187#1222#0" expanded="false" />
-            <element signature="e#1276#3556#0" expanded="false" />
-            <element signature="e#3617#5698#0" expanded="false" />
-            <element signature="e#5750#7995#0" expanded="false" />
-            <element signature="e#8054#9999#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/view/products.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/apiRoutes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="62" column="59" lean-forward="false" selection-start-line="62" selection-start-column="59" selection-end-line="62" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/dao/baseDao.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static-src/scripts/content_manage/view/product_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="34" column="120" lean-forward="false" selection-start-line="34" selection-start-column="120" selection-end-line="34" selection-end-column="120" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="38" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/dao/productDao.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-110">
-          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.40080428">
+          <caret line="40" column="14" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/apiRoutes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="58" selection-start-line="61" selection-start-column="58" selection-end-line="61" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/dao/classifyDao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
           <folding />
         </state>
       </provider>
