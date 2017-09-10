@@ -23,11 +23,10 @@ channelController.directive('contenteditable', function() {
       ];
       editor.config.uploadImgUrl = '/api/upload';
       editor.config.uploadImgFns.onload = function (resultText, xhr) {
-        console.log(resultText, 'resultText')
         // 上传图片时，已经将图片的名字存在 editor.uploadImgOriginalName
         var originalName = editor.uploadImgOriginalName || '';
         // 如果 resultText 是图片的url地址，可以这样插入图片：
-        editor.command(null, 'insertHtml', '<img src="' + JSON.parse(resultText).image_url + '" alt="' + originalName + '" style="max-width:100%;"/>');
+        editor.command(null, 'insertHtml', '<img src="http://admin.cigem.com.cn' +  JSON.parse(resultText).image_url + '" alt="' + originalName + '" style="max-width:100%;"/>');
       };
       editor.onchange = function () {
         // 从 onchange 函数中更新数据
@@ -250,7 +249,7 @@ channelController.controller('newsDetailController', ['$scope', '$location', '$s
         if (type === 'mini') {
           $scope.news.image_url_mini = data.image_url
         } else {
-          $scope.news.image_url = 'http://admin.cigem.com.cn' + data.image_url
+          $scope.news.image_url = data.image_url
         }
       }).error(function(data){
         CigemAlert.addError({
