@@ -265,7 +265,7 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
     $scope.isEdit = series_id !== 'new';
 
     if ($scope.isEdit) {
-      Content.classifies.get({id: series_id}, function (data) {
+      Content.series.get({id: series_id}, function (data) {
         $scope.series = data;
         NProgress.done();
       }, function (err) {
