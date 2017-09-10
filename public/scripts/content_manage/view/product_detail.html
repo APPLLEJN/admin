@@ -39,6 +39,7 @@
                 <div class='col-md-2 text-right'>所属系列</div>
                 <div class="col-md-8">
                     <select class="form-control" id="series" ng-model="product.series" ng-disabled="!!product.design_id">
+                        <option value=""></option>
                         <option ng-repeat="item in series" value="{{item.id}}">
                             {{item.name}}
                         </option>
@@ -50,6 +51,7 @@
                 <div class='col-md-2 text-right'>所属分类</div>
                 <div class="col-md-8">
                     <select class="form-control" id="classify" ng-model="product.classify" ng-disabled="!!product.design_id">
+                        <option value=""></option>
                         <option ng-repeat="item in classifies" value="{{item.id}}">
                             {{item.name}}
                         </option>
