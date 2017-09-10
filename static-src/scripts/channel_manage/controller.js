@@ -250,7 +250,7 @@ channelController.controller('newsDetailController', ['$scope', '$location', '$s
         if (type === 'mini') {
           $scope.news.image_url_mini = data.image_url
         } else {
-          $scope.news.image_url = data.image_url
+          $scope.news.image_url = 'http://admin.cigem.com.cn' + data.image_url
         }
       }).error(function(data){
         CigemAlert.addError({
