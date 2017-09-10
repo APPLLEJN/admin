@@ -31,7 +31,7 @@ class baseDao {
     }
   }
 
-  async get(req, res, cb) {
+  async get(req, res, next, cb) {
     try {
       let obj = await db(this.db).select().where({id: req.params.id, status: 1}).orderBy('create_time', 'desc')
       if(typeof cb === 'function') {

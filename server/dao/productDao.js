@@ -7,7 +7,7 @@ class productDao extends baseDao {
     super(db, search)
   }
   async get(req, res, next) {
-    super.get(req, res,  async(obj) => {
+    super.get(req, res, next, async(obj) => {
      const designRes = await db('design').select('id').where({'product_id': obj.id, status: 1})
       obj.design_id = designRes.length ? designRes[0].id : null
       return obj
