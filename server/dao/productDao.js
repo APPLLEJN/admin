@@ -29,7 +29,8 @@ class productDao extends baseDao {
           res.status(200).json({status: 'ok', list: list})
         } else if (req.query.type === 'design') {
           const listQuery = db(`${this.db} as p`)
-            .select().where('status', 1).whereNull('classify').orderBy('create_time', 'desc')
+            .select().where('status', 1)
+            .whereNull('classify').orderBy('create_time', 'desc').whereNull('series').orderBy('create_time', 'desc')
             .whereNotExists(function () {
               this.select('product_id').from('design').where('status', 1).whereRaw('design.product_id=p.id')
             })
