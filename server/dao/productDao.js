@@ -30,7 +30,7 @@ class productDao extends baseDao {
         } else if (req.query.type === 'design') {
           const listQuery = db(`${this.db} as p`)
             .select().where('status', 1)
-            .whereNull('classify').whereNull('series').orderBy('create_time', 'desc')
+            .where({classify: '', series: ''}).orderBy('create_time', 'desc')
             .whereNotExists(function () {
               this.select('product_id').from('design').where('status', 1).whereRaw('design.product_id=p.id')
             })
@@ -40,6 +40,7 @@ class productDao extends baseDao {
             //.whereNotExists(function () {
             //  this.select('product_id').from('recommends').where('status', 1).whereRaw('recommends.product_id=p.product_id')
             //})
+
           const list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
           res.status(200).json({status: 'ok', list: list})
         } else if (req.query.type === 'recommend') {
