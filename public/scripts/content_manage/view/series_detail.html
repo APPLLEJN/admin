@@ -21,7 +21,25 @@
                 </div>
             </div>
             <div class='row'>
-                <div class='col-md-2 text-right require-star'>系列图片<span style="color: red"> * </span>: </div>
+                <div class='col-md-2 text-right'>描述 <span style="color: red"> * </span> ：</div>
+                <div class="col-md-8">
+                    <textarea class="form-control" name="des" id="des" cols="30"
+                              rows="10" required="required" placeholder="必填"
+                              ng-model="series.description" >
+                    </textarea>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right require-star'>系列图片  (小)<span style="color: red"> * </span>: </div>
+                <div class='col-md-10'>
+                    <input ng-if="!series.image_url_mini" type="file" ng-file-select="onFileUpload($files, 'mini')" accept="image/*"
+                           style="font-size: 1px;" required="required">
+                    <input ng-if="series.image_url_mini" type="file" ng-file-select="onFileUpload($files, 'mini')" accept="image/*"
+                           style="font-size: 1px;">
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right require-star'>系列图片  (大)<span style="color: red"> * </span>: </div>
                 <div class='col-md-10'>
                     <input ng-if="!series.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
                            style="font-size: 1px;" required="required">
