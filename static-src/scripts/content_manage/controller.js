@@ -303,7 +303,7 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
       }
     }
 
-    $scope.onFileUpload = function ($files) {
+    $scope.onFileUpload = function ($files, type) {
       if (!$scope.series) {
         $scope.series = {};
       }
@@ -315,7 +315,11 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
           type: 'success',
           msg: '上传成功'
         });
-        $scope.series.image_url = data.image_url
+        if(type === 'mini') {
+            $scope.product.image_url_mini = data.image_url
+        } else {
+            $scope.product.image_url = data.image_url
+        }
       }).error(function(data){
         CigemAlert.addError({
           type: 'danger',

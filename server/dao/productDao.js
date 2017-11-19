@@ -1,3 +1,34 @@
+/**
+ * @api {GET, PUT, DELETE} /products/[:id]
+ * @apiName Get,Update,Delete
+ * @apiGroup Products
+ *
+ * @apiParam {Number} id products unique ID.
+ *
+ */
+
+/**
+ * @api {POST} /products
+ * @apiName POST
+ * @apiGroup Products
+ *
+ * @apiParamExample {json} Request Example
+ *   POST /api/products/
+ *   {
+ *       classif: "",
+ *       description: "产品描述产品描述产品描述产品描述",
+ *       description_en: "product-des",
+ *       en_name: "product",
+ *       id:56,
+ *       image_url: "/upload/images/demo-prodect.jpg",
+ *       image_url_mini: "/upload/images/di_1.png",
+ *       name:"产品",
+ *       series:"",
+ *       status:1,
+ *       wearing_method:"11"
+ *   }
+ */
+
 const baseDao = require('./baseDao')
 const db = require('../database')
 const ORDER_LIMIT = 20

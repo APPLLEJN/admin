@@ -1,3 +1,26 @@
+/**
+ * @api {GET, PUT, DELETE} /unique/[:id]
+ * @apiName Get,Update,Delete
+ * @apiGroup Unique
+ *
+ * @apiParam {Number} id unique unique ID.
+ *
+ */
+
+/**
+ * @api {POST} /recommends
+ * @apiName POST
+ * @apiGroup Unique
+ *
+ * @apiParamExample {json} Request Example
+ *   POST /api/unique/
+ *   {
+ *      list: [
+ *        {product_id: 65, sort: 3},
+ *        {product_id: 67, sort: 4},
+ *      ]
+ *   }
+ */
 const baseDao = require('./baseDao')
 const db = require('../database')
 const ORDER_LIMIT = 20
