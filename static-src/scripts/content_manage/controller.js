@@ -316,9 +316,9 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
           msg: '上传成功'
         });
         if(type === 'mini') {
-            $scope.product.image_url_mini = data.image_url
+            $scope.series.image_url_mini = data.image_url
         } else {
-            $scope.product.image_url = data.image_url
+            $scope.series.image_url = data.image_url
         }
       }).error(function(data){
         CigemAlert.addError({
