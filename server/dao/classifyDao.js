@@ -15,11 +15,9 @@
  * @apiParamExample {json} Request Example
  *   POST /api/classifies/
  *   {
- *     "data": {
- *       "name": "test",
- *       "en_name": "test",
- *       "image_url": "/upload/images/bg_s_r.png"
- *     }
+ *       name: "test",
+ *       en_name: "test",
+ *       image_url: "/upload/images/bg_s_r.png"
  *   }
  */
 

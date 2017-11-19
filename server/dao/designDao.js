@@ -1,3 +1,27 @@
+/**
+ * @api {GET, PUT, DELETE} /design/[:id]
+ * @apiName Get,Update,Delete
+ * @apiGroup Design
+ *
+ * @apiParam {Number} id design unique ID.
+ *
+ */
+
+/**
+ * @api {POST} /design
+ * @apiName POST
+ * @apiGroup Design
+ *
+ * @apiParamExample {json} Request Example
+ *   POST /api/design/
+ *   {
+ *      list: [
+ *        {product_id: 65, sort: 3},
+ *        {product_id: 67, sort: 4},
+ *      ]
+ *   }
+ */
+
 const baseDao = require('./baseDao')
 const db = require('../database')
 const ORDER_LIMIT = 20

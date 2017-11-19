@@ -1,3 +1,27 @@
+/**
+ * @api {GET, PUT, DELETE} /order/[:id]
+ * @apiName Get,Update,Delete
+ * @apiGroup Order
+ *
+ * @apiParam {Number} id order unique ID.
+ *
+ */
+
+/**
+ * @api {POST} /order
+ * @apiName POST
+ * @apiGroup Order
+ *
+ * @apiParamExample {json} Request Example
+ *   POST /api/order/
+ *   {
+ *       date:"2017-09-21",
+ *       phone:"17710133830",
+ *       time_type: [1, 2],
+ *       username:"test"
+ *   }
+ */
+
 const baseDao = require('./baseDao')
 const db = require('../database')
 
