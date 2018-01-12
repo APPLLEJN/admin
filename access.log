@@ -6267,3 +6267,17 @@
 ::1 - GET /fonts/glyphicons-halflings-regular.woff HTTP/1.1 200 23320 - 1.143 ms
 ::1 - GET /upload/images/image.png HTTP/1.1 404 162 - 1.096 ms
 ::1 - PUT /api/products/54 HTTP/1.1 200 15 - 18.834 ms
+::1 - GET /api/permission HTTP/1.1 200 - - 1.673 ms
+::1 - GET /scripts/content_manage/view/products.html HTTP/1.1 200 - - 1.739 ms
+::1 - GET /api/products HTTP/1.1 200 - - 23.093 ms
+::1 - GET /upload/images/image.png HTTP/1.1 404 162 - 2.890 ms
+::1 - GET /upload/images/%E8%83%8C%E6%99%AF.jpg HTTP/1.1 404 175 - 6.244 ms
+::1 - GET /upload/images/bg_s_r.png HTTP/1.1 404 163 - 7.159 ms
+::1 - GET /api/permission HTTP/1.1 200 - - 0.637 ms
+::1 - GET /scripts/channel_manage/view/recommends.html HTTP/1.1 200 - - 1.159 ms
+::1 - GET /api/recommends HTTP/1.1 200 - - 30.612 ms
+::1 - GET /upload/images/%E8%83%8C%E6%99%AF.jpg HTTP/1.1 404 175 - 5.933 ms
+::1 - GET /upload/images/bg_s_r.png HTTP/1.1 404 163 - 6.208 ms
+::1 - GET /upload/images/bg.jpg HTTP/1.1 404 159 - 6.522 ms
+::1 - GET /api/permission HTTP/1.1 200 - - 0.788 ms
+::1 - GET /login.html HTTP/1.1 200 - - 0.940 ms
