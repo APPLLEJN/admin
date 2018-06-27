@@ -13,6 +13,7 @@ const newsDao = require("./dao/newsDao");
 const recommendDao = require("./dao/recommendDao");
 const uniqueDao = require("./dao/uniqueDao");
 const designDao = require("./dao/designDao");
+const childSeriesDao = require("./dao/childSeriesDao");
 var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
 
@@ -57,6 +58,14 @@ router.get('/series/:id', (req, res, next) => seriesDao.get(req, res, next))
 router.post('/series', (req, res, next) => seriesDao.insert(req, res, next))
 router.put('/series/:id', (req, res, next) => seriesDao.update(req, res, next))
 router.delete('/series/:id', (req,res,next) => seriesDao.delete(req, res, next));
+
+
+//子系列
+router.get('/child_series', (req, res, next) => childSeriesDao.query(req, res, next))
+router.get('/child_series/:id', (req, res, next) => childSeriesDao.get(req, res, next))
+router.post('/child_series', (req, res, next) => childSeriesDao.insert(req, res, next))
+router.put('/child_series/:id', (req, res, next) => childSeriesDao.update(req, res, next))
+router.delete('/child_series/:id', (req,res,next) => childSeriesDao.delete(req, res, next));
 
 //产品
 router.get('/products', (req, res, next) => productDao.query(req, res, next))

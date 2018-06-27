@@ -330,6 +330,159 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
   }
 ]);
 
+contentController.controller('childSeriesController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter', 'handleSort',
+    function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter, handleSort){
+        CigemAlert.clearAlert();
+
+        /* init */
+        var search = $location.search();
+        $scope.search = {},
+        $scope.maxSize = 5,
+        $scope.bigCurrentPage = search.page;
+        search.parent_id = $scope.series_id = $stateParams.id;
+
+        function getSeries(param, success, error){
+            NProgress.start();
+            Content.child_series.get(param, function(data, getResponseHeaders){
+                NProgress.done();
+                var totalNumber = getResponseHeaders()['total-count'];
+                success && success(data, totalNumber);
+            }, function(err){
+                NProgress.done();
+                error && error(err);
+            });
+        }
+
+        getSeries(search, function(data, total){
+            $scope.seriesList = data.list || [];
+            $scope.bigTotalItems = total;
+        }, function(err){
+            CigemAlert.addError(err.data);
+        });
+
+        $scope.deleteSeries = function (id) {
+            if (confirm('确认删除？')) {
+                Content.child_series.delete({id: id}, function(data){
+                    CigemAlert.addError({
+                        type: 'success',
+                        msg: '删除成功'
+                    });
+                    $scope.seriesList = $scope.seriesList.filter(function (item) {
+                        return item.id !== id
+                    })
+                }, function(err){
+                    CigemAlert.addError(err.data);
+                });
+            }
+        }
+
+        $scope.searchSeries = function () {
+            CigemAlert.clearAlert();
+            var searchKey = ['name', 'en_name']
+            var param = cigemUtils.searchCondition(searchKey, $scope.search);
+            param.parent_id = $scope.series_id
+            $location.search(param);
+            getSeries(param, function(data, total){
+                $scope.seriesList = data.list;
+                $scope.bigTotalItems = total;
+            }, function(err){
+                CigemAlert.addError(err.data);
+            });
+        }
+
+        $scope.pageChanged = function () {
+            $location.search('page', $scope.bigCurrentPage);
+            getSeries($location.search(), function (data, total) {
+                $scope.seriesList = data.list;
+                $scope.bigTotalItems = total;
+            }, function (err) {
+                CigemAlert.addError(err.data);
+            });
+        }
+
+        $scope.handleSort = function(type, id, sort, index) {
+            handleSort($scope, type, id, sort, index, 'seriesList', 'child_series')
+        }
+    }]);
+
+contentController.controller('childSeriesDetailController', ['$scope', '$location', '$stateParams', '$upload', 'CigemAlert', 'Content', '$filter', '$modal',
+    function ($scope, $location, $stateParams, $upload, CigemAlert, Content, $filter, $modal) {
+        CigemAlert.clearAlert();
+
+        /* init */
+        var search = $location.search();
+        var series_id = $stateParams.id;
+        search.parent_id = $scope.parent_id = $stateParams.sid;
+        /* parameter */
+        $scope.isEdit = series_id !== 'new';
+
+        if ($scope.isEdit) {
+            Content.child_series.get({id: series_id}, function (data) {
+                $scope.series = data;
+                NProgress.done();
+            }, function (err) {
+                NProgress.done();
+                CigemAlert.addError(err.data);
+            });
+        }
+
+        $scope.updateContent = function () {
+            $scope.series.parent_id = $scope.parent_id
+            if ($scope.isEdit) {
+                delete $scope.series.create_time
+                delete $scope.series.update_time
+                Content.child_series.update($scope.series, function (data) {
+                    NProgress.done();
+                    CigemAlert.addError({
+                        type: 'success',
+                        msg: '修改成功'
+                    });
+                }, function (err) {
+                    NProgress.done();
+                    CigemAlert.addError(err.data);
+                });
+            } else {
+                Content.child_series.create($scope.series, function (data) {
+                    NProgress.done();
+                    CigemAlert.addError({
+                        type: 'success',
+                        msg: '创建成功'
+                    });
+                    location.href = '#/series/'+$scope.parent_id+'/child';
+                }, function (err) {
+                    NProgress.done();
+                    CigemAlert.addError(err.data);
+                });
+            }
+        }
+
+        $scope.onFileUpload = function ($files, type) {
+            if (!$scope.series) {
+                $scope.series = {};
+            }
+            $scope.upload = $upload.upload({
+                url: '/api/upload',
+                file: $files
+            }).success(function(data, status, headers, config) {
+                CigemAlert.addError({
+                    type: 'success',
+                    msg: '上传成功'
+                });
+                if(type === 'mini') {
+                    $scope.series.image_url_mini = data.image_url
+                } else {
+                    $scope.series.image_url = data.image_url
+                }
+            }).error(function(data){
+                CigemAlert.addError({
+                    type: 'danger',
+                    msg: '上传失败'
+                });
+            });
+        };
+    }
+]);
+
 contentController.controller('productsController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter',
   function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter){
     CigemAlert.clearAlert();

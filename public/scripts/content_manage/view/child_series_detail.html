@@ -1,8 +1,8 @@
 <div class="apply_page">
     <div class="header">
-        <h2>{{isEdit ? '系列详情' : '创建系列'}}</h2>
+        <h2>{{isEdit ? '子系列详情' : '创建子系列'}}</h2>
         <div class="ctls">
-            <a class="btn btn-default" href="#/series">返回列表</a>
+            <a class="btn btn-default" href="#/series/{{parent_id}}/child">返回列表</a>
         </div>
     </div>
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
