@@ -102,4 +102,8 @@ router.post('/design', (req, res, next) => designDao.insert(req, res, next))
 router.put('/design/:id', (req, res, next) => designDao.update(req, res, next))
 router.delete('/design/:id', (req,res,next) => designDao.delete(req, res, next));
 
+// 更新数据脚本
+
+router.get('/update/products', (req, res, next) => productDao.updateOnce(req, res, next))
+
 module.exports = router

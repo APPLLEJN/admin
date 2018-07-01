@@ -1792,7 +1792,32 @@ contentController.controller('seriesDetailAllController',['$scope', '$location',
         }
 
         $scope.handleSort = function(type, id, sort, index) {
-            handleSort($scope, type, id, sort, index, 'seriesList', 'series')
+            var before = $scope.seriesList[index-1]
+            var after = $scope.seriesList[index+1]
+            var current = $scope.seriesList[index]
+            if(type === 'up') {
+                Content[current.type].update({id: id, sort: before.sort}, function(data){
+                    Content[before.type].update({id: before.id, sort: sort}, function (data) {
+                        current.sort = before.sort
+                        before.sort = sort
+                        $scope.seriesList[index-1] = current
+                        $scope.seriesList[index] = before
+                    })
+                }, function(err){
+                    CigemAlert.addError(err.data);
+                });
+            } else {
+                Content[current.type].update({id: id, sort: after.sort}, function(data){
+                    Content[after.type].update({id: after.id, sort: sort}, function (data) {
+                        current.sort = after.sort
+                        after.sort = sort
+                        $scope.seriesList[index+1] = current
+                        $scope.seriesList[index] = after
+                    })
+                }, function(err){
+                    CigemAlert.addError(err.data);
+                });
+            }
         }
     }]);
 
@@ -2063,7 +2088,7 @@ contentController.controller('childSeriesProductionController',['$scope', '$loca
         }
 
         $scope.handleSort = function(type, id, sort, index) {
-            handleSort($scope, type, id, sort, index, 'seriesList', 'child_series')
+            handleSort($scope, type, id, sort, index, 'seriesList', 'products')
         }
     }]);
 

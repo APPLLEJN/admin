@@ -34,9 +34,9 @@ class seriesDao extends baseDao {
     // })
     if(req.query.isAll) {
         try {
-            let listQuery = db(`child_series`).select('parent_id','name', 'id', 'image_url', 'sort').where({'parent_id': req.params.id, status: 1})
+            let listQuery = db(`child_series`).select('parent_id','name', 'id', 'image_url', 'sort', 'type').where({'parent_id': req.params.id, status: 1})
                 .unionAll(function () {
-                  this.select('parent_id', 'name', 'id', 'image_url', 'sort').from('products').where({'series': req.params.id, status: 1})
+                  this.select('parent_id', 'name', 'id', 'image_url', 'sort', 'type').from('products').where({'series': req.params.id, status: 1})
                 }).orderBy('sort', 'desc')
             this.search.map(function (item) {
                 if (req.query && req.query[ item ]) {

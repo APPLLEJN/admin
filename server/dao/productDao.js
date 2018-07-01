@@ -88,8 +88,9 @@ class productDao extends baseDao {
         }
       } else if (req.query.parent_id) {
           const listQuery = db(`${this.db} as p`).select().where({'status': 1, parent_id: req.query.parent_id}).orderBy('sort', 'desc')
+          const count = await listQuery.clone()
           const list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
-          res.status(200).json({status: 'ok', list: list})
+          res.set({'total-count': count.length}).status(200).json({status: 'ok', list: list})
       } else {
         super.query(req, res, next)
       }
@@ -97,6 +98,24 @@ class productDao extends baseDao {
       console.log(err, 'error')
       res.status(404).json({status: 'failed', msg: err});
     }
+  }
+  async insert(req, res, next) {
+      const [{count}] = await db(this.db).select().where({status: 1}).count('id as count')
+      req.body.sort = count + 1
+      req.body.type = 'products'
+      super.insert(req, res, next)
+  }
+  async update(req, res, next) {
+      const [{count}] = await db(this.db).select().where({status: 1}).count('id as count')
+      req.body.sort = req.body.sort || count + 1
+      super.update(req, res, next)
+  }
+  async updateOnce (req, res, next) {
+      const result = await db(this.db).select().where({status: 1})
+      result.map(async (item, index) => {
+        await db('products').where({id: item.id}).update({sort: index})
+      })
+      res.send('finish')
   }
 }
 

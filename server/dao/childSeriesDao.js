@@ -28,8 +28,9 @@ class childSeriesDao extends baseDao {
     super(db, search, orderBy)
   }
   async insert(req, res, next) {
-    const [{count}] = await db(this.db).select().where({status: 1}).count('id as count')
-    req.body.sort = count +1
+    const [{count}] = await db('products').select().where({status: 1, series: req.body.parent_id}).count('id as count')
+    req.body.sort = count + 1
+    req.body.type = 'child_series'
     super.insert(req, res, next)
   }
 }
