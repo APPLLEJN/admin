@@ -29,18 +29,43 @@
             <div class='row'>
                 <div class='col-md-2 text-right'>描述 <span style="color: red"> * </span> ：</div>
                 <div class="col-md-8">
-                    <textarea class="form-control" name="des" id="des" cols="30"
-                              rows="10" required="required" placeholder="必填"
-                              ng-model="product.description" >
-                    </textarea>
+                    <!--<textarea class="form-control" name="des" id="des" cols="30"-->
+                              <!--rows="10" required="required" placeholder="必填"-->
+                              <!--ng-model="product.description" >-->
+                    <!--</textarea>-->
+                    <div id="content-editor-trigger" ng-model="product.description" deseditable="true" style="height:400px;max-height:500px;">
+                        <p>设计说明：</p><p style="text-indent: 2em;">代表魔力源头的符号，代表CIGEM对魔术的最初眷恋 以及四花色中黑桃所蕴含的对平和的向往，红桃所蕴含的 对爱情的追求，梅花所蕴含的对回忆的追溯，方片所蕴含 的对光彩的心动。 &nbsp;&nbsp;&nbsp;&nbsp;</p><p style="text-indent: 2em;">依据纸牌的四个花色重新设计制作出小巧精致，立体 感及质感十足的锁骨链小坠，沿用黑色和红色两种配色， 分别选用18k白金搭配黑尖晶石以及18k玫瑰金搭配红宝石， 使颈部凸显精致美感，拉长颈部视觉曲线，便于穿搭。&nbsp;</p><p style="text-indent: 2em;">材质：黑桃锁骨链：18k白色金，黑尖晶石</p><p style="text-indent: 5em;"><span style="text-indent: 5em;">红</span>桃锁骨链：18k玫瑰色金，红宝石</p><p style="text-indent: 5em;">梅花锁骨链：18k白色金，黑尖晶石</p><p style="text-indent: 5em;">方片锁骨链：18k玫瑰色金，红宝石</p><p style="text-indent: 2em;">规格：黑桃锁骨链：45cm 黑尖晶石xxct&nbsp;xxg</p><p style="text-indent: 5em;">红桃锁骨链：45cm&nbsp;红宝石xxct&nbsp;xxg</p><p style="text-indent: 5em;">梅花锁骨链：45cm&nbsp;黑尖晶石xxct&nbsp;xxg</p><p style="text-indent: 5em;">方片锁骨链：45cm&nbsp;红宝石xxct&nbsp;xxg</p><p style="text-indent: 5em;"><br></p>
+                    </div>
+                    <hr>
+                    <p><b>以下是编辑器的内容：</b></p>
+                    <p ng-bind="product.description"></p>
                 </div>
             </div>
             <div class="row">
+                <div class='col-md-2 text-right'>请选择</div>
+                <div class="col-md-8">
+                    <label for="series"><input type="radio" name="classify" id="series" ng-model="product.seriesType" ng-value="0"> 系列</label>
+                    <label for="child_series"><input type="radio" name="classify" id="child_series" ng-model="product.seriesType" ng-value="1"> 子系列</label>
+                </div>
+            </div>
+            <div class="row" ng-show="product.seriesType === 0">
                 <div class='col-md-2 text-right'>所属系列</div>
                 <div class="col-md-8">
-                    <select class="form-control" id="series" ng-model="product.series" ng-disabled="!!product.design_id">
+                    <select class="form-control" ng-model="product.series" ng-disabled="!!product.design_id">
                         <option></option>
                         <option ng-repeat="item in series" value="{{item.id}}">
+                            {{item.name}}
+                        </option>
+                    </select>
+                    <p ng-show="!!product.design_id">已经被添加到私人订制的产品，不能选择分类</p>
+                </div>
+            </div>
+            <div class="row" ng-show="product.seriesType === 1">
+                <div class='col-md-2 text-right'>所属子系列</div>
+                <div class="col-md-8">
+                    <select class="form-control" ng-model="product.parent_id" ng-disabled="!!product.design_id">
+                        <option></option>
+                        <option ng-repeat="item in child_series" value="{{item.id}}">
                             {{item.name}}
                         </option>
                     </select>
@@ -70,6 +95,24 @@
                 </div>
             </div>
             <div class='row'>
+                <div class='col-md-2 text-right'>价格 <span style="color: red"></span> ：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="product.price" placeholder="价格">
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right'>单位 <span style="color: red"></span> ：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="product.unit" placeholder="件">
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-2 text-right'>购买链接 <span style="color: red"></span> ：</div>
+                <div class="col-md-8">
+                    <input class="form-control" ng-model="product.pay_url" placeholder="必填">
+                </div>
+            </div>
+            <div class='row'>
                 <div class='col-md-2 text-right require-star'>分类图片 (小)<span style="color: red"> * </span> : </div>
                 <div class='col-md-10'>
                     <input ng-if="!product.image_url_mini" type="file" ng-file-select="onFileUpload($files, 'mini')" accept="image/*"
@@ -84,17 +127,54 @@
             </div>
             <div class='row'>
                 <div class='col-md-2 text-right require-star'>分类图片（大）<span style="color: red"> * </span>: </div>
+                <!--<div class='col-md-10'>-->
+                    <!--<input ng-if="!product.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"-->
+                           <!--style="font-size: 1px;" required="required">-->
+                    <!--<input ng-if="product.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"-->
+                           <!--style="font-size: 1px;">-->
+                <!--</div>-->
                 <div class='col-md-10'>
-                    <input ng-if="!product.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
-                           style="font-size: 1px;" required="required">
-                    <input ng-if="product.image_url" type="file" ng-file-select="onFileUpload($files)" accept="image/*"
-                           style="font-size: 1px;">
+                    <div>
+                        <button class="btn btn-info" type="button" ng-click="addImage()">增加一条</button>
+                    </div>
+                    <div ng-repeat="item in product.image_url">
+                        <div style="margin-top: 15px; display: flex; align-items: center">
+                            <div style="margin-right: 10px">
+                                <!--<input type="file" ng-file-select="onFileUpload($files, 'banner', $index)" accept="image/*"-->
+                                       <!--style="font-size: 1px;">-->
+                                <input ng-if="!item.image_url" type="file" ng-file-select="onFileUpload($files, 'banner', $index)" accept="image/*"
+                                       style="font-size: 1px;" required="required">
+                                <input ng-if="item.image_url" type="file" ng-file-select="onFileUpload($files, 'banner', $index)" accept="image/*"
+                                       style="font-size: 1px;">
+                                <image style="display: block" ng-show="item.image_url" src="{{item.image_url}}"  width="400"/>
+                            </div>
+                            <button class="btn btn-warning" type="button" ng-click="deleteImage($index)">删除</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class='row' ng-show="product.image_url">
-                <div class='col-md-2 text-right require-star'></div>
-                <image src="{{product.image_url}}"  width="400"/>
-            </div>
+            <!--<div class='row' ng-show="product.image_url">-->
+                <!--<div class='col-md-2 text-right require-star'></div>-->
+                <!--<image src="{{product.image_url}}"  width="400"/>-->
+            <!--</div>-->
+            <!--<div class='row'>-->
+                <!--<div class='col-md-2 text-right require-star'>轮播图<span style="color: red"></span>: </div>-->
+                <!--<div class='col-md-10'>-->
+                    <!--<div>-->
+                        <!--<button class="btn btn-info" type="button" ng-click="addImage()">增加一条</button>-->
+                    <!--</div>-->
+                    <!--<div ng-repeat="item in product.banner_images">-->
+                        <!--<div style="margin-top: 15px; display: flex; align-items: center">-->
+                            <!--<div style="margin-right: 10px">-->
+                                <!--<input type="file" ng-file-select="onFileUpload($files, 'banner', $index)" accept="image/*"-->
+                                       <!--style="font-size: 1px;">-->
+                                <!--<image style="display: block" ng-show="item.image_url" src="{{item.image_url}}"  width="400"/>-->
+                            <!--</div>-->
+                            <!--<button class="btn btn-warning" type="button" ng-click="deleteImage($index)">删除</button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
         <div class='row'>
             <div class='col-md-12 text-right'>

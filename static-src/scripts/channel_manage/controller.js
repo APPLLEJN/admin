@@ -20,6 +20,7 @@ channelController.directive('contenteditable', function() {
         'unlink',
         '|',     // '|' 是菜单组的分割线
         'img',
+        'indent'
       ];
       editor.config.uploadImgUrl = '/api/upload';
       editor.config.uploadImgFns.onload = function (resultText, xhr) {
@@ -212,6 +213,7 @@ channelController.controller('newsDetailController', ['$scope', '$location', '$s
             msg: '修改成功'
           });
           $scope.editor.destroy();
+          location.href = '#/news';
         }, function (err) {
           NProgress.done();
           CigemAlert.addError(err.data);
@@ -223,9 +225,8 @@ channelController.controller('newsDetailController', ['$scope', '$location', '$s
             type: 'success',
             msg: '创建成功'
           });
-          location.href = '#/news';
           $scope.editor.destroy();
-
+          location.href = '#/news';
         }, function (err) {
           NProgress.done();
           CigemAlert.addError(err.data);

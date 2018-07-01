@@ -531,45 +531,18 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
         search.parent_id = $scope.parent_id = $stateParams.sid;
         /* parameter */
         $scope.isEdit = series_id !== 'new';
-        $scope.wearing = [
-            {name: '戒指', en_name: 'ring', id: 10},
-            {name: '对戒', en_name: 'twin ring', id: 11},
-            {name: '项链', en_name: 'choker necklace', id: 20},
-            {name: '锁骨链', en_name: 'princess necklace', id: 21},
-            {name: '手镯', en_name: 'bangle', id: 30},
-            {name: '手链', en_name: 'bracelet', id: 31},
-            {name: '耳钉', en_name: 'stud', id: 40},
-            {name: '耳环', en_name: 'earring', id: 41},
-            {name: '胸针', en_name: 'brooch', id: 50},
-            {name: '领针', en_name: 'collar pin', id: 51},
-            {name: '其他', en_name: 'other', id: 90},
-        ];
+
         if ($scope.isEdit) {
             Content.child_series.get({id: series_id}, function (data) {
                 $scope.series = data;
-                $scope.editor.$txt.html(data.description);
-                $scope.series.image_url = data.image_url ? data.image_url.split(',').map(function (item) {
-                    return {image_url: item}
-                }) : []
                 NProgress.done();
             }, function (err) {
                 NProgress.done();
                 CigemAlert.addError(err.data);
             });
-        } else {
-            $scope.series = {}
-            $scope.series.image_url = []
         }
 
         $scope.updateContent = function () {
-            if($scope.series.image_url.length) {
-                $scope.series.image_url = $scope.series.image_url.map(function (item) {
-                    return item.image_url
-                }).join(',')
-            } else {
-                $scope.series.image_url = ''
-            }
-            if (!$scope.series.wearing_method) delete $scope.series.wearing_method
             $scope.series.parent_id = $scope.parent_id
             $scope.series.unit = $scope.series.unit || '件'
             if ($scope.isEdit) {
@@ -581,7 +554,6 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
                         type: 'success',
                         msg: '修改成功'
                     });
-                    location.href = '#/series/'+$scope.parent_id+'/child';
                 }, function (err) {
                     NProgress.done();
                     CigemAlert.addError(err.data);
@@ -601,7 +573,7 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
             }
         }
 
-        $scope.onFileUpload = function ($files, type, index) {
+        $scope.onFileUpload = function ($files, type) {
             if (!$scope.series) {
                 $scope.series = {};
             }
@@ -615,8 +587,6 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
                 });
                 if(type === 'mini') {
                     $scope.series.image_url_mini = data.image_url
-                } else if (type === 'banner'){
-                    $scope.series.image_url[index].image_url = data.image_url
                 } else {
                     $scope.series.image_url = data.image_url
                 }
@@ -627,93 +597,8 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
                 });
             });
         };
-
-        $scope.addImage = function () {
-            $scope.series.image_url.push({image_url: ''})
-        }
-
-        $scope.deleteImage = function (index) {
-            $scope.series.image_url.splice(index, 1)
-        }
     }
 ]);
-
-contentController.controller('childSeriesProductionController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter', 'handleSort',
-    function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter, handleSort){
-        CigemAlert.clearAlert();
-
-        /* init */
-        var search = $location.search();
-        $scope.search = {},
-        $scope.maxSize = 5,
-        $scope.bigCurrentPage = search.page;
-        search.parent_id = $stateParams.id;
-
-        function getSeries(param, success, error){
-            NProgress.start();
-            Content.products.get(param, function(data, getResponseHeaders){
-                NProgress.done();
-                var totalNumber = getResponseHeaders()['total-count'];
-                success && success(data, totalNumber);
-            }, function(err){
-                NProgress.done();
-                error && error(err);
-            });
-        }
-
-        getSeries(search, function(data, total){
-            $scope.seriesList = data.list || [];
-            $scope.bigTotalItems = total;
-        }, function(err){
-            CigemAlert.addError(err.data);
-        });
-
-        $scope.deleteSeries = function (id) {
-            if (confirm('确认删除？')) {
-                Content.child_series.delete({id: id}, function(data){
-                    CigemAlert.addError({
-                        type: 'success',
-                        msg: '删除成功'
-                    });
-                    $scope.seriesList = $scope.seriesList.filter(function (item) {
-                        return item.id !== id
-                    })
-                }, function(err){
-                    CigemAlert.addError(err.data);
-                });
-            }
-        }
-
-        $scope.searchSeries = function () {
-            CigemAlert.clearAlert();
-            var searchKey = ['name', 'en_name']
-            var param = cigemUtils.searchCondition(searchKey, $scope.search);
-            param.parent_id = $scope.series_id
-            $location.search(param);
-            getSeries(param, function(data, total){
-                $scope.seriesList = data.list;
-                $scope.bigTotalItems = total;
-            }, function(err){
-                CigemAlert.addError(err.data);
-            });
-        }
-
-        $scope.pageChanged = function () {
-            $location.search('page', $scope.bigCurrentPage);
-            var param = $location.search()
-            param.parent_id = $scope.series_id
-            getSeries(param, function (data, total) {
-                $scope.seriesList = data.list;
-                $scope.bigTotalItems = total;
-            }, function (err) {
-                CigemAlert.addError(err.data);
-            });
-        }
-
-        $scope.handleSort = function(type, id, sort, index) {
-            handleSort($scope, type, id, sort, index, 'seriesList', 'child_series')
-        }
-    }]);
 
 contentController.controller('productsController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter',
   function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter){
@@ -852,7 +737,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
                 $scope.product = data;
                 $scope.editor.$txt.html(data.description);
                 $scope.product.seriesType = data.series ? 0 : 1
-                $scope.product.image_url = data.image_url ? data.image_url.split(',').map(function (item) {
+                $scope.product.banner_images = data.banner_images ? data.banner_images.split(',').map(function (item) {
                     return {image_url: item}
                 }) : []
                 NProgress.done();
@@ -861,18 +746,23 @@ contentController.controller('productDetailController', ['$scope', '$location', 
                 CigemAlert.addError(err.data);
             });
         } else {
+            console.log($scope.editor)
             $scope.product = {}
-            $scope.product.image_url = []
+            $scope.product.banner_images = []
+            $scope.product.description = ''
+            // $scope.product.description = '<p style="text-indent: 0px;">这里是文字的描述哈哈哈!这里是文字的描述哈哈哈!这里是文字的描述哈哈哈!</p><p style="text-indent: 2em;">材质：黑桃: 什么什么吧啦吧啦吧！</p><p style="text-indent: 5em;"><span style="text-indent: 5em;">红桃: 请回车换行哦～</span></p><p><br></p>'
+            $scope.editor.$txt.html($scope.product.description);
+
         }
     }
 
     $scope.updateContent = function () {
-        if($scope.product.image_url.length) {
-            $scope.product.image_url = $scope.product.image_url.map(function (item) {
+        if($scope.product.banner_images.length) {
+            $scope.product.banner_images = $scope.product.banner_images.map(function (item) {
               return item.image_url
             }).join(',')
         } else {
-            $scope.product.image_url = ''
+            $scope.product.banner_images = ''
         }
         if ($scope.product.seriesType === 1) {
             $scope.product.series = null
@@ -891,7 +781,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
             type: 'success',
             msg: '修改成功'
           });
-          location.href = '#/products';
+          // location.href = '#/products';
         }, function (err) {
           NProgress.done();
           CigemAlert.addError(err.data);
@@ -903,7 +793,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
             type: 'success',
             msg: '创建成功'
           });
-          location.href = '#/products';
+          // location.href = '#/products';
         }, function (err) {
           NProgress.done();
           CigemAlert.addError(err.data);
@@ -927,7 +817,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
         if(type === 'mini') {
           $scope.product.image_url_mini = data.image_url
         } else if (type === 'banner'){
-          $scope.product.image_url[index].image_url = data.image_url
+          $scope.product.banner_images[index].image_url = data.image_url
         } else {
           $scope.product.image_url = data.image_url
         }
@@ -940,11 +830,11 @@ contentController.controller('productDetailController', ['$scope', '$location', 
     };
     
     $scope.addImage = function () {
-        $scope.product.image_url.push({image_url: ''})
+        $scope.product.banner_images.push({image_url: ''})
     }
 
     $scope.deleteImage = function (index) {
-      $scope.product.image_url.splice(index, 1)
+      $scope.product.banner_images.splice(index, 1)
     }
   }
 ]);

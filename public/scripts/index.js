@@ -616,6 +616,7 @@ channelController.directive('contenteditable', function() {
         'unlink',
         '|',     // '|' 是菜单组的分割线
         'img',
+        'indent'
       ];
       editor.config.uploadImgUrl = '/api/upload';
       editor.config.uploadImgFns.onload = function (resultText, xhr) {
@@ -808,6 +809,7 @@ channelController.controller('newsDetailController', ['$scope', '$location', '$s
             msg: '修改成功'
           });
           $scope.editor.destroy();
+          location.href = '#/news';
         }, function (err) {
           NProgress.done();
           CigemAlert.addError(err.data);
@@ -819,9 +821,8 @@ channelController.controller('newsDetailController', ['$scope', '$location', '$s
             type: 'success',
             msg: '创建成功'
           });
-          location.href = '#/news';
           $scope.editor.destroy();
-
+          location.href = '#/news';
         }, function (err) {
           NProgress.done();
           CigemAlert.addError(err.data);
@@ -1352,6 +1353,46 @@ channelServices.factory('Channel', ['$resource', function($resource){
 'use strict';
 var contentController = angular.module('contentController',['ui.bootstrap']);
 
+contentController.directive('deseditable', function() {
+    return {
+        restrict: 'A' ,
+        require: 'ngModel',
+        link: function(scope, element, attrs, ctrl) {
+            // 创建编辑器
+            var editor = scope.editor = new wangEditor('content-editor-trigger');
+            editor.config.menus = [
+                'source',
+                '|',     // '|' 是菜单组的分割线
+                'head',
+                'bold',
+                'underline',
+                'italic',
+                'forecolor',
+                'link',
+                'unlink',
+                '|',     // '|' 是菜单组的分割线
+                'img',
+                'indent'
+            ];
+            editor.config.uploadImgUrl = '/api/upload';
+            editor.config.uploadImgFns.onload = function (resultText, xhr) {
+                // 上传图片时，已经将图片的名字存在 editor.uploadImgOriginalName
+                var originalName = editor.uploadImgOriginalName || '';
+                // 如果 resultText 是图片的url地址，可以这样插入图片：
+                editor.command(null, 'insertHtml', '<img src="http://admin.cigem.com.cn' +  JSON.parse(resultText).image_url + '" alt="' + originalName + '" style="max-width:100%;"/>');
+            };
+            editor.onchange = function () {
+                // 从 onchange 函数中更新数据
+                scope.$apply(function () {
+                    var html = editor.$txt.html();
+                    ctrl.$setViewValue(html);
+                });
+            };
+            editor.create();
+        }
+    };
+});
+
 contentController.factory('handleSort',['Content', 'CigemAlert', function(Content, CigemAlert){
   return function($scope, type, id, sort, index, scopeData, service){
     var before = $scope[scopeData][index-1]
@@ -1681,6 +1722,80 @@ contentController.controller('seriesDetailController', ['$scope', '$location', '
   }
 ]);
 
+contentController.controller('seriesDetailAllController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter', 'handleSort',
+    function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter, handleSort){
+        CigemAlert.clearAlert();
+
+        /* init */
+        var search = $location.search();
+        $scope.search = {},
+        $scope.maxSize = 5,
+        $scope.bigCurrentPage = search.page;
+        search.isAll = true
+        search.id = $stateParams.id
+        function getSeries(param, success, error){
+            NProgress.start();
+            Content.series.get(param, function(data, getResponseHeaders){
+                NProgress.done();
+                var totalNumber = getResponseHeaders()['total-count'];
+                success && success(data, totalNumber);
+            }, function(err){
+                NProgress.done();
+                error && error(err);
+            });
+        }
+
+        getSeries(search, function(data, total){
+            $scope.seriesList = data.list || [];
+            $scope.bigTotalItems = total;
+        }, function(err){
+            CigemAlert.addError(err.data);
+        });
+
+        $scope.deleteSeries = function (id) {
+            if (confirm('确认删除？')) {
+                Content.series.delete({id: id}, function(data){
+                    CigemAlert.addError({
+                        type: 'success',
+                        msg: '删除成功'
+                    });
+                    $scope.seriesList = $scope.seriesList.filter(function (item) {
+                        return item.id !== id
+                    })
+                }, function(err){
+                    CigemAlert.addError(err.data);
+                });
+            }
+        }
+
+        $scope.searchSeries = function () {
+            CigemAlert.clearAlert();
+            var searchKey = ['name', 'en_name']
+            var param = cigemUtils.searchCondition(searchKey, $scope.search);
+            $location.search(param);
+            getSeries(param, function(data, total){
+                $scope.seriesList = data.list;
+                $scope.bigTotalItems = total;
+            }, function(err){
+                CigemAlert.addError(err.data);
+            });
+        }
+
+        $scope.pageChanged = function () {
+            $location.search('page', $scope.bigCurrentPage);
+            getSeries($location.search(), function (data, total) {
+                $scope.seriesList = data.list;
+                $scope.bigTotalItems = total;
+            }, function (err) {
+                CigemAlert.addError(err.data);
+            });
+        }
+
+        $scope.handleSort = function(type, id, sort, index) {
+            handleSort($scope, type, id, sort, index, 'seriesList', 'series')
+        }
+    }]);
+
 contentController.controller('childSeriesController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter', 'handleSort',
     function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter, handleSort){
         CigemAlert.clearAlert();
@@ -1743,7 +1858,9 @@ contentController.controller('childSeriesController',['$scope', '$location', '$s
 
         $scope.pageChanged = function () {
             $location.search('page', $scope.bigCurrentPage);
-            getSeries($location.search(), function (data, total) {
+            var param = $location.search()
+            param.parent_id = $scope.series_id
+            getSeries(param, function (data, total) {
                 $scope.seriesList = data.list;
                 $scope.bigTotalItems = total;
             }, function (err) {
@@ -1766,19 +1883,47 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
         search.parent_id = $scope.parent_id = $stateParams.sid;
         /* parameter */
         $scope.isEdit = series_id !== 'new';
-
+        $scope.wearing = [
+            {name: '戒指', en_name: 'ring', id: 10},
+            {name: '对戒', en_name: 'twin ring', id: 11},
+            {name: '项链', en_name: 'choker necklace', id: 20},
+            {name: '锁骨链', en_name: 'princess necklace', id: 21},
+            {name: '手镯', en_name: 'bangle', id: 30},
+            {name: '手链', en_name: 'bracelet', id: 31},
+            {name: '耳钉', en_name: 'stud', id: 40},
+            {name: '耳环', en_name: 'earring', id: 41},
+            {name: '胸针', en_name: 'brooch', id: 50},
+            {name: '领针', en_name: 'collar pin', id: 51},
+            {name: '其他', en_name: 'other', id: 90},
+        ];
         if ($scope.isEdit) {
             Content.child_series.get({id: series_id}, function (data) {
                 $scope.series = data;
+                $scope.editor.$txt.html(data.description);
+                $scope.series.image_url = data.image_url ? data.image_url.split(',').map(function (item) {
+                    return {image_url: item}
+                }) : []
                 NProgress.done();
             }, function (err) {
                 NProgress.done();
                 CigemAlert.addError(err.data);
             });
+        } else {
+            $scope.series = {}
+            $scope.series.image_url = []
         }
 
         $scope.updateContent = function () {
+            if($scope.series.image_url.length) {
+                $scope.series.image_url = $scope.series.image_url.map(function (item) {
+                    return item.image_url
+                }).join(',')
+            } else {
+                $scope.series.image_url = ''
+            }
+            if (!$scope.series.wearing_method) delete $scope.series.wearing_method
             $scope.series.parent_id = $scope.parent_id
+            $scope.series.unit = $scope.series.unit || '件'
             if ($scope.isEdit) {
                 delete $scope.series.create_time
                 delete $scope.series.update_time
@@ -1788,6 +1933,7 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
                         type: 'success',
                         msg: '修改成功'
                     });
+                    location.href = '#/series/'+$scope.parent_id+'/child';
                 }, function (err) {
                     NProgress.done();
                     CigemAlert.addError(err.data);
@@ -1807,7 +1953,7 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
             }
         }
 
-        $scope.onFileUpload = function ($files, type) {
+        $scope.onFileUpload = function ($files, type, index) {
             if (!$scope.series) {
                 $scope.series = {};
             }
@@ -1821,6 +1967,8 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
                 });
                 if(type === 'mini') {
                     $scope.series.image_url_mini = data.image_url
+                } else if (type === 'banner'){
+                    $scope.series.image_url[index].image_url = data.image_url
                 } else {
                     $scope.series.image_url = data.image_url
                 }
@@ -1831,8 +1979,93 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
                 });
             });
         };
+
+        $scope.addImage = function () {
+            $scope.series.image_url.push({image_url: ''})
+        }
+
+        $scope.deleteImage = function (index) {
+            $scope.series.image_url.splice(index, 1)
+        }
     }
 ]);
+
+contentController.controller('childSeriesProductionController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter', 'handleSort',
+    function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter, handleSort){
+        CigemAlert.clearAlert();
+
+        /* init */
+        var search = $location.search();
+        $scope.search = {},
+        $scope.maxSize = 5,
+        $scope.bigCurrentPage = search.page;
+        search.parent_id = $stateParams.id;
+
+        function getSeries(param, success, error){
+            NProgress.start();
+            Content.products.get(param, function(data, getResponseHeaders){
+                NProgress.done();
+                var totalNumber = getResponseHeaders()['total-count'];
+                success && success(data, totalNumber);
+            }, function(err){
+                NProgress.done();
+                error && error(err);
+            });
+        }
+
+        getSeries(search, function(data, total){
+            $scope.seriesList = data.list || [];
+            $scope.bigTotalItems = total;
+        }, function(err){
+            CigemAlert.addError(err.data);
+        });
+
+        $scope.deleteSeries = function (id) {
+            if (confirm('确认删除？')) {
+                Content.child_series.delete({id: id}, function(data){
+                    CigemAlert.addError({
+                        type: 'success',
+                        msg: '删除成功'
+                    });
+                    $scope.seriesList = $scope.seriesList.filter(function (item) {
+                        return item.id !== id
+                    })
+                }, function(err){
+                    CigemAlert.addError(err.data);
+                });
+            }
+        }
+
+        $scope.searchSeries = function () {
+            CigemAlert.clearAlert();
+            var searchKey = ['name', 'en_name']
+            var param = cigemUtils.searchCondition(searchKey, $scope.search);
+            param.parent_id = $scope.series_id
+            $location.search(param);
+            getSeries(param, function(data, total){
+                $scope.seriesList = data.list;
+                $scope.bigTotalItems = total;
+            }, function(err){
+                CigemAlert.addError(err.data);
+            });
+        }
+
+        $scope.pageChanged = function () {
+            $location.search('page', $scope.bigCurrentPage);
+            var param = $location.search()
+            param.parent_id = $scope.series_id
+            getSeries(param, function (data, total) {
+                $scope.seriesList = data.list;
+                $scope.bigTotalItems = total;
+            }, function (err) {
+                CigemAlert.addError(err.data);
+            });
+        }
+
+        $scope.handleSort = function(type, id, sort, index) {
+            handleSort($scope, type, id, sort, index, 'seriesList', 'child_series')
+        }
+    }]);
 
 contentController.controller('productsController',['$scope', '$location', '$stateParams', '$window', 'CigemAlert', 'Content', '$filter',
   function($scope, $location, $stateParams, $window, CigemAlert, Content, $filter){
@@ -1946,12 +2179,11 @@ contentController.controller('productDetailController', ['$scope', '$location', 
       {name: '胸针', en_name: 'brooch', id: 50},
       {name: '领针', en_name: 'collar pin', id: 51},
       {name: '其他', en_name: 'other', id: 90},
-    ]
+    ];
 
     /* common function */
     productInit();
-    
-    
+
     function productInit() {
       Content.series.get({}, function (data) {
         $scope.series = data.list
@@ -1959,19 +2191,48 @@ contentController.controller('productDetailController', ['$scope', '$location', 
       Content.classifies.get({}, function (data) {
         $scope.classifies = data.list
       })
+      Content.child_series.get({}, function (data) {
+        $scope.child_series = data.list
+      })
+      getProductInfo()
     }
 
-    if ($scope.isEdit) {
-      Content.products.get({id: product_id}, function (data) {
-        $scope.product = data;
-        NProgress.done();
-      }, function (err) {
-        NProgress.done();
-        CigemAlert.addError(err.data);
-      });
+    function getProductInfo() {
+        if ($scope.isEdit) {
+            Content.products.get({id: product_id}, function (data) {
+                console.log($scope.editor)
+                $scope.product = data;
+                $scope.editor.$txt.html(data.description);
+                $scope.product.seriesType = data.series ? 0 : 1
+                $scope.product.image_url = data.image_url ? data.image_url.split(',').map(function (item) {
+                    return {image_url: item}
+                }) : []
+                NProgress.done();
+            }, function (err) {
+                NProgress.done();
+                CigemAlert.addError(err.data);
+            });
+        } else {
+            $scope.product = {}
+            $scope.product.image_url = []
+        }
     }
 
     $scope.updateContent = function () {
+        if($scope.product.image_url.length) {
+            $scope.product.image_url = $scope.product.image_url.map(function (item) {
+              return item.image_url
+            }).join(',')
+        } else {
+            $scope.product.image_url = ''
+        }
+        if ($scope.product.seriesType === 1) {
+            $scope.product.series = null
+        } else {
+            $scope.product.parent_id = null
+        }
+        $scope.product.unit = $scope.product.unit || '件'
+        delete $scope.product.seriesType
       if ($scope.isEdit) {
         delete $scope.product.create_time
         delete $scope.product.update_time
@@ -1982,6 +2243,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
             type: 'success',
             msg: '修改成功'
           });
+          location.href = '#/products';
         }, function (err) {
           NProgress.done();
           CigemAlert.addError(err.data);
@@ -2001,7 +2263,7 @@ contentController.controller('productDetailController', ['$scope', '$location', 
       }
     }
 
-    $scope.onFileUpload = function ($files, type) {
+    $scope.onFileUpload = function ($files, type, index) {
       if (!$scope.product) {
         $scope.product = {};
       }
@@ -2016,6 +2278,8 @@ contentController.controller('productDetailController', ['$scope', '$location', 
         });
         if(type === 'mini') {
           $scope.product.image_url_mini = data.image_url
+        } else if (type === 'banner'){
+          $scope.product.image_url[index].image_url = data.image_url
         } else {
           $scope.product.image_url = data.image_url
         }
@@ -2026,6 +2290,14 @@ contentController.controller('productDetailController', ['$scope', '$location', 
         });
       });
     };
+    
+    $scope.addImage = function () {
+        $scope.product.image_url.push({image_url: ''})
+    }
+
+    $scope.deleteImage = function (index) {
+      $scope.product.image_url.splice(index, 1)
+    }
   }
 ]);
 
@@ -2078,16 +2350,16 @@ contentServices.factory('Content', ['$resource', function($resource){
     child_series : $resource('/api/child_series/:id', {id: '@id'}, {
         get : {method: 'GET', isArray: false, transformResponse: function(data, headersGetter, status){
                 return cigemUtils.transformResponse(data);
-            }},
+        }},
         create : {method: 'POST', isArray: false, transformResponse: function(data, headersGetter, status){
                 return cigemUtils.transformResponse(data);
-            }},
+        }},
         update : {method: 'PUT', isArray: false, transformResponse: function(data, headersGetter, status){
                 return cigemUtils.transformResponse(data);
-            }},
+        }},
         delete : {method: 'DELETE', isArray: false, transformResponse: function(data, headersGetter, status){
                 return cigemUtils.transformResponse(data);
-            }},
+        }},
     }),
   }
 }]);
@@ -2383,6 +2655,11 @@ cigem.config(function ($stateProvider, $urlRouterProvider) {
           templateUrl: 'scripts/content_manage/view/series_detail.html',
           controller: 'seriesDetailController',
         })
+        .state('series/:id/all', {
+            url: '/series/:id/all',
+            templateUrl: 'scripts/content_manage/view/series_detail_all.html',
+            controller: 'seriesDetailAllController',
+        })
         .state('series/:id/child', {
             url: '/series/:id/child',
             templateUrl: 'scripts/content_manage/view/child_series.html',
@@ -2392,6 +2669,11 @@ cigem.config(function ($stateProvider, $urlRouterProvider) {
             url: '/series/:sid/child/:id',
             templateUrl: 'scripts/content_manage/view/child_series_detail.html',
             controller: 'childSeriesDetailController',
+        })
+        .state('child_series/:id', {
+            url: '/child_series/:id',
+            templateUrl: 'scripts/content_manage/view/child_series_productions.html',
+            controller: 'childSeriesProductionController',
         })
         .state('products', {
           url: '/products',

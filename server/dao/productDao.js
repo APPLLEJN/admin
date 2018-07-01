@@ -86,6 +86,10 @@ class productDao extends baseDao {
             }).limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.uniquePage - 1 : 0))
           res.status(200).json({status: 'ok', seriesList: seriesList, uniqueList: uniqueList})
         }
+      } else if (req.query.parent_id) {
+          const listQuery = db(`${this.db} as p`).select().where({'status': 1, parent_id: req.query.parent_id}).orderBy('sort', 'desc')
+          const list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
+          res.status(200).json({status: 'ok', list: list})
       } else {
         super.query(req, res, next)
       }
@@ -96,4 +100,4 @@ class productDao extends baseDao {
   }
 }
 
-module.exports = new productDao('products', ['name', 'en_name', 'image_url'])
+module.exports = new productDao('products', ['name', 'en_name', 'image_url', 'parent_id'])

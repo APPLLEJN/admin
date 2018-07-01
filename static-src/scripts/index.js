@@ -64,6 +64,11 @@ cigem.config(function ($stateProvider, $urlRouterProvider) {
           templateUrl: 'scripts/content_manage/view/series_detail.html',
           controller: 'seriesDetailController',
         })
+        .state('series/:id/all', {
+            url: '/series/:id/all',
+            templateUrl: 'scripts/content_manage/view/series_detail_all.html',
+            controller: 'seriesDetailAllController',
+        })
         .state('series/:id/child', {
             url: '/series/:id/child',
             templateUrl: 'scripts/content_manage/view/child_series.html',
@@ -73,6 +78,11 @@ cigem.config(function ($stateProvider, $urlRouterProvider) {
             url: '/series/:sid/child/:id',
             templateUrl: 'scripts/content_manage/view/child_series_detail.html',
             controller: 'childSeriesDetailController',
+        })
+        .state('child_series/:id', {
+            url: '/child_series/:id',
+            templateUrl: 'scripts/content_manage/view/child_series_productions.html',
+            controller: 'childSeriesProductionController',
         })
         .state('products', {
           url: '/products',
