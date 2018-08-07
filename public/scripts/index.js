@@ -870,6 +870,7 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
     $scope.typeStatus = {
       series: '系列',
       unique: '单品',
+      product: '系列产品',
     }
 
     function getRecommends(param, success, error){
@@ -940,6 +941,8 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
             $scope.uniqueList = [obj]
         } else if (obj.type === "series") {
           $scope.seriesList = [obj]
+        } else if (obj.type === "product") {
+            $scope.productsList = [obj]
         }
       }
       var modalInstance = $modal.open({
@@ -1138,15 +1141,18 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
     $scope.page = 1
     $scope.seriesPage = 1
     $scope.uniquePage = 1
+    $scope.productsPage = 1
     $scope.addProducts = []
 
     if(!$scope.isEdit) {
-      getProducts({page: $scope.page, seriesPage: $scope.seriesPage, uniquePage: $scope.uniquePage, type: $scope.modalType}, function(data, total){
+      getProducts({page: $scope.page, seriesPage: $scope.seriesPage, uniquePage: $scope.uniquePage, productsPage: $scope.productsPage, type: $scope.modalType}, function(data, total){
         if ($scope.modalType === 'recommend') {
           $scope.seriesList = data.seriesList;
           $scope.uniqueList = data.uniqueList;
+          $scope.productsList = data.productsList;
           $scope.seriesPage = $scope.seriesPage + 1
           $scope.uniquePage = $scope.uniquePage + 1
+          $scope.productsPage = $scope.productsPage + 1
         } else {
           $scope.products = data.list;
           $scope.page = $scope.page + 1
@@ -1194,6 +1200,7 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
         } else if ($scope.modalType == 'recommend') {
           var seriesList = $scope.seriesList.filter(function (item) { return item.checked})
           var uniqueList = $scope.uniqueList.filter(function (item) { return item.checked})
+          var productsList = $scope.productsList.filter(function (item) { return item.checked})
           seriesList = seriesList.map(function (item, index) {
             var newItem = {}
             newItem.sort = $scope.recommends.length ? $scope.recommends[0].sort + 1 : 1
@@ -1212,7 +1219,16 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             newItem.type = 'unique'
             return newItem
           })
-          list = seriesList.concat(uniqueList)
+          productsList = productsList.map(function (item, index) {
+              var newItem = {}
+              newItem.sort = $scope.recommends.length ?  $scope.recommends[0].sort + 1 : 1
+              newItem.name = item.name
+              newItem.product_id = item.id
+              newItem.image_url = item.image_url_mini
+              newItem.type = 'product'
+              return newItem
+          })
+          list = seriesList.concat(uniqueList).concat(productsList)
         }
         Channel[$scope.modalType].create({list: list}, function(data){
           $modalInstance.dismiss('cancel');
@@ -1267,12 +1283,14 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
 
     $scope.$watch('isBottom', function (value) {
       if (value) {
-        getProducts({page: $scope.page, seriesPage: $scope.seriesPage, uniquePage: $scope.uniquePage, type: $scope.modalType}, function(data, total){
+        getProducts({page: $scope.page, seriesPage: $scope.seriesPage, uniquePage: $scope.uniquePage, productsPage: $scope.productsPage, type: $scope.modalType}, function(data, total){
           if ($scope.modalType === 'recommend') {
             $scope.seriesList = $scope.seriesList.concat(data.seriesList);
             $scope.uniqueList =  $scope.uniqueList.concat(data.uniqueList);
+            $scope.productsList =  $scope.productsList.concat(data.productsList);
             $scope.seriesPage = $scope.seriesPage + 1
             $scope.uniquePage = $scope.uniquePage + 1
+            $scope.productsPage = $scope.productsPage + 1
           } else {
             $scope.products = $scope.products.concat(data.list);
             $scope.page = $scope.page + 1
@@ -2212,14 +2230,16 @@ contentController.controller('productDetailController', ['$scope', '$location', 
     function productInit() {
       Content.series.get({}, function (data) {
         $scope.series = data.list
+        if (!$scope.product) getProductInfo()
       })
       Content.classifies.get({}, function (data) {
         $scope.classifies = data.list
+        if (!$scope.product) getProductInfo()
       })
       Content.child_series.get({}, function (data) {
         $scope.child_series = data.list
+        if (!$scope.product) getProductInfo()
       })
-      getProductInfo()
     }
 
     function getProductInfo() {

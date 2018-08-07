@@ -75,16 +75,20 @@ class productDao extends baseDao {
           const list = await listQuery.limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.page - 1 : 0))
           res.status(200).json({status: 'ok', list: list})
         } else if (req.query.type === 'recommend') {
-          const seriesList = await db('series').select()
+          const seriesList = await db('child_series').select()
             .whereNotExists(function () {
-              this.select('series_id').from('recommends').where({'status': 1, type: 'series'}).whereRaw('recommends.series_id=series.id')
+              this.select('child_series_id').from('recommends').where({'status': 1, type: 'child_series'}).whereRaw('recommends.child_series_id=child_series.id')
+            }).limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.seriesPage - 1 : 0))
+          const productsList = await db('products').select()
+            .whereNotExists(function () {
+                this.select('product_id').from('recommends').where({'status': 1, type: 'product'}).whereRaw('recommends.product_id=products.id')
             }).limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.seriesPage - 1 : 0))
           const uniqueList = await db('unique as u').leftJoin('products as p', 'p.id', 'u.product_id')
             .select('p.id', 'p.name', 'p.image_url', 'p.image_url_mini').where('p.status', 1)
             .whereNotExists(function () {
               this.select('unique_id').from('recommends').where({'status': 1, type: 'unique'}).whereRaw('recommends.unique_id=u.product_id')
             }).limit(ORDER_LIMIT).offset(ORDER_LIMIT * (req.query ? req.query.uniquePage - 1 : 0))
-          res.status(200).json({status: 'ok', seriesList: seriesList, uniqueList: uniqueList})
+          res.status(200).json({status: 'ok', seriesList: seriesList, uniqueList: uniqueList, productsList: productsList})
         }
       } else if (req.query.parent_id) {
           const listQuery = db(`${this.db} as p`).select().where({'status': 1, parent_id: req.query.parent_id}).orderBy('sort', 'desc')

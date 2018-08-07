@@ -860,14 +860,16 @@ contentController.controller('productDetailController', ['$scope', '$location', 
     function productInit() {
       Content.series.get({}, function (data) {
         $scope.series = data.list
+        if (!$scope.product) getProductInfo()
       })
       Content.classifies.get({}, function (data) {
         $scope.classifies = data.list
+        if (!$scope.product) getProductInfo()
       })
       Content.child_series.get({}, function (data) {
         $scope.child_series = data.list
+        if (!$scope.product) getProductInfo()
       })
-      getProductInfo()
     }
 
     function getProductInfo() {

@@ -57,8 +57,18 @@
                       <!--placeholder="请输入产品id" ng-model="recommend.productIds" />-->
             <!--</textarea>-->
             <div style="display: flex; flex: 1; flex-direction: column; margin: 10px; height: 400px; overflow-y: scroll;" scroll-to-bottom="isAtBottom">
-                <h4>系列</h4>
+                <h4>子系列</h4>
                 <div ng-repeat="product in seriesList" style="width: 178px; margin: 0 10px 36px 0 ;  position: relative;">
+                    <img ng-show="!isEdit" ng-src="{{product.image_url}}" alt="mini" width="100%" ng-click="selectProduction(product);">
+                    <img ng-show="isEdit" ng-src="{{product.image_url}}" alt="mini" width="100%">
+                    <input class="form-control" id="product_name_s" ng-model="product.name" style="margin: 10px 0;" />
+                    <input ng-show="!isEdit"  type="checkbox" ng-model="product.checked" ng-click="selectProduction(product);" style="position: absolute; left: 10px; top: 0;">
+                    <input type="file" ng-file-select="onFileUpload($files, product)"/>
+                </div>
+            </div>
+            <div style="display: flex; flex: 1; flex-direction: column; margin: 10px; height: 400px; overflow-y: scroll;" scroll-to-bottom="isAtBottom">
+                <h4>系列产品</h4>
+                <div ng-repeat="product in productsList" style="width: 178px; margin: 0 10px 36px 0 ;  position: relative;">
                     <img ng-show="!isEdit" ng-src="{{product.image_url}}" alt="mini" width="100%" ng-click="selectProduction(product);">
                     <img ng-show="isEdit" ng-src="{{product.image_url}}" alt="mini" width="100%">
                     <input class="form-control" id="product_name_s" ng-model="product.name" style="margin: 10px 0;" />
