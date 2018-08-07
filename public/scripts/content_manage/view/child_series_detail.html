@@ -42,9 +42,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class='col-md-2 text-right'>所属分类</div>
+                <div class='col-md-2 text-right'>所属分类 <span style="color: red"> * </span></div>
                 <div class="col-md-8">
-                    <select class="form-control" id="classify" ng-model="series.classify" ng-disabled="!!series.design_id">
+                    <select class="form-control" id="classify" ng-model="series.classify" required="required" ng-disabled="!!series.design_id">
                         <option></option>
                         <option ng-repeat="item in classifies" value="{{item.id}}">
                             {{item.name}}
