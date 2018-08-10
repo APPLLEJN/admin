@@ -1195,7 +1195,7 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
         if ($scope.modalType !== 'recommend') {
           list = $scope.products.filter(function (item) { return item.checked})
           list = list.map(function (item, index) {
-            return {product_id: item.id, sort: $scope[$scope.modalType + 'List'].length ? $scope[$scope.modalType + 'List'][0].sort + 1 : 1}
+            return {unique_id: item.id, sort: $scope[$scope.modalType + 'List'].length ? $scope[$scope.modalType + 'List'][0].sort + 1 : 1}
           })
         } else if ($scope.modalType == 'recommend') {
           var seriesList = $scope.seriesList.filter(function (item) { return item.checked})
@@ -1206,7 +1206,7 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             newItem.sort = $scope.recommends.length ? $scope.recommends[0].sort + 1 : 1
             newItem.name = item.name
             newItem.series_id = item.id
-            newItem.image_url = item.image_url
+            newItem.image_url = item.image_url_mini
             newItem.type = 'series'
             return newItem
           })
@@ -1223,7 +1223,7 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
               var newItem = {}
               newItem.sort = $scope.recommends.length ?  $scope.recommends[0].sort + 1 : 1
               newItem.name = item.name
-              newItem.product_id = item.id
+              newItem.unique_id = item.id
               newItem.image_url = item.image_url_mini
               newItem.type = 'product'
               return newItem
