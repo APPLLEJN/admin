@@ -868,7 +868,7 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
     $scope.maxSize = 5,
     $scope.bigCurrentPage = search.page;
     $scope.typeStatus = {
-      series: '系列',
+      child_series: '子系列',
       unique: '单品',
       product: '系列产品',
     }
@@ -939,7 +939,7 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
         $scope.isEdit = true
         if (obj.type === "unique") {
             $scope.uniqueList = [obj]
-        } else if (obj.type === "series") {
+        } else if (obj.type === "child_series") {
           $scope.seriesList = [obj]
         } else if (obj.type === "product") {
             $scope.productsList = [obj]
@@ -1205,9 +1205,9 @@ channelController.controller('addProductController', ['$scope', '$modalInstance'
             var newItem = {}
             newItem.sort = $scope.recommends.length ? $scope.recommends[0].sort + 1 : 1
             newItem.name = item.name
-            newItem.series_id = item.id
+            newItem.child_series_id = item.id
             newItem.image_url = item.image_url_mini
-            newItem.type = 'series'
+            newItem.type = 'child_series'
             return newItem
           })
           uniqueList = uniqueList.map(function (item, index) {

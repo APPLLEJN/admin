@@ -27,7 +27,7 @@
         <tbody>
         <tr ng-repeat="recommend in recommends">
             <td>{{recommend.id}}</td>
-            <td>{{recommend[recommend.type === 'series' ? 'series_id' : 'unique_id']}}</td>
+            <td>{{recommend[recommend.type === 'child_series' ? 'child_series_id' : 'unique_id']}}</td>
             <td>{{typeStatus[recommend.type]}}</td>
             <td>{{recommend.name}}</td>
             <td>
