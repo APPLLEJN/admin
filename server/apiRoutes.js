@@ -104,6 +104,6 @@ router.delete('/design/:id', (req,res,next) => designDao.delete(req, res, next))
 
 // 更新数据脚本
 
-router.get('/update/products', (req, res, next) => productDao.updateOnce(req, res, next))
+// router.get('/update/products', (req, res, next) => productDao.updateOnce(req, res, next))
 
 module.exports = router
