@@ -45,13 +45,15 @@ angular.module('channelController').directive('scrollToBottom', function() {
   return {
     restrict: 'A',
     link: function(scope, elm, attr) {
-      elm.bind('scroll', function() {
-        if (elm[0].scrollHeight - elm[0].scrollTop < parseInt(elm[0].style.height) + 5) {
-          scope.$apply(function() {
-            scope.isBottom = true;
+      if(!scope.isEdit) {
+          elm.bind('scroll', function() {
+              if (elm[0].scrollHeight - elm[0].scrollTop < parseInt(elm[0].style.height) + 5) {
+                  scope.$apply(function() {
+                      scope.isBottom = true;
+                  });
+              }
           });
-        }
-      });
+      }
     }
   };
 });
@@ -335,7 +337,8 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
       });
     }
 
-    $scope.addProduct = function(obj) {
+    $scope.addProduct = function(obj, type) {
+      $scope.isEdit = type === 'edit'
       $scope.modalType = 'recommend'
       $scope.seriesList = []
       if (obj){
@@ -352,7 +355,9 @@ channelController.controller('recommendsController',['$scope', '$location', '$st
       var modalInstance = $modal.open({
         templateUrl: 'addProduct.html',
         controller: 'addProductController',
-        scope: $scope
+        scope: $scope,
+        size: 'lg',
+        windowClass: 'app-modal-window'
       });
     }
 
