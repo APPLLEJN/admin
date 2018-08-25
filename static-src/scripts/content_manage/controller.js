@@ -569,21 +569,34 @@ contentController.controller('childSeriesDetailController', ['$scope', '$locatio
             {name: '领针', en_name: 'collar pin', id: 51},
             {name: '其他', en_name: 'other', id: 90},
         ];
-        if ($scope.isEdit) {
-            Content.child_series.get({id: series_id}, function (data) {
-                $scope.series = data;
-                $scope.editor.$txt.html(data.description);
-                $scope.series.image_url = data.image_url ? data.image_url.split(',').map(function (item) {
-                    return {image_url: item}
-                }) : []
-                NProgress.done();
-            }, function (err) {
-                NProgress.done();
-                CigemAlert.addError(err.data);
-            });
-        } else {
-            $scope.series = {}
-            $scope.series.image_url = []
+
+        /* common function */
+        productInit();
+
+        function productInit() {
+            Content.classifies.get({}, function (data) {
+                $scope.classifies = data.list
+                if (!$scope.product) getProductInfo()
+            })
+        }
+
+        function getProductInfo() {
+            if ($scope.isEdit) {
+                Content.child_series.get({id: series_id}, function (data) {
+                    $scope.series = data;
+                    $scope.editor.$txt.html(data.description);
+                    $scope.series.image_url = data.image_url ? data.image_url.split(',').map(function (item) {
+                        return {image_url: item}
+                    }) : []
+                    NProgress.done();
+                }, function (err) {
+                    NProgress.done();
+                    CigemAlert.addError(err.data);
+                });
+            } else {
+                $scope.series = {}
+                $scope.series.image_url = []
+            }
         }
 
         $scope.updateContent = function () {
